@@ -1,4 +1,123 @@
 package com.kreitek.PFBKreitekfy.Application.Dto;
 
-public class CancionDTO {
+import com.kreitek.PFBKreitekfy.Domain.Entity.Album;
+import com.kreitek.PFBKreitekfy.Domain.Entity.Artista;
+import com.kreitek.PFBKreitekfy.Domain.Entity.CancionUsuario;
+import com.kreitek.PFBKreitekfy.Domain.Entity.Estilo;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.Objects;
+import java.util.Set;
+
+public class CancionDTO implements Serializable {
+
+    private Long id;
+    private String nombre;
+    private Long duracion;
+    private Date fecha;
+    private Long artistaId;
+    private String artistaNombre;
+    private Long albumId;
+    private String albumNombre;
+    private byte[] albumImagen;
+    private Long estiloId;
+    private String estiloNombre;
+
+
+    public CancionDTO() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Long getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(Long duracion) {
+        this.duracion = duracion;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public Long getArtistaId() {
+        return artistaId;
+    }
+
+    public void setArtistaId(Long artistaId) {
+        this.artistaId = artistaId;
+    }
+
+    public String getArtistaNombre() {
+        return artistaNombre;
+    }
+
+    public void setArtistaNombre(String artistaNombre) {
+        this.artistaNombre = artistaNombre;
+    }
+
+    public byte[] getAlbumImagen() {
+        return albumImagen;
+    }
+
+    public void setAlbumImagen(byte[] albumImagen) {
+        this.albumImagen = albumImagen;
+    }
+
+    public Long getAlbumId() {
+        return albumId;
+    }
+
+    public void setAlbumId(Long albumId) {
+        this.albumId = albumId;
+    }
+
+    public String getAlbumNombre() {
+        return albumNombre;
+    }
+
+    public void setAlbumNombre(String albumNombre) {
+        this.albumNombre = albumNombre;
+    }
+
+
+    public Long getEstiloId() {
+        return estiloId;
+    }
+
+    public void setEstiloId(Long estiloId) {
+        this.estiloId = estiloId;
+    }
+
+    public String getEstiloNombre() {
+        return estiloNombre;
+    }
+
+    public void setEstiloNombre(String estiloNombre) {
+        this.estiloNombre = estiloNombre;
+    }
+
+
 }
