@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  base64Prefix: "data:image/png;base64,"
 };

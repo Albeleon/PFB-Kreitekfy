@@ -7,9 +7,9 @@ import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
 
-public class ItemSpecification extends EntitySpecification<Cancion> implements Specification<Cancion> {
+public class CancionSpecification extends EntitySpecification<Cancion> implements Specification<Cancion> {
 
-    public ItemSpecification(List<SearchCriteria> criteria) {
+    public CancionSpecification(List<SearchCriteria> criteria) {
         this.criteria = criteria;
     }
 }
