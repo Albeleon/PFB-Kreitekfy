@@ -1,0 +1,8 @@
+2022-05-25 18:06:28 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'usuario' (USUARIOS: ""ROL"" INTEGER NOT NULL)"
+Data conversion error converting "'usuario' (USUARIOS: ""ROL"" INTEGER NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."USUARIOS"("ID","IMAGEN","NOMBRE","ROL")VALUES(?,?,?,?) [22018-212]
+2022-05-25 18:06:28 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'usuario' (USUARIOS: ""ROL"" INTEGER NOT NULL)"
+Data conversion error converting "'usuario' (USUARIOS: ""ROL"" INTEGER NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."USUARIOS"("ID","IMAGEN","NOMBRE","ROL")VALUES(?,?,?,?) [22018-212]
