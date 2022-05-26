@@ -1,1 +1,39 @@
-<p>header works!</p>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" (click) = "logOut()" href="/"><span class = "brand">Kreitekfy</span><span class = "admin">Admin</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-2">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/backoffice"><img class = "logo" src = "../../../../assets/img/home.png">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="" ><img class = "logo" src = "../../../../assets/img/estilos.png">Estilos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href = ""><img class = "logo" src = "../../../../assets/img/artistas.png">Artistas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" [routerLink]="['ingresarCancion']"><img class = "logo" src = "../../../../assets/img/canciones.png">Canciones</a>
+          </li>
+        </ul>
+        <div class = " col-xl-4 col-lg-4 col-sm-3 col-xs-3 col-md-6">
+            <form class="d-flex">
+                <img class = "logoB" src = "../../../../assets/img/search.png"><input class="form-control searchForm me-2" type="search" name = "inputFiltros" [(ngModel)]="textoBuscado" (ngModelChange)="enviarTextoBuscado()" placeholder="Buscar" aria-label="Search">
+                <select class = "filtros" #selectValue (change) = filterParametro() >
+                  <option selected value="" >Filtrado por:</option>
+                  <option value = "estilo">Estilos</option>
+                  <option value = "artista">Artistas</option>
+                  <option value = "album">Albumes</option>
+                  <option value = "cancion">Canciones</option>
+                </select>
+            </form>
+        </div>
+        <div class = "col-xl-1 mx-2">
+            <p class = "userName"><i class="fa-solid fa-user mx-2"></i>{{nombre}}</p>
+        </div>
+      </div>
+    </div>
+  </nav>

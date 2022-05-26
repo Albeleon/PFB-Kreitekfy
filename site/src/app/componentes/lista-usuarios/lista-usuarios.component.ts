@@ -28,9 +28,10 @@ export class ListaUsuariosComponent implements OnInit {
     
   }
 
-   setUser(id:string , rol:string){
+   setUser(id:string , rol:string , username:string){
     localStorage.setItem('usuarioId' , id);
     localStorage.setItem('rol' , rol);
+    localStorage.setItem('userName',username);
 
   }
 
