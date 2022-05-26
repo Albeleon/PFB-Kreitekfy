@@ -1,1 +1,6 @@
-<p>backoffice works!</p>
+<app-header (eventEmitter) = "recibirTextoBuscado($event)"></app-header>
+<div class = "router-outlet-container">
+    <router-outlet></router-outlet>
+    <app-tabla-canciones [busqueda] = "busqueda"></app-tabla-canciones>
+</div>
+<app-footer></app-footer>

@@ -19,6 +19,28 @@ export class CancionService {
     }
     return this.http.get<Cancion_Simple[]>(urlEndpoint);
   }
+
+
+  public getCancionesAdministrador(busqueda:string, filtro:string , page:number): Observable<Cancion[]> {
+    let url: string = "http://localhost:8080/kreitekfy/canciones";
+
+    if(busqueda != "" && filtro != "cancion" && filtro != "" || busqueda != "" && filtro != "cancion" && filtro != "" && page != 1 ) {
+
+      url =  url + "?sort=nombre,ASC&size=1&page="+ page +"&filter="+filtro+".nombre:MATCH:" + busqueda;
+
+    }else if(busqueda != "" && page != 1 && filtro == "" || filtro == "cancion"){
+
+      url =  url + "?sort=nombre,ASC&size=1&page="+ page +"&filter=nombre:MATCH:" + busqueda;
+
+    }else{
+      url =  url + "?sort=nombre,ASC&size=1&page="+ page;
+    }
+
+    return this.http.get<Cancion[]>(url);
+  }
+
+
+
   
   getCancionById(id: string): Observable<Cancion> {
     let urlEndpoint: string = "http://localhost:8080/kreitekfy/canciones/" + id;
@@ -39,4 +61,5 @@ export class CancionService {
     let urlEndpoint: string = "http://localhost:8080/kreitekfy/canciones";
     return this.http.put<Cancion>(urlEndpoint, cancion);
   }
+
 }

@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./backoffice.component.scss']
 })
 export class BackofficeComponent implements OnInit {
-
+  busqueda: string = "";
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  recibirTextoBuscado(value:string){
+    this.busqueda = value;
   }
 
 }
