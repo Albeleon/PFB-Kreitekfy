@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2022-05-25 18:29:10 jdbc[13]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Columna "fisica y quimica" no encontrada
 Column "fisica y quimica" not found; SQL statement:
@@ -242,3 +243,13 @@ INSERT INTO ESTILOS (id, nombre) VALUES (2, "Pop") [42122-212]
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
+=======
+2022-05-25 18:06:28 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'usuario' (USUARIOS: ""ROL"" INTEGER NOT NULL)"
+Data conversion error converting "'usuario' (USUARIOS: ""ROL"" INTEGER NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."USUARIOS"("ID","IMAGEN","NOMBRE","ROL")VALUES(?,?,?,?) [22018-212]
+2022-05-25 18:06:28 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'usuario' (USUARIOS: ""ROL"" INTEGER NOT NULL)"
+Data conversion error converting "'usuario' (USUARIOS: ""ROL"" INTEGER NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."USUARIOS"("ID","IMAGEN","NOMBRE","ROL")VALUES(?,?,?,?) [22018-212]
+>>>>>>> 5054cd69e0ff390139b5bc9c181df7c645edb532

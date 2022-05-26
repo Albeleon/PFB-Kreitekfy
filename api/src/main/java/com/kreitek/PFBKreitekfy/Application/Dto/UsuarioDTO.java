@@ -15,7 +15,6 @@ public class UsuarioDTO implements Serializable {
     private String nombre;
     private byte[] imagen;
     private TipoRol rol;
-    private List<CancionUsuario> usuariosCanciones;
 
 
     public Long getId() {
@@ -50,25 +49,17 @@ public class UsuarioDTO implements Serializable {
         this.rol = rol;
     }
 
-    public List<CancionUsuario> getUsuariosCanciones() {
-        return usuariosCanciones;
-    }
-
-    public void setUsuariosCanciones(List<CancionUsuario> usuariosCanciones) {
-        this.usuariosCanciones = usuariosCanciones;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UsuarioDTO that = (UsuarioDTO) o;
-        return id.equals(that.id) && nombre.equals(that.nombre) && Arrays.equals(imagen, that.imagen) && rol == that.rol && usuariosCanciones.equals(that.usuariosCanciones);
+        return id.equals(that.id) && nombre.equals(that.nombre) && Arrays.equals(imagen, that.imagen);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, nombre, rol, usuariosCanciones);
+        int result = Objects.hash(id, nombre, rol);
         result = 31 * result + Arrays.hashCode(imagen);
         return result;
     }
@@ -80,7 +71,6 @@ public class UsuarioDTO implements Serializable {
                 ", nombre='" + nombre + '\'' +
                 ", imagen=" + Arrays.toString(imagen) +
                 ", rol=" + rol +
-                ", usuariosCanciones=" + usuariosCanciones +
                 '}';
     }
 }
