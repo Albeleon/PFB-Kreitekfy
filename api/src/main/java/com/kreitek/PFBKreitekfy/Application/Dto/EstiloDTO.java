@@ -1,6 +1,5 @@
 package com.kreitek.PFBKreitekfy.Application.Dto;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 

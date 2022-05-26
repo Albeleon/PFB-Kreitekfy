@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cancion_Simple } from '../models/cancion-simple.interface';
+import { Cancion } from '../models/cancion.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +17,10 @@ export class CancionService {
       urlEndpoint = urlEndpoint + "&filter=estilo.nombre:MATCH:" + estilo;
     }
     return this.http.get<Cancion_Simple[]>(urlEndpoint);
+  }
+
+  insertarCancion(cancion: Cancion) {
+    let urlEndpoint: string = "http://localhost:8080/kreitekfy/canciones";
+    return this.http.post<Cancion[]>(urlEndpoint, cancion);
   }
 }

@@ -1,12 +1,9 @@
 package com.kreitek.PFBKreitekfy.Application.Dto;
 
-import com.kreitek.PFBKreitekfy.Domain.Entity.CancionUsuario;
 import com.kreitek.PFBKreitekfy.Domain.Type.TipoRol;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 public class UsuarioDTO implements Serializable {

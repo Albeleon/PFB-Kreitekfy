@@ -1,16 +1,7 @@
 package com.kreitek.PFBKreitekfy.Application.Dto;
 
-import com.kreitek.PFBKreitekfy.Domain.Entity.Album;
-import com.kreitek.PFBKreitekfy.Domain.Entity.Artista;
-import com.kreitek.PFBKreitekfy.Domain.Entity.CancionUsuario;
-import com.kreitek.PFBKreitekfy.Domain.Entity.Estilo;
-
-import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.Objects;
-import java.util.Set;
 
 public class CancionDTO implements Serializable {
 

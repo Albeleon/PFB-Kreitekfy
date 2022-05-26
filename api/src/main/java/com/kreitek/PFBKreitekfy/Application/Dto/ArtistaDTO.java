@@ -2,7 +2,6 @@ package com.kreitek.PFBKreitekfy.Application.Dto;
 
 import java.io.Serializable;
 import java.util.Objects;
-import java.util.Set;
 
 
 public class ArtistaDTO implements Serializable {

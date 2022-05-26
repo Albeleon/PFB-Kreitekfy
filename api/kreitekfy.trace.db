@@ -253,3 +253,7 @@ org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'u
 Data conversion error converting "'usuario' (USUARIOS: ""ROL"" INTEGER NOT NULL)"; SQL statement:
 INSERT INTO "PUBLIC"."USUARIOS"("ID","IMAGEN","NOMBRE","ROL")VALUES(?,?,?,?) [22018-212]
 >>>>>>> 5054cd69e0ff390139b5bc9c181df7c645edb532
+2022-05-26 02:17:14 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'Administrador' (USUARIOS: ""ROL"" INTEGER NOT NULL)"
+Data conversion error converting "'Administrador' (USUARIOS: ""ROL"" INTEGER NOT NULL)"; SQL statement:
+INSERT INTO USUARIOS (id, nombre, imagen, rol) VALUES (1, 'Administrador', null, 'Administrador') [22018-212]
