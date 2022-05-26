@@ -1,6 +1,6 @@
 export interface Cancion_Simple {
     id: number;
     nombre: string;
-    imagenAlbum: string;
+    albumImagen: string;
     artistaNombre: string;
 }

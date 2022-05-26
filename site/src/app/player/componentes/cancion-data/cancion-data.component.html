@@ -1,0 +1,21 @@
+<p>Hola</p>
+<div *ngIf="cancion">
+    <figure *ngIf="cancion.albumImagen">
+        <img [src]="base64Prefix + cancion.albumImagen" alt="">
+        <div class="noImage" *ngIf="!cancion.albumImagen"></div>
+    </figure>
+    <h2>{{ cancion.nombre }}</h2>
+    <button class="btn btn-primary">Reproducir</button>
+    <p>Duración: {{ cancion.duracion | timeDuration: 's':'mmss' }}</p>
+    <p>Album: {{ cancion.albumNombre }}</p>
+    <p>Artista: {{ cancion.artistaNombre }}</p>
+    <p>Estilo: {{ cancion.estiloNombre }}</p>
+    <p>¡Valora la canción!</p>
+    <div>
+        <i #estrella1 class="pi pi-star"></i>
+        <i #estrella2 class="pi pi-star"></i>
+        <i #estrella3 class="pi pi-star"></i>
+        <i #estrella4 class="pi pi-star"></i>
+    </div>
+</div>
+

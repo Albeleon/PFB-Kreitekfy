@@ -6,7 +6,7 @@ import { UserGuard } from './guards/user.guard';
 import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
-  { path: '', component: ListaUsuariosComponent, canActivate: [UserGuard] },
+  { path: '', component: ListaUsuariosComponent },
   {
     path: 'player',
     component: PlayerComponent,

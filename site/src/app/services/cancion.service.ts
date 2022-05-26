@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cancion_Simple } from '../models/cancion-simple.interface';
+import { Cancion_Usuario } from '../models/cancion-usuario.interface';
 import { Cancion } from '../models/cancion.model';
 
 @Injectable({
@@ -22,6 +23,11 @@ export class CancionService {
   getCancionById(id: string): Observable<Cancion> {
     let urlEndpoint: string = "http://localhost:8080/kreitekfy/canciones/" + id;
     return this.http.get<Cancion>(urlEndpoint);
+  }
+
+  getValoracionCancionById(idCancion: string, idUsuario: string): Observable<Cancion_Usuario> {
+    let urlEndpoint: string = "http://localhost:8080/kreitekfy/canciones/" + idCancion + "/usuarios/" + idUsuario;
+    return this.http.get<Cancion_Usuario>(urlEndpoint);
   }
 
   insertarCancion(cancion: Cancion) {

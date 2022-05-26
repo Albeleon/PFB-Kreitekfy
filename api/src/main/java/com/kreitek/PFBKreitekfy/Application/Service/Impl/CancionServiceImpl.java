@@ -4,8 +4,10 @@ import java.util.Optional;
 
 import com.kreitek.PFBKreitekfy.Application.Dto.CancionDTO;
 import com.kreitek.PFBKreitekfy.Application.Dto.CancionSimpleDTO;
+import com.kreitek.PFBKreitekfy.Application.Dto.CancionUsuarioDTO;
 import com.kreitek.PFBKreitekfy.Application.Mapper.CancionMapper;
 import com.kreitek.PFBKreitekfy.Application.Mapper.CancionSimpleMapper;
+import com.kreitek.PFBKreitekfy.Application.Mapper.CancionUsuarioMapper;
 import com.kreitek.PFBKreitekfy.Application.Service.CancionService;
 import com.kreitek.PFBKreitekfy.Domain.Entity.Cancion;
 import com.kreitek.PFBKreitekfy.Domain.Persistence.CancionPersistence;
@@ -18,12 +20,19 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CancionServiceImpl implements CancionService {
     private final CancionPersistence persistence;
+    private final CancionUsuarioMapper cancionUsuarioMapper;
     private final CancionSimpleMapper simpleMapper;
     private final CancionMapper mapper;
 
     @Autowired
-    public CancionServiceImpl(CancionPersistence persistence, CancionSimpleMapper simpleMapper, CancionMapper mapper) {
+    public CancionServiceImpl(
+        CancionPersistence persistence, 
+        CancionUsuarioMapper cancionUsuarioMapper,
+        CancionSimpleMapper simpleMapper, 
+        CancionMapper mapper)
+    {
         this.persistence = persistence;
+        this.cancionUsuarioMapper = cancionUsuarioMapper;
         this.simpleMapper = simpleMapper;
         this.mapper = mapper;
     }
@@ -46,5 +55,11 @@ public class CancionServiceImpl implements CancionService {
     @Transactional(readOnly = true)
     public Optional<CancionDTO> getCancionById(Long idCancion) {
         return this.persistence.getCancionById(idCancion).map(mapper::toDto);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<CancionUsuarioDTO> getCancionUsuarioById(Long idCancion, Long idUsuario) {
+        return this.persistence.getCancionUsuarioById(idCancion, idUsuario).map(cancionUsuarioMapper::toDto);
     }
 }

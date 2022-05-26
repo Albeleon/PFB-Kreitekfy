@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.kreitek.PFBKreitekfy.Application.Dto.CancionDTO;
 import com.kreitek.PFBKreitekfy.Application.Dto.CancionSimpleDTO;
+import com.kreitek.PFBKreitekfy.Application.Dto.CancionUsuarioDTO;
 import com.kreitek.PFBKreitekfy.Application.Service.CancionService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,6 +40,18 @@ public class CancionRestController {
     @GetMapping(value = "/canciones/{idCancion}", produces="application/json")
     ResponseEntity<CancionDTO> getCancion(@PathVariable Long idCancion) {
         Optional<CancionDTO> cancion = this.cancionService.getCancionById(idCancion);
+
+        if (cancion.isPresent()) {
+            return new ResponseEntity<>(cancion.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @CrossOrigin
+    @GetMapping(value = "/canciones/{idCancion}/usuarios/{idUsuario}", produces="application/json")
+    ResponseEntity<CancionUsuarioDTO> getCancionUsuario(@PathVariable Long idCancion, @PathVariable Long idUsuario) {
+        Optional<CancionUsuarioDTO> cancion = this.cancionService.getCancionUsuarioById(idCancion, idUsuario);
 
         if (cancion.isPresent()) {
             return new ResponseEntity<>(cancion.get(), HttpStatus.OK);

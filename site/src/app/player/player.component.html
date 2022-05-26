@@ -3,8 +3,8 @@
 <div class="row">
     <div class="col-md-2" *ngFor="let novedad of novedades">
         <figure>
-            <img *ngIf="novedad.imagenAlbum" [src]="base64Prefix + novedad.imagenAlbum" alt="">
-            <div class="noImage" *ngIf="!novedad.imagenAlbum"></div>
+            <img *ngIf="novedad.albumImagen" [src]="base64Prefix + novedad.albumImagen" alt="">
+            <div class="noImage" *ngIf="!novedad.albumImagen"></div>
         </figure>
         <h3>{{ novedad.nombre }}</h3>
         <p>{{ novedad.artistaNombre }}</p>
