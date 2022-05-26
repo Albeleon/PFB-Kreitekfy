@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Album } from 'src/app/models/album.interface';
 import { Artista } from 'src/app/models/artista.interface';
 import { Cancion } from 'src/app/models/cancion.model';
@@ -7,6 +7,8 @@ import { AlbumService } from 'src/app/services/album.service';
 import { ArtistaService } from 'src/app/services/artista.service';
 import { CancionService } from 'src/app/services/cancion.service';
 import { EstiloService } from 'src/app/services/estilo.service';
+import { ActivatedRoute } from '@angular/router';
+import { Calendar } from 'primeng/calendar';
 
 @Component({
   selector: 'app-cancion-form',
@@ -14,13 +16,10 @@ import { EstiloService } from 'src/app/services/estilo.service';
   styleUrls: ['./cancion-form.component.scss']
 })
 export class CancionFormComponent implements OnInit {
-
   exito: Boolean = false;
+  operacion: string = "";
 
   cancion?: Cancion;
-  nombre: string = "";
-  duracion: string = "";
-  fecha: string = "";
 
   albumFiltro?: Album;
   albumes: Album[] = [];
@@ -35,10 +34,44 @@ export class CancionFormComponent implements OnInit {
     private cancionService: CancionService,
     private albumService: AlbumService,
     private artistaService: ArtistaService,
-    private estiloService: EstiloService) { }
+    private estiloService: EstiloService,
+    private route: ActivatedRoute ) {}
 
   ngOnInit(): void {
+    const entryParam: string = this.route.snapshot.paramMap.get("cancionId") ?? "new";
+    if (entryParam !== "new") {
+      this.initEditarCancion(entryParam);
+    }
+    else {
+      this.initInsertarCancion();
+    }
+  }
+
+  ngAfterViewInit(): void {
+  }
+
+  initInsertarCancion() {
+    this.operacion = "new";
     this.cancion = new Cancion();
+  }
+
+  initEditarCancion(id: string) {
+    this.cancion = new Cancion();
+    this.operacion = "edit";
+    this.cancionService.getCancionById(id).subscribe({
+      next: (data: Cancion) => {
+        this.cancion = data;
+        this.cancion.fecha = new Date(this.cancion.fecha!);
+
+        this.albumService.getAlbumById(this.cancion.albumId!.toString()).subscribe({
+          next: (data: any) => { this.albumFiltro = data; } } );
+        this.artistaService.getArtistaById(this.cancion.artistaId!.toString()).subscribe({
+          next: (data: any) => { this.artistaFiltro = data; } } );
+        this.estiloService.getEstiloById(this.cancion.estiloId!.toString()).subscribe({
+          next: (data: any) => { this.estiloFiltro = data; } } );
+
+         }
+    });
   }
 
   filtrarAlbumes(event?: any): void {
@@ -85,11 +118,26 @@ export class CancionFormComponent implements OnInit {
 
   insertarCancion(): void {
     if (this.albumFiltro && this.estiloFiltro && this.artistaFiltro
-       && this.cancion && this.cancion.nombre != "" && this.cancion.duracion! > 0) {
+       && this.cancion && this.cancion.nombre != "" && this.cancion.duracion! > 0
+       && this.cancion.fecha) {
       this.cancion.albumId = this.albumFiltro.id;
       this.cancion.artistaId = this.artistaFiltro.id;
       this.cancion.estiloId = this.estiloFiltro.id;
       this.cancionService.insertarCancion(this.cancion).subscribe({
+        next: (data: any) => { this.exito = true; }
+      }
+      )
+    }
+  }
+
+  editarCancion(): void {
+    if (this.albumFiltro && this.estiloFiltro && this.artistaFiltro
+       && this.cancion && this.cancion.nombre != "" && this.cancion.duracion! > 0
+       && this.cancion.fecha) {
+      this.cancion.albumId = this.albumFiltro.id;
+      this.cancion.artistaId = this.artistaFiltro.id;
+      this.cancion.estiloId = this.estiloFiltro.id;
+      this.cancionService.editarCancion(this.cancion).subscribe({
         next: (data: any) => { this.exito = true; }
       }
       )

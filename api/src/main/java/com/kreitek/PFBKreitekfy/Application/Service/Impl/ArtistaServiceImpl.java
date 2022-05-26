@@ -1,5 +1,7 @@
 package com.kreitek.PFBKreitekfy.Application.Service.Impl;
 
+import java.util.Optional;
+
 import com.kreitek.PFBKreitekfy.Application.Dto.ArtistaDTO;
 import com.kreitek.PFBKreitekfy.Application.Mapper.ArtistaMapper;
 import com.kreitek.PFBKreitekfy.Application.Service.ArtistaService;
@@ -28,5 +30,10 @@ public class ArtistaServiceImpl implements ArtistaService {
     public Page<ArtistaDTO> getArtistasByCriteriaString(Pageable pageable, String filter) {
         Page<Artista> artistaPage = this.persistence.findAll(pageable, filter);
         return artistaPage.map(mapper::toDto);
+    }
+
+    @Override
+    public Optional<ArtistaDTO> getArtistaById(Long idArtista) {
+        return this.persistence.getArtistaById(idArtista).map(mapper::toDto);
     }
 }

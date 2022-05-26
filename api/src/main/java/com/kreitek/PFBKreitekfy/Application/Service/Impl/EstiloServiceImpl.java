@@ -1,5 +1,7 @@
 package com.kreitek.PFBKreitekfy.Application.Service.Impl;
 
+import java.util.Optional;
+
 import com.kreitek.PFBKreitekfy.Application.Dto.EstiloDTO;
 import com.kreitek.PFBKreitekfy.Application.Mapper.EstiloMapper;
 import com.kreitek.PFBKreitekfy.Application.Service.EstiloService;
@@ -28,5 +30,10 @@ public class EstiloServiceImpl implements EstiloService {
     public Page<EstiloDTO> getEstilosByCriteriaString(Pageable pageable, String filter) {
         Page<Estilo> estiloPage = this.persistence.findAll(pageable, filter);
         return estiloPage.map(mapper::toDto);
+    }
+
+    @Override
+    public Optional<EstiloDTO> getEstiloById(Long idEstilo) {
+        return this.persistence.getEstiloById(idEstilo).map(mapper::toDto);
     }
 }

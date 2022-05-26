@@ -17,4 +17,9 @@ export class EstiloService {
     }
     return this.http.get<Estilo[]>(urlEndpoint);
   }
+
+  getEstiloById(id: string): Observable<Estilo> {
+    let urlEndpoint: string = "http://localhost:8080/kreitekfy/estilos/" + id;
+    return this.http.get<Estilo>(urlEndpoint);
+  }
 }

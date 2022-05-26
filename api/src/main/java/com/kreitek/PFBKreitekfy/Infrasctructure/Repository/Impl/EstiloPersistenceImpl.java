@@ -1,5 +1,7 @@
 package com.kreitek.PFBKreitekfy.Infrasctructure.Repository.Impl;
 
+import java.util.Optional;
+
 import com.kreitek.PFBKreitekfy.Domain.Entity.Estilo;
 import com.kreitek.PFBKreitekfy.Domain.Persistence.EstiloPersistence;
 import com.kreitek.PFBKreitekfy.Infrasctructure.Repository.EstiloRepository;
@@ -23,5 +25,10 @@ public class EstiloPersistenceImpl implements EstiloPersistence {
     public Page<Estilo> findAll(Pageable pageable, String filter) {
         EstiloSpecification specification = new EstiloSpecification(SearchCriteriaHelper.fromFilterString(filter));
         return this.estiloRepository.findAll(specification, pageable);
+    }
+
+    @Override
+    public Optional<Estilo> getEstiloById(Long idEstilo) {
+        return this.estiloRepository.findById(idEstilo);
     }
 }

@@ -1,5 +1,7 @@
 package com.kreitek.PFBKreitekfy.Infrasctructure.Repository.Impl;
 
+import java.util.Optional;
+
 import com.kreitek.PFBKreitekfy.Domain.Entity.Album;
 import com.kreitek.PFBKreitekfy.Domain.Persistence.AlbumPersistence;
 import com.kreitek.PFBKreitekfy.Infrasctructure.Repository.AlbumRepository;
@@ -23,5 +25,10 @@ public class AlbumPersistenceImpl implements AlbumPersistence {
     public Page<Album> findAll(Pageable pageable, String filter) {
         AlbumSpecification specification = new AlbumSpecification(SearchCriteriaHelper.fromFilterString(filter));
         return this.albumRepository.findAll(specification, pageable);
+    }
+
+    @Override
+    public Optional<Album> getAlbumById(Long idAlbum) {
+        return this.albumRepository.findById(idAlbum);
     }
 }

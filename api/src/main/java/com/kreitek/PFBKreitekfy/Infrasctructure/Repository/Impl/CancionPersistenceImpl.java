@@ -1,5 +1,7 @@
 package com.kreitek.PFBKreitekfy.Infrasctructure.Repository.Impl;
 
+import java.util.Optional;
+
 import com.kreitek.PFBKreitekfy.Domain.Entity.Cancion;
 import com.kreitek.PFBKreitekfy.Domain.Persistence.CancionPersistence;
 import com.kreitek.PFBKreitekfy.Infrasctructure.Repository.CancionRepository;
@@ -28,5 +30,10 @@ public class CancionPersistenceImpl implements CancionPersistence {
     @Override
     public Cancion saveItem(Cancion entity) {
         return this.cancionRepository.save(entity);
+    }
+
+    @Override
+    public Optional<Cancion> getCancionById(Long idCancion) {
+        return this.cancionRepository.findById(idCancion);
     }
 }

@@ -1,4 +1,5 @@
-<h2>Crear Canción</h2>
+<h2 *ngIf="operacion == 'new'">Insertar Canción</h2>
+<h2 *ngIf="operacion == 'edit'">Modificar canción</h2>
 
 <form *ngIf="cancion">
     <div class="form-group">
@@ -43,11 +44,15 @@
         </p-autoComplete>
     </div>
 
-    <div *ngIf="exito == true">
+    <div *ngIf="exito == true && operacion == 'new'">
         Canción creada con éxito.
+    </div>
+    <div *ngIf="exito == true && operacion == 'edit'">
+        Canción editada con éxito.
     </div>
 
     <div class="form-group">
-        <button (click)="insertarCancion()" class="btn btn-primary">Submit</button>
+        <button *ngIf="operacion == 'new'" (click)="insertarCancion()" class="btn btn-primary">Insertar</button>
+        <button *ngIf="operacion == 'edit'" (click)="editarCancion()" class="btn btn-primary">Editar</button>
     </div>
   </form>

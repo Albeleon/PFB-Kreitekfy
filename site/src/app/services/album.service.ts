@@ -17,4 +17,9 @@ export class AlbumService {
     }
     return this.http.get<Album[]>(urlEndpoint);
   }
+
+  getAlbumById(id: string): Observable<Album> {
+    let urlEndpoint: string = "http://localhost:8080/kreitekfy/albumes/" + id;
+    return this.http.get<Album>(urlEndpoint);
+  }
 }

@@ -1,5 +1,7 @@
 package com.kreitek.PFBKreitekfy.Application.Service.Impl;
 
+import java.util.Optional;
+
 import com.kreitek.PFBKreitekfy.Application.Dto.AlbumDTO;
 import com.kreitek.PFBKreitekfy.Application.Mapper.AlbumMapper;
 import com.kreitek.PFBKreitekfy.Application.Service.AlbumService;
@@ -28,5 +30,11 @@ public class AlbumServiceImpl implements AlbumService {
     public Page<AlbumDTO> getAlbumsByCriteriaString(Pageable pageable, String filter) {
         Page<Album> albumPage = this.persistence.findAll(pageable, filter);
         return albumPage.map(mapper::toDto);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<AlbumDTO> getAlbumById(Long idAlbum) {
+        return this.persistence.getAlbumById(idAlbum).map(mapper::toDto);
     }
 }

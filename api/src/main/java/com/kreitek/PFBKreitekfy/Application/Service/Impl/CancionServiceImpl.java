@@ -1,5 +1,7 @@
 package com.kreitek.PFBKreitekfy.Application.Service.Impl;
 
+import java.util.Optional;
+
 import com.kreitek.PFBKreitekfy.Application.Dto.CancionDTO;
 import com.kreitek.PFBKreitekfy.Application.Dto.CancionSimpleDTO;
 import com.kreitek.PFBKreitekfy.Application.Mapper.CancionMapper;
@@ -38,5 +40,11 @@ public class CancionServiceImpl implements CancionService {
     public CancionDTO saveItem(CancionDTO cancionDTO) {
         Cancion cancionSaved = this.persistence.saveItem(this.mapper.toEntity(cancionDTO));
         return this.mapper.toDto(cancionSaved);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<CancionDTO> getCancionById(Long idCancion) {
+        return this.persistence.getCancionById(idCancion).map(mapper::toDto);
     }
 }

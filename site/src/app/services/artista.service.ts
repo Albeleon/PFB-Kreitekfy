@@ -18,4 +18,9 @@ export class ArtistaService {
     }
     return this.http.get<Artista[]>(urlEndpoint);
   }
+
+  getArtistaById(id: string): Observable<Artista> {
+    let urlEndpoint: string = "http://localhost:8080/kreitekfy/artistas/" + id;
+    return this.http.get<Artista>(urlEndpoint);
+  }
 }

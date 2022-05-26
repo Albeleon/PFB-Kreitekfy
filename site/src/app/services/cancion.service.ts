@@ -18,9 +18,19 @@ export class CancionService {
     }
     return this.http.get<Cancion_Simple[]>(urlEndpoint);
   }
+  
+  getCancionById(id: string): Observable<Cancion> {
+    let urlEndpoint: string = "http://localhost:8080/kreitekfy/canciones/" + id;
+    return this.http.get<Cancion>(urlEndpoint);
+  }
 
   insertarCancion(cancion: Cancion) {
     let urlEndpoint: string = "http://localhost:8080/kreitekfy/canciones";
     return this.http.post<Cancion[]>(urlEndpoint, cancion);
+  }
+
+  editarCancion(cancion: Cancion) {
+    let urlEndpoint: string = "http://localhost:8080/kreitekfy/canciones";
+    return this.http.put<Cancion>(urlEndpoint, cancion);
   }
 }

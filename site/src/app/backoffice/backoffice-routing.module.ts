@@ -5,7 +5,8 @@ import { CancionFormComponent } from './componentes/cancion-form/cancion-form.co
 
 const routes: Routes = [
   { path: '', component: BackofficeComponent },
-  { path: 'ingresarCancion', component: CancionFormComponent }
+  { path: 'ingresarCancion', component: CancionFormComponent },
+  { path: 'editarCancion/:cancionId', component: CancionFormComponent }
 ];
 
 @NgModule({
