@@ -1,0 +1,58 @@
+<h2 *ngIf="operacion == 'new'">Insertar Canción</h2>
+<h2 *ngIf="operacion == 'edit'">Modificar canción</h2>
+
+<form *ngIf="cancion">
+    <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input id="nombre" [(ngModel)]="cancion.nombre" name="nombre" type="text">
+    </div>
+    <div class="form-group">
+        <label for="duracion">Duración (segundos)</label>
+        <input id="duracion" [(ngModel)]="cancion.duracion" name="duracion" type="number">
+    </div>
+    <div class="form-group">
+        <div class="field">
+            <label for="fecha">Fecha</label>
+            <p-calendar name="fecha" [(ngModel)]="cancion.fecha" [showIcon]="true" inputId="fecha"></p-calendar>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="estilo">Album</label>
+        <p-autoComplete name="album" [(ngModel)]="albumFiltro" [suggestions]="albumes" (completeMethod)="filtrarAlbumes($event)" field="nombre" [dropdown]="true">
+            <ng-template let-album pTemplate="album">
+                <div>{{album.nombre}}</div>
+            </ng-template>
+        </p-autoComplete>
+    </div>
+
+    <div class="form-group">
+        <label for="estilo">Artista</label>
+        <p-autoComplete name="artista" [(ngModel)]="artistaFiltro" [suggestions]="artistas" (completeMethod)="filtrarArtistas($event)" field="nombre" [dropdown]="true">
+            <ng-template let-artista pTemplate="artista">
+                <div>{{artista.nombre}}</div>
+            </ng-template>
+        </p-autoComplete>
+    </div>
+
+    <div class="form-group">
+        <label for="estilo">Estilo</label>
+        <p-autoComplete name="estilo" [(ngModel)]="estiloFiltro" [suggestions]="estilos" (completeMethod)="filtrarEstilos($event)" field="nombre" [dropdown]="true">
+            <ng-template let-estilo pTemplate="estilo">
+                <div>{{estilo.nombre}}</div>
+            </ng-template>
+        </p-autoComplete>
+    </div>
+
+    <div *ngIf="exito == true && operacion == 'new'">
+        Canción creada con éxito.
+    </div>
+    <div *ngIf="exito == true && operacion == 'edit'">
+        Canción editada con éxito.
+    </div>
+
+    <div class="form-group">
+        <button *ngIf="operacion == 'new'" (click)="insertarCancion()" class="btn btn-primary">Insertar</button>
+        <button *ngIf="operacion == 'edit'" (click)="editarCancion()" class="btn btn-primary">Editar</button>
+    </div>
+  </form>

@@ -10,6 +10,9 @@ import { TablaCancionesComponent } from './componentes/tabla-canciones/tabla-can
 import { TablaArtistasComponent } from './componentes/tabla-artistas/tabla-artistas.component';
 import { FormsModule } from '@angular/forms';
 
+import { CancionFormComponent } from './componentes/cancion-form/cancion-form.component';
+import { CalendarModule } from 'primeng/calendar';
+import { AutoCompleteModule} from 'primeng/autocomplete';
 
 @NgModule({
   declarations: [
@@ -17,12 +20,15 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     FooterComponent,
     TablaCancionesComponent,
-    TablaArtistasComponent
+    TablaArtistasComponent,
+    CancionFormComponent
   ],
   imports: [
     CommonModule,
     BackofficeRoutingModule,
     TableModule,
+    CalendarModule,
+    AutoCompleteModule,
     FormsModule
   ]
 })
