@@ -5,17 +5,25 @@ import { BackofficeRoutingModule } from './backoffice-routing.module';
 import { BackofficeComponent } from './backoffice.component';
 import { HeaderComponent } from './layouts/header/header.component';
 import { FooterComponent } from './layouts/footer/footer.component';
+import {TableModule} from 'primeng/table';
+import { TablaCancionesComponent } from './componentes/tabla-canciones/tabla-canciones.component';
+import { TablaArtistasComponent } from './componentes/tabla-artistas/tabla-artistas.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     BackofficeComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    TablaCancionesComponent,
+    TablaArtistasComponent
   ],
   imports: [
     CommonModule,
-    BackofficeRoutingModule
+    BackofficeRoutingModule,
+    TableModule,
+    FormsModule
   ]
 })
 export class BackofficeModule { }

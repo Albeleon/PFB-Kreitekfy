@@ -1,0 +1,55 @@
+.cover{
+    border-radius:20px;
+    height:200px;
+    width: 200px;
+    opacity:1;
+    transition: opacity .3s ease-out; 
+}
+
+.cover:hover{
+    opacity:0.8;
+    transition: opacity .3s ease-out;
+}
+
+.artist{
+    margin-top:-20px;
+    font-weight: 300;
+  }
+
+.columna{
+    border: 1px solid black;
+}
+
+.btnAtras{
+    border-radius:19px;
+    background-color: #000000b4;
+    color:white;
+    border:2px solid white;
+    font-weight: bold;
+}
+
+.btnSiguiente{
+    border-radius:19px;
+    background-color: #000000b4;
+    color:white;
+    border:2px solid white;
+    font-weight: bold;
+}
+
+
+.btnAtras:hover{
+    color:black;
+    background-color:rgb(104, 151, 240);
+    border:2px solid #2f71e8ff;
+}
+
+.btnSiguiente:hover{
+    color:black;
+    background-color:rgb(104, 151, 240);
+    border:2px solid #2f71e8ff;
+}
+
+.botoneraPaginacion{
+    position: relative;
+    top: 450px;
+}
