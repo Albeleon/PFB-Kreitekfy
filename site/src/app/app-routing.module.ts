@@ -6,7 +6,7 @@ import { UserGuard } from './guards/user.guard';
 import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
-  { path: '', component: ListaUsuariosComponent, canActivate: [UserGuard] },
+  { path: '', component: ListaUsuariosComponent },
   {
     path: 'player',
     component: PlayerComponent,
@@ -17,6 +17,7 @@ const routes: Routes = [
     path: 'player',
     loadChildren: () =>
       import('./player/player.module').then((m) => m.PlayerModule),
+    canActivate: [UserGuard],
   },
   {
     path: 'backoffice',
