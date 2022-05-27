@@ -22,8 +22,10 @@ export class CancionService {
     }
     return this.http.get<Cancion_Simple[]>(urlEndpoint);
   }
-  
-  getCancionesMasReproducidas(estilo: Estilo | undefined): Observable<Cancion_Simple[]> {
+
+  getCancionesMasReproducidas(
+    estilo: Estilo | undefined
+  ): Observable<Cancion_Simple[]> {
     let urlEndpoint: string =
       'http://localhost:8080/kreitekfy/canciones/masReproducidas';
     if (estilo) {
@@ -31,7 +33,7 @@ export class CancionService {
     }
     return this.http.get<Cancion_Simple[]>(urlEndpoint);
   }
-  
+
   getCancionesMasValoradas(estilo: Estilo | undefined) {
     let urlEndpoint: string =
       'http://localhost:8080/kreitekfy/canciones/masValoradas';
@@ -83,7 +85,9 @@ export class CancionService {
     return this.http.get<Cancion>(urlEndpoint);
   }
 
-  updateValoracion(cancionUsuario: Cancion_Usuario): Observable<Cancion_Usuario> {
+  updateValoracion(
+    cancionUsuario: Cancion_Usuario
+  ): Observable<Cancion_Usuario> {
     const urlEndpoint = `http://localhost:8080/kreitekfy/canciones/${cancionUsuario.cancionId}/usuarios/${cancionUsuario.usuarioId}/valoracion`;
     return this.http.patch<Cancion_Usuario>(urlEndpoint, cancionUsuario);
   }
@@ -115,5 +119,10 @@ export class CancionService {
   ): Observable<Cancion_Usuario> {
     const urlEndpoint = `http://localhost:8080/kreitekfy/canciones/${cancionUsuario.cancionId}/usuarios/${cancionUsuario.usuarioId}/reproduccion`;
     return this.http.put<Cancion_Usuario>(urlEndpoint, cancionUsuario);
+  }
+
+  deleteCancion(cancionId: number): Observable<any> {
+    const urlEndpoint = `http://localhost:8080/kreitekfy/canciones/${cancionId}`;
+    return this.http.delete(urlEndpoint);
   }
 }

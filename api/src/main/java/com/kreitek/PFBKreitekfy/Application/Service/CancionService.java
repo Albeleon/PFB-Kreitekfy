@@ -24,4 +24,6 @@ public interface CancionService {
     List<CancionSimpleDTO> getCancionesNovedades(String filter);
 
     List<CancionSimpleDTO> getCancionesMasReproducidas(String filter);
+
+    void deleteCancionById(Long cancionId);
 }

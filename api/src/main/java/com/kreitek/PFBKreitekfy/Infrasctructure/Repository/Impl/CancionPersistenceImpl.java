@@ -19,8 +19,7 @@ public class CancionPersistenceImpl implements CancionPersistence {
 
     @Autowired
     public CancionPersistenceImpl(
-        CancionRepository cancionRepository)
-    {
+            CancionRepository cancionRepository) {
         this.cancionRepository = cancionRepository;
     }
 
@@ -44,5 +43,10 @@ public class CancionPersistenceImpl implements CancionPersistence {
     @Override
     public Optional<Cancion> getCancionById(Long idCancion) {
         return this.cancionRepository.findById(idCancion);
+    }
+
+    @Override
+    public void deleteCancionById(Long cancionId) {
+        this.cancionRepository.deleteById(cancionId);
     }
 }

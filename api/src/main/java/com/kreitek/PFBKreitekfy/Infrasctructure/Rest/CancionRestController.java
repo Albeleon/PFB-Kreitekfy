@@ -10,14 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class CancionRestController {
@@ -65,7 +58,7 @@ public class CancionRestController {
     }
 
     @CrossOrigin
-    @PostMapping(value = "/canciones", produces="application/json", consumes="application/json")
+    @PostMapping(value = "/canciones", produces = "application/json", consumes = "application/json")
     ResponseEntity<CancionDTO> createCancion(@RequestBody CancionDTO cancionDTO) {
         return new ResponseEntity<>(cancionService.saveItem(cancionDTO), HttpStatus.CREATED);
     }
@@ -74,5 +67,12 @@ public class CancionRestController {
     @PutMapping(value = "/canciones", produces = "application/json", consumes = "application/json")
     ResponseEntity<CancionDTO> editCancion(@RequestBody CancionDTO cancionDTO) {
         return new ResponseEntity<>(cancionService.saveItem(cancionDTO), HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @DeleteMapping(value = "/canciones/{cancionId}", produces = "application/json")
+    ResponseEntity<Void> deleteCancionFromId(@PathVariable Long cancionId) {
+        cancionService.deleteCancionById(cancionId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

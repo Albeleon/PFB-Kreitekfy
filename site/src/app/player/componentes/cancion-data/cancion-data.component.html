@@ -1,4 +1,7 @@
-<div *ngIf="cancion">
+
+<app-header></app-header>
+
+<div class="cancion" *ngIf="cancion">
     <div class="row">
         <figure class="col-md-6">
             <img *ngIf="cancion.albumImagen" [src]="base64Prefix + cancion.albumImagen" alt="">
@@ -25,3 +28,5 @@
 
 </div>
 <p-toast></p-toast>
+
+<app-footer></app-footer>
