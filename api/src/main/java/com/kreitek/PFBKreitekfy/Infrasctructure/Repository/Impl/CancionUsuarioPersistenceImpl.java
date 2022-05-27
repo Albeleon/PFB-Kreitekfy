@@ -22,7 +22,7 @@ public class CancionUsuarioPersistenceImpl implements CancionUsuarioPersistence 
     }
 
     @Override
-    public CancionUsuario updateReproduccion(CancionUsuario cancionUsuario) {
-        return cancionUsuarioRepository.save(cancionUsuario);
+    public CancionUsuario saveItem(CancionUsuario entity) {
+        return cancionUsuarioRepository.save(entity);
     }
 }

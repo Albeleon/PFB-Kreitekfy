@@ -6,21 +6,25 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
 public class CancionUsuarioRestController {
 
     private final CancionUsuarioService cancionUsuarioService;
 
-
     public CancionUsuarioRestController(CancionUsuarioService cancionUsuarioService) {
         this.cancionUsuarioService = cancionUsuarioService;
     }
 
+    @CrossOrigin
     @PutMapping(value = "/canciones/{cancionId}/usuarios/{usuarioId}/reproduccion", produces = "application/json")
     public ResponseEntity<CancionUsuarioDTO> updateReproduccion(@RequestBody CancionUsuarioDTO cancionUsuarioDTO) {
         return new ResponseEntity<>(cancionUsuarioService.updateReproduccion(cancionUsuarioDTO), HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @PatchMapping(value = "/canciones/{cancionId}/usuarios/{usuarioId}/valoracion", produces = "application/json")
+    public ResponseEntity<CancionUsuarioDTO> updateValoracion(@RequestBody CancionUsuarioDTO cancionUsuarioDTO) {
+        return new ResponseEntity<>(cancionUsuarioService.updateValoracion(cancionUsuarioDTO), HttpStatus.OK);
     }
 
     @CrossOrigin

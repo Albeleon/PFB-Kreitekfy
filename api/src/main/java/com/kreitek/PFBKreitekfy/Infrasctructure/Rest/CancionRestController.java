@@ -2,16 +2,12 @@ package com.kreitek.PFBKreitekfy.Infrasctructure.Rest;
 
 
 import java.util.List;
-import java.util.Optional;
 
 import com.kreitek.PFBKreitekfy.Application.Dto.CancionDTO;
 import com.kreitek.PFBKreitekfy.Application.Dto.CancionSimpleDTO;
-import com.kreitek.PFBKreitekfy.Application.Dto.CancionUsuarioDTO;
 import com.kreitek.PFBKreitekfy.Application.Service.CancionService;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;

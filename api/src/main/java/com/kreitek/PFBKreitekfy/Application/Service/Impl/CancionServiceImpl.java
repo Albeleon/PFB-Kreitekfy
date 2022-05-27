@@ -7,7 +7,6 @@ import java.util.Optional;
 import com.kreitek.PFBKreitekfy.Application.Comparer.ValoracionComparer;
 import com.kreitek.PFBKreitekfy.Application.Dto.CancionDTO;
 import com.kreitek.PFBKreitekfy.Application.Dto.CancionSimpleDTO;
-import com.kreitek.PFBKreitekfy.Application.Dto.CancionUsuarioDTO;
 import com.kreitek.PFBKreitekfy.Application.Mapper.CancionMapper;
 import com.kreitek.PFBKreitekfy.Application.Mapper.CancionSimpleMapper;
 import com.kreitek.PFBKreitekfy.Application.Mapper.CancionUsuarioMapper;
@@ -25,18 +24,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CancionServiceImpl implements CancionService {
     private final CancionPersistence persistence;
-    private final CancionUsuarioMapper cancionUsuarioMapper;
     private final CancionSimpleMapper simpleMapper;
     private final CancionMapper mapper;
 
     @Autowired
     public CancionServiceImpl(
             CancionPersistence persistence,
-            CancionUsuarioMapper cancionUsuarioMapper,
             CancionSimpleMapper simpleMapper,
             CancionMapper mapper) {
         this.persistence = persistence;
-        this.cancionUsuarioMapper = cancionUsuarioMapper;
         this.simpleMapper = simpleMapper;
         this.mapper = mapper;
     }

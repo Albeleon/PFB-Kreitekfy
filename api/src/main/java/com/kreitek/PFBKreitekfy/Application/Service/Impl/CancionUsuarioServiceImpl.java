@@ -33,12 +33,12 @@ public class CancionUsuarioServiceImpl implements CancionUsuarioService {
         Optional<CancionUsuario> cancionUsuario = cancionUsuarioPersistence.findCancionUsuarioByCancionIdAndUsuarioId(cancionUsuarioDTO.getCancionId(), cancionUsuarioDTO.getUsuarioId());
         if (cancionUsuario.isPresent()) {
             cancionUsuario.get().setReproduccion(cancionUsuario.get().getReproduccion() + 1);
-            cancionUsuarioPersistence.updateReproduccion(cancionUsuario.get());
+            cancionUsuarioPersistence.saveItem(cancionUsuario.get());
             return cancionUsuarioMapper.toDto(cancionUsuario.get());
         } else {
             CancionUsuario cancionUsuarioUpdated = cancionUsuarioMapper.toEntity(cancionUsuarioDTO);
             cancionUsuarioUpdated.setReproduccion(1L);
-            cancionUsuarioPersistence.updateReproduccion(cancionUsuarioUpdated);
+            cancionUsuarioPersistence.saveItem(cancionUsuarioUpdated);
             return cancionUsuarioMapper.toDto(cancionUsuarioUpdated);
         }
     }
@@ -46,7 +46,18 @@ public class CancionUsuarioServiceImpl implements CancionUsuarioService {
     @Override
     @Transactional
     public CancionUsuarioDTO updateValoracion(CancionUsuarioDTO cancionUsuarioDTO) {
-        return cancionUsuarioDTO;
+        
+        Optional<CancionUsuario> cancionUsuario = cancionUsuarioPersistence.findCancionUsuarioByCancionIdAndUsuarioId(cancionUsuarioDTO.getCancionId(), cancionUsuarioDTO.getUsuarioId());
+        if (cancionUsuario.isPresent()) {
+            cancionUsuario.get().setValoracion(cancionUsuarioDTO.getValoracion());
+            cancionUsuarioPersistence.saveItem(cancionUsuario.get());
+            return cancionUsuarioMapper.toDto(cancionUsuario.get());
+        } else {
+            CancionUsuario cancionUsuarioUpdated = cancionUsuarioMapper.toEntity(cancionUsuarioDTO);
+            cancionUsuarioUpdated.setValoracion(cancionUsuarioDTO.getValoracion());
+            cancionUsuarioPersistence.saveItem(cancionUsuarioUpdated);
+            return cancionUsuarioMapper.toDto(cancionUsuarioUpdated);
+        }
     }
 
     @Override

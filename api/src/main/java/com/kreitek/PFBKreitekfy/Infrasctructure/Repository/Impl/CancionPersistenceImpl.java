@@ -4,10 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import com.kreitek.PFBKreitekfy.Domain.Entity.Cancion;
-import com.kreitek.PFBKreitekfy.Domain.Entity.CancionUsuario;
 import com.kreitek.PFBKreitekfy.Domain.Persistence.CancionPersistence;
 import com.kreitek.PFBKreitekfy.Infrasctructure.Repository.CancionRepository;
-import com.kreitek.PFBKreitekfy.Infrasctructure.Repository.CancionUsuarioRepository;
 import com.kreitek.PFBKreitekfy.Infrasctructure.Specs.CancionSpecification;
 import com.kreitek.PFBKreitekfy.Infrasctructure.Specs.Shared.SearchCriteriaHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +16,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class CancionPersistenceImpl implements CancionPersistence {
     private final CancionRepository cancionRepository;
-    private final CancionUsuarioRepository cancionUsuarioRepository;
 
     @Autowired
     public CancionPersistenceImpl(
-        CancionRepository cancionRepository,
-        CancionUsuarioRepository cancionUsuarioRepository)
+        CancionRepository cancionRepository)
     {
         this.cancionRepository = cancionRepository;
-        this.cancionUsuarioRepository = cancionUsuarioRepository;
     }
 
     @Override

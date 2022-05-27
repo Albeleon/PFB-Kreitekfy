@@ -14,6 +14,7 @@ import { AutoCompleteModule} from 'primeng/autocomplete';
 import {ToastModule} from 'primeng/toast';
 import { TiraReproduccionesComponent } from './componentes/tira-reproducciones/tira-reproducciones.component';
 import { TiraValoradasComponent } from './componentes/tira-valoradas/tira-valoradas.component';
+import { TiraRecomendadosComponent } from './componentes/tira-recomendados/tira-recomendados.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { TiraValoradasComponent } from './componentes/tira-valoradas/tira-valora
     PaginaPrincipalComponent,
     TiraNovedadesComponent,
     TiraReproduccionesComponent,
-    TiraValoradasComponent
+    TiraValoradasComponent,
+    TiraRecomendadosComponent
   ],
   imports: [
     CommonModule,
