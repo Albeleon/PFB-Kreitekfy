@@ -32,7 +32,7 @@ export class ListaUsuariosComponent implements OnInit {
     localStorage.setItem('usuarioId' , id);
     localStorage.setItem('rol' , rol);
     localStorage.setItem('userName',username);
-
+    localStorage.setItem('filtroAdmin','');
   }
 
   navigateUser(){
