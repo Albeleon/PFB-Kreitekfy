@@ -47,9 +47,6 @@ export class CancionFormComponent implements OnInit {
     }
   }
 
-  ngAfterViewInit(): void {
-  }
-
   initInsertarCancion() {
     this.operacion = "new";
     this.cancion = new Cancion();

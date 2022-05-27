@@ -28,7 +28,18 @@
           </li>
         </ul>
         <form class="d-flex">
-          <input class="form-control me-2" name="searchEstilo" type="search" [(ngModel)]="estilo" (ngModelChange)="enviarEstilo()" placeholder="Search" aria-label="Search">
+          
+          <div class="form-group">
+            <label for="estilo">Estilo</label>
+            <p-autoComplete name="estilo" [(ngModel)]="estiloFiltro" [suggestions]="estilos" (completeMethod)="filtrarEstilos($event)" (ngModelChange)="enviarEstilo()" field="nombre" [dropdown]="true">
+                <ng-template let-estilo pTemplate="estilo">
+                    <div>{{estilo.nombre}}</div>
+                </ng-template>
+            </p-autoComplete>
+          </div>
+          <div class = "col-xl-1 mx-2">
+            <p class = "userName"><i class="fa-solid fa-user mx-2"></i>{{usuarioNombre}}</p>
+          </div>
         </form>
       </div>
     </div>

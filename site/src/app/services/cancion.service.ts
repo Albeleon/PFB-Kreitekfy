@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Cancion_Simple } from '../models/cancion-simple.interface';
 import { Cancion_Usuario } from '../models/cancion-usuario.interface';
 import { Cancion } from '../models/cancion.model';
+import { Estilo } from '../models/estilo.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +13,10 @@ export class CancionService {
 
   constructor(private http: HttpClient) { }
 
-  public getCancionesNovedades(estilo: string): Observable<Cancion_Simple[]> {
+  public getCancionesNovedades(estilo: Estilo | undefined): Observable<Cancion_Simple[]> {
     let urlEndpoint: string = "http://localhost:8080/kreitekfy/canciones?size=5&sort=fecha,DESC";
-    if (estilo != "") {
-      urlEndpoint = urlEndpoint + "&filter=estilo.nombre:MATCH:" + estilo;
+    if (estilo) {
+      urlEndpoint = urlEndpoint + "&filter=estilo.id:EQUAL:" + estilo.id;
     }
     return this.http.get<Cancion_Simple[]>(urlEndpoint);
   }
@@ -26,14 +27,14 @@ export class CancionService {
 
     if(busqueda != "" && filtro != "cancion" && filtro != "" || busqueda != "" && filtro != "cancion" && filtro != "" && page != 1 ) {
 
-      url =  url + "?sort=nombre,ASC&size=1&page="+ page +"&filter="+filtro+".nombre:MATCH:" + busqueda;
+      url =  url + "?sort=nombre,ASC&size=25&page="+ page +"&filter="+filtro+".nombre:MATCH:" + busqueda;
 
     }else if(busqueda != "" && page != 1 && filtro == "" || filtro == "cancion"){
 
-      url =  url + "?sort=nombre,ASC&size=1&page="+ page +"&filter=nombre:MATCH:" + busqueda;
+      url =  url + "?sort=nombre,ASC&size=25&page="+ page +"&filter=nombre:MATCH:" + busqueda;
 
     }else{
-      url =  url + "?sort=nombre,ASC&size=1&page="+ page;
+      url =  url + "?sort=nombre,ASC&size=25&page="+ page;
     }
 
     return this.http.get<Cancion[]>(url);

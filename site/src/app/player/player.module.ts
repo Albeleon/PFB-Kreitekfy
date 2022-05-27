@@ -8,6 +8,9 @@ import { HeaderComponent } from './layouts/header/header.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { CancionDataComponent } from './componentes/cancion-data/cancion-data.component';
 import { TimeDurationPipe } from '../pipes/time-duration.pipe';
+import { PaginaPrincipalComponent } from './componentes/pagina-principal/pagina-principal.component';
+import { TiraNovedadesComponent } from './componentes/tira-novedades/tira-novedades.component';
+import { AutoCompleteModule} from 'primeng/autocomplete';
 
 @NgModule({
   declarations: [
@@ -15,12 +18,15 @@ import { TimeDurationPipe } from '../pipes/time-duration.pipe';
     HeaderComponent,
     FooterComponent,
     CancionDataComponent,
-    TimeDurationPipe
+    TimeDurationPipe,
+    PaginaPrincipalComponent,
+    TiraNovedadesComponent
   ],
   imports: [
     CommonModule,
     PlayerRoutingModule,
-    FormsModule
+    FormsModule,
+    AutoCompleteModule
   ],
   providers: [
   ]
