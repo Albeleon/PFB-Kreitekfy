@@ -26,22 +26,18 @@ public class AlbumRestController {
     }
 
     @CrossOrigin
-    @GetMapping(value = "/albumes", produces="application/json")
+    @GetMapping(value = "/albumes", produces = "application/json")
     ResponseEntity<Page<AlbumDTO>> getAllAlbums(@RequestParam(value = "filter", required = false) String filter, Pageable pageable) {
         Page<AlbumDTO> albumPage = this.albumService.getAlbumsByCriteriaString(pageable, filter);
         return new ResponseEntity<>(albumPage, HttpStatus.OK);
     }
-    
-    @CrossOrigin
-    @GetMapping(value = "/albumes/{idAlbum}", produces="application/json")
-    ResponseEntity<AlbumDTO> getAlbum(@PathVariable Long idAlbum) {
-        Optional<AlbumDTO> album = this.albumService.getAlbumById(idAlbum);
 
-        if (album.isPresent()) {
-            return new ResponseEntity<>(album.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    @CrossOrigin
+    @GetMapping(value = "/albumes/{idAlbum}", produces = "application/json")
+    ResponseEntity<AlbumDTO> getAlbum(@PathVariable Long idAlbum) {
+        return albumService.getAlbumById(idAlbum)
+                .map(albumDTO -> new ResponseEntity<>(albumDTO, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
 }

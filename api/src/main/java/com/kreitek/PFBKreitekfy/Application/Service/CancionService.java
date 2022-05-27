@@ -14,4 +14,6 @@ public interface CancionService {
     CancionDTO saveItem(CancionDTO cancionDTO);
 
     Optional<CancionDTO> getCancionById(Long idCancion);
+
+    void updateReproduccionCancion(Long idCancion);
 }

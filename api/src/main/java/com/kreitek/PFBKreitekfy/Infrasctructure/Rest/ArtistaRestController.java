@@ -26,22 +26,20 @@ public class ArtistaRestController {
     }
 
     @CrossOrigin
-    @GetMapping(value = "/artistas", produces="application/json")
+    @GetMapping(value = "/artistas", produces = "application/json")
     ResponseEntity<Page<ArtistaDTO>> getAllArtistas(@RequestParam(value = "filter", required = false) String filter, Pageable pageable) {
         Page<ArtistaDTO> artistaPage = this.artistaService.getArtistasByCriteriaString(pageable, filter);
         return new ResponseEntity<>(artistaPage, HttpStatus.OK);
     }
 
     @CrossOrigin
-    @GetMapping(value = "/artistas/{idArtista}", produces="application/json")
+    @GetMapping(value = "/artistas/{idArtista}", produces = "application/json")
     ResponseEntity<ArtistaDTO> getArtista(@PathVariable Long idArtista) {
-        Optional<ArtistaDTO> artista = this.artistaService.getArtistaById(idArtista);
 
-        if (artista.isPresent()) {
-            return new ResponseEntity<>(artista.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return artistaService.getArtistaById(idArtista)
+                .map(artistaDTO -> new ResponseEntity<>(artistaDTO, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+
     }
 
 }

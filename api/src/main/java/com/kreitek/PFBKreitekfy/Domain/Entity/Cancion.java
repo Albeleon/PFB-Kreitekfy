@@ -23,6 +23,9 @@ public class Cancion {
     @Column(nullable = false)
     private Date fecha;
 
+    @Column(nullable = false)
+    private Long reproduccion = 0L;
+
     @ManyToOne
     @JoinColumn(name = "artista_id", nullable = false)
     private Artista artista;
@@ -37,7 +40,6 @@ public class Cancion {
 
     @OneToMany(mappedBy = "cancion")
     private Set<CancionUsuario> cancionesUsuarios;
-
 
     public Long getId() {
         return id;
@@ -101,6 +103,14 @@ public class Cancion {
 
     public void setCancionesUsuarios(Set<CancionUsuario> cancionesUsuarios) {
         this.cancionesUsuarios = cancionesUsuarios;
+    }
+
+    public Long getReproduccion() {
+        return reproduccion;
+    }
+
+    public void setReproduccion(Long reproduccion) {
+        this.reproduccion = reproduccion;
     }
 
     @Override

@@ -29,37 +29,31 @@ public class CancionRestController {
     }
 
     @CrossOrigin
-    @GetMapping(value = "/canciones", produces="application/json")
+    @GetMapping(value = "/canciones", produces = "application/json")
     ResponseEntity<Page<CancionSimpleDTO>> getAllCanciones(@RequestParam(value = "filter", required = false) String filter, Pageable pageable) {
         Page<CancionSimpleDTO> cancionPage = this.cancionService.getCancionesByCriteriaString(pageable, filter);
         return new ResponseEntity<>(cancionPage, HttpStatus.OK);
     }
 
     @CrossOrigin
-    @GetMapping(value = "/canciones/{idCancion}", produces="application/json")
+    @GetMapping(value = "/canciones/{idCancion}", produces = "application/json")
     ResponseEntity<CancionDTO> getCancion(@PathVariable Long idCancion) {
-        Optional<CancionDTO> cancion = this.cancionService.getCancionById(idCancion);
+        return cancionService.getCancionById(idCancion)
+                .map(cancionDTO -> new ResponseEntity<>(cancionDTO, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
-        if (cancion.isPresent()) {
-            return new ResponseEntity<>(cancion.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+
     }
 
     @CrossOrigin
-    @PostMapping(value = "/canciones", produces="application/json", consumes="application/json")
+    @PostMapping(value = "/canciones", produces = "application/json", consumes = "application/json")
     ResponseEntity<CancionDTO> createCancion(@RequestBody CancionDTO cancionDTO) {
-
-        CancionDTO cancionSaved = this.cancionService.saveItem(cancionDTO);
-        return new ResponseEntity<>(cancionSaved, HttpStatus.CREATED);
+        return new ResponseEntity<>(cancionService.saveItem(cancionDTO), HttpStatus.CREATED);
     }
 
     @CrossOrigin
-    @PutMapping(value = "/canciones", produces="application/json", consumes="application/json")
+    @PutMapping(value = "/canciones", produces = "application/json", consumes = "application/json")
     ResponseEntity<CancionDTO> editCancion(@RequestBody CancionDTO cancionDTO) {
-
-        CancionDTO cancionUpdated = this.cancionService.saveItem(cancionDTO);
-        return new ResponseEntity<>(cancionUpdated, HttpStatus.OK);
+        return new ResponseEntity<>(cancionService.saveItem(cancionDTO), HttpStatus.OK);
     }
 }

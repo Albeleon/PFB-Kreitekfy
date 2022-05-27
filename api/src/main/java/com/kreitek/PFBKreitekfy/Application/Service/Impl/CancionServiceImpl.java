@@ -47,4 +47,13 @@ public class CancionServiceImpl implements CancionService {
     public Optional<CancionDTO> getCancionById(Long idCancion) {
         return this.persistence.getCancionById(idCancion).map(mapper::toDto);
     }
+
+    @Override
+    @Transactional
+    public void updateReproduccionCancion(Long idCancion) {
+        CancionDTO cancionDTO = this.getCancionById(idCancion).orElseThrow(() -> new RuntimeException("No existe este Usuario"));
+        Cancion cancion = mapper.toEntity(cancionDTO);
+        cancion.setReproduccion(cancion.getReproduccion() + 1);
+        persistence.saveItem(cancion);
+    }
 }

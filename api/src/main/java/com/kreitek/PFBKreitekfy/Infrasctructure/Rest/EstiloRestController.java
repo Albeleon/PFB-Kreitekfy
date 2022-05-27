@@ -26,22 +26,20 @@ public class EstiloRestController {
     }
 
     @CrossOrigin
-    @GetMapping(value = "/estilos", produces="application/json")
+    @GetMapping(value = "/estilos", produces = "application/json")
     ResponseEntity<Page<EstiloDTO>> getAllEstilos(@RequestParam(value = "filter", required = false) String filter, Pageable pageable) {
         Page<EstiloDTO> estiloPage = this.estiloService.getEstilosByCriteriaString(pageable, filter);
         return new ResponseEntity<>(estiloPage, HttpStatus.OK);
     }
-    
-    @CrossOrigin
-    @GetMapping(value = "/estilos/{idEstilo}", produces="application/json")
-    ResponseEntity<EstiloDTO> getEstilo(@PathVariable Long idEstilo) {
-        Optional<EstiloDTO> estilo = this.estiloService.getEstiloById(idEstilo);
 
-        if (estilo.isPresent()) {
-            return new ResponseEntity<>(estilo.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    @CrossOrigin
+    @GetMapping(value = "/estilos/{idEstilo}", produces = "application/json")
+    ResponseEntity<EstiloDTO> getEstilo(@PathVariable Long idEstilo) {
+        return estiloService.getEstiloById(idEstilo)
+                .map(estiloDTO -> new ResponseEntity<>(estiloDTO, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+
+
     }
 
 }
