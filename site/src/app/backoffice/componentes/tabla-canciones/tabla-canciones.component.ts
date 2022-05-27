@@ -1,4 +1,10 @@
-import { Component, Input, OnInit , OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { Album } from 'src/app/models/album.interface';
 import { Artista } from 'src/app/models/artista.interface';
@@ -10,17 +16,16 @@ import { CancionService } from 'src/app/services/cancion.service';
 import { EstiloService } from 'src/app/services/estilo.service';
 import { ActivatedRoute } from '@angular/router';
 import { Calendar } from 'primeng/calendar';
-import {MessageService} from 'primeng/api';
-
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-tabla-canciones',
   templateUrl: './tabla-canciones.component.html',
   styleUrls: ['./tabla-canciones.component.scss'],
-  providers: [MessageService]
+  providers: [MessageService, ConfirmationService],
 })
-export class TablaCancionesComponent implements OnInit , OnChanges{
-// Variables lista y búsqueda de canciones//
+export class TablaCancionesComponent implements OnInit, OnChanges {
+  // Variables lista y búsqueda de canciones//
   Canciones: Cancion[] = [];
   page: number = 0;
   first: boolean = false;
@@ -29,76 +34,78 @@ export class TablaCancionesComponent implements OnInit , OnChanges{
   totalPages: number = 0;
   totalElements: number = 0;
   display: boolean = false;
-  @Input()busqueda: string = "";
-
+  @Input() busqueda: string = '';
 
   // Variables modal inserción de canciones//
 
   exito: Boolean = false;
-  operacion: string = "";
+  operacion: string = '';
 
   cancion?: Cancion;
-
   albumFiltro?: Album;
   albumes: Album[] = [];
-
   artistaFiltro?: Artista;
   artistas: Artista[] = [];
-  
+
   estiloFiltro?: Estilo;
   estilos: Estilo[] = [];
   fechaHoy: Date = new Date();
-
-
-
+  toogleCreate: boolean = false;
+  titleMode: string = '';
+  flagErrorSearch: boolean = false;
 
   constructor(
     private cancionService: CancionService,
     private albumService: AlbumService,
     private artistaService: ArtistaService,
     private estiloService: EstiloService,
-    private route: ActivatedRoute ,
-    private messageService: MessageService) {}
+    private route: ActivatedRoute,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService
+  ) {}
 
+  // Lógica lista y búsqueda de canciones//
 
-    // Lógica lista y búsqueda de canciones//
-
-
-  showDialog(){
-    const tiempoTranscurrido = Date.now();
-    const hoy = new Date(tiempoTranscurrido);
+  showDialogCreate() {
+    console.log('Create');
+    this.toogleCreate = true;
     this.display = true;
-    this.cancion!.fecha = hoy;
+    this.initInsertarCancion();
+  }
+
+  showDialogEdit(idCancion: number) {
+    this.titleMode = 'Editar';
+    this.toogleCreate = false;
+    this.display = true;
+    this.initEditarCancion(idCancion!.toString());
   }
 
   ngOnChanges(busqueda: SimpleChanges): void {
-    this.getCancionesFiltradas()
+    this.getCancionesFiltradas();
   }
 
   ngOnInit(): void {
     this.getCancionesFiltradas();
-    const entryParam: string = this.route.snapshot.paramMap.get("cancionId") ?? "new";
-    if (entryParam !== "new") {
-      this.initEditarCancion(entryParam);
-    }
-    else {
-      this.initInsertarCancion();
-    }
+    // const entryParam: string =
+    //   this.route.snapshot.paramMap.get('cancionId') ?? 'new';
+    // if (entryParam !== 'new') {
+    //   this.initEditarCancion(entryParam);
+    // } else {
+    //   this.initInsertarCancion();
+    // }
   }
 
-  public nextPage():void {
+  public nextPage(): void {
     this.clickpage = true;
     this.page = this.page + 1;
     this.getCancionesFiltradas();
   }
 
-  public previousPage():void {
+  public previousPage(): void {
     this.clickpage = true;
     this.page = this.page - 1;
     this.getCancionesFiltradas();
   }
-
- 
 
   public getCancionesFiltradas():void{
     if (this.busqueda == "" || this.busqueda.match("^[^.:,&=%;]+$")) {
@@ -119,120 +126,193 @@ export class TablaCancionesComponent implements OnInit , OnChanges{
           })
     }
   }
-    
-  private handleError(err:any):void{
+  
+  private handleError(err: any): void {
     // implementar gestión de errores;
   }
 
+  // Lógica modal inserción de canciones//
 
-    // Lógica modal inserción de canciones//
+  initInsertarCancion() {
+    const timeNow = Date.now();
+    const now = new Date(timeNow);
+    this.cancion = {} as Cancion;
+    this.albumFiltro = {} as Album;
+    this.artistaFiltro = {} as Artista;
+    this.estiloFiltro = {} as Estilo;
+    this.cancion!.fecha = now;
+    this.titleMode = 'Crear';
+  }
 
+  initEditarCancion(id: string) {
+    this.cancion = { nombre: "", duracion: 1, fecha: new Date()};
+    this.operacion = 'edit';
+    this.cancionService.getCancionById(id).subscribe({
+      next: (data: Cancion) => {
+        this.cancion = data;
+        this.cancion.fecha = new Date(this.cancion.fecha!);
 
-    initInsertarCancion() {
-      this.operacion = "new";
-      this.cancion = { nombre: "", duracion: 1, fecha: new Date()};
+        this.albumService
+          .getAlbumById(this.cancion.albumId!.toString())
+          .subscribe({
+            next: (data: any) => {
+              this.albumFiltro = data;
+            },
+          });
+        this.artistaService
+          .getArtistaById(this.cancion.artistaId!.toString())
+          .subscribe({
+            next: (data: any) => {
+              this.artistaFiltro = data;
+            },
+          });
+        this.estiloService
+          .getEstiloById(this.cancion.estiloId!.toString())
+          .subscribe({
+            next: (data: any) => {
+              this.estiloFiltro = data;
+            },
+          });
+      },
+    });
+  }
+
+  filtrarAlbumes(event?: any): void {
+    let albumBusqueda: string = '';
+    if (event?.query) {
+      albumBusqueda = event.query;
     }
-  
-    initEditarCancion(id: string) {
-      this.cancion = { nombre: "", duracion: 1, fecha: new Date()};
-      this.operacion = "edit";
-      this.cancionService.getCancionById(id).subscribe({
-        next: (data: Cancion) => {
-          this.cancion = data;
-          this.cancion.fecha = new Date(this.cancion.fecha!);
-  
-          this.albumService.getAlbumById(this.cancion.albumId!.toString()).subscribe({
-            next: (data: any) => { this.albumFiltro = data; } } );
-          this.artistaService.getArtistaById(this.cancion.artistaId!.toString()).subscribe({
-            next: (data: any) => { this.artistaFiltro = data; } } );
-          this.estiloService.getEstiloById(this.cancion.estiloId!.toString()).subscribe({
-            next: (data: any) => { this.estiloFiltro = data; } } );
-  
-           }
+
+    this.albumService.getAlbumes(albumBusqueda).subscribe({
+      next: (data: any) => {
+        this.albumes = data.content;
+      },
+    });
+  }
+    
+  filtrarEstilos(event?: any): void {
+    let estiloBusqueda: string = "";
+    if (event?.query) {
+      estiloBusqueda = event.query;
+    }
+
+    this.estiloService.getEstilos(estiloBusqueda).subscribe({
+      next: (data: any) => {
+        this.estilos = data.content;
+      }
+    }
+    )
+  }
+
+  filtrarArtistas(event?: any): void {
+    let artistaBusqueda: string = '';
+    if (event?.query) {
+      artistaBusqueda = event.query;
+    }
+
+    this.artistaService.getArtistas(artistaBusqueda).subscribe({
+      next: (data: any) => {
+        this.artistas = data.content;
+      },
+    });
+  }
+
+  showDialogDelete(cancionId: number) {
+    console.log(cancionId);
+
+    this.confirmationService.confirm({
+      message: '¿Desea eliminar esta cancion?',
+      header: 'Confirmacion de eliminacion',
+      icon: 'pi pi-info-circle',
+      accept: () => {
+        this.cancionService.deleteCancion(cancionId).subscribe({
+          next: () => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Cancion',
+              detail: 'Se ha eliminado correctamente',
+            });
+            this.ngOnInit();
+          },
+          error: (err) => {
+            console.log(err);
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error Cancion',
+              detail: 'Se ha producido un error',
+            });
+          },
+        });
+      },
+    });
+  }
+
+  saveCancion() {
+    this.toogleCreate ? this.insertarCancion() : this.editarCancion();
+  }
+
+  insertarCancion(): void {
+    if (
+      this.albumFiltro &&
+      this.estiloFiltro &&
+      this.artistaFiltro &&
+      this.cancion &&
+      this.cancion.nombre != '' &&
+      this.cancion.duracion! > 0 &&
+      this.cancion.fecha
+    ) {
+      this.cancion.albumId = this.albumFiltro.id;
+      this.cancion.artistaId = this.artistaFiltro.id;
+      this.cancion.estiloId = this.estiloFiltro.id;
+      this.cancionService.insertarCancion(this.cancion).subscribe({
+        next: (data: any) => {
+          // this.exito = true;
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Inserción Correcta',
+            detail: 'Canción Insertada',
+          });
+          this.display = false;
+          this.ngOnInit();
+        },
       });
     }
-  
-    filtrarAlbumes(event?: any): void {
-      let albumBusqueda: string = "";
-      if (event?.query) {
-        albumBusqueda = event.query;
-      }
-  
-      this.albumService.getAlbumes(albumBusqueda).subscribe({
-        next: (data: any) => {
-          this.albumes = data.content;
-        }
-      }
-      )
-    }
-  
-    filtrarArtistas(event?: any): void {
-      let artistaBusqueda: string = "";
-      if (event?.query) {
-        artistaBusqueda = event.query;
-      }
-  
-      this.artistaService.getArtistas(artistaBusqueda).subscribe({
-        next: (data: any) => {
-          this.artistas = data.content;
-        }
-      }
-      )
-    }
-    
-    filtrarEstilos(event?: any): void {
-      let estiloBusqueda: string = "";
-      if (event?.query) {
-        estiloBusqueda = event.query;
-      }
-  
-      this.estiloService.getEstilos(estiloBusqueda).subscribe({
-        next: (data: any) => {
-          this.estilos = data.content;
-        }
-      }
-      )
-    }
-
-    addSingle() {
-      this.messageService.add({severity:'success', summary:'Inserción Correcta', detail:'Canción Insertada'});
   }
-  
-    insertarCancion(): void {
-      if (this.albumFiltro && this.estiloFiltro && this.artistaFiltro
-         && this.cancion && this.cancion.nombre != "" && this.cancion.duracion! > 0
-         && this.cancion.fecha) {
-        this.cancion.albumId = this.albumFiltro.id;
-        this.cancion.artistaId = this.artistaFiltro.id;
-        this.cancion.estiloId = this.estiloFiltro.id;
-        this.cancionService.insertarCancion(this.cancion).subscribe({
-          next: (data: any) => { this.exito = true; 
-            if(this.exito){
-              this.display = false;
-              this.ngOnInit();
-              this.addSingle();
-            }
-          }
-        }
-        )
-      }
+
+  editarCancion(): void {
+    if (
+      this.albumFiltro &&
+      this.estiloFiltro &&
+      this.artistaFiltro &&
+      this.cancion &&
+      this.cancion.nombre != '' &&
+      this.cancion.duracion! > 0 &&
+      this.cancion.fecha
+    ) {
+      this.cancion.albumId = this.albumFiltro.id;
+      this.cancion.artistaId = this.artistaFiltro.id;
+      this.cancion.estiloId = this.estiloFiltro.id;
+      this.cancionService.editarCancion(this.cancion).subscribe({
+        next: (data: any) => {
+          this.exito = true;
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Edicion',
+            detail: 'Se ha editado con exito',
+          });
+          this.display = false;
+          this.ngOnInit();
+        },
+        error: (err) => {
+          console.log(err);
+          // this.exito = true;
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Edicion',
+            detail: 'Se ha producido un problema con la edicion',
+          });
+        },
+      });
     }
-  
-    editarCancion(): void {
-      if (this.albumFiltro && this.estiloFiltro && this.artistaFiltro
-         && this.cancion && this.cancion.nombre != "" && this.cancion.duracion! > 0
-         && this.cancion.fecha) {
-        this.cancion.albumId = this.albumFiltro.id;
-        this.cancion.artistaId = this.artistaFiltro.id;
-        this.cancion.estiloId = this.estiloFiltro.id;
-        this.cancionService.editarCancion(this.cancion).subscribe({
-          next: (data: any) => { this.exito = true; }
-        }
-        )
-      }
-    }
-  
-
-
-
+  }
 }

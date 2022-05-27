@@ -83,6 +83,11 @@ public class CancionServiceImpl implements CancionService {
     }
 
     @Override
+    public void deleteCancionById(Long cancionId) {
+        this.persistence.deleteCancionById(cancionId);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public List<CancionSimpleDTO> getCancionesMasValoradas(String filter) {
         List<Cancion> canciones = this.persistence.findAll(filter);

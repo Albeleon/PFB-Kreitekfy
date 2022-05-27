@@ -18,4 +18,6 @@ public interface CancionPersistence {
 
     Optional<Cancion> getCancionById(Long idCancion);
 
+    void deleteCancionById(Long cancionId);
+
 }

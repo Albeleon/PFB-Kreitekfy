@@ -1,16 +1,21 @@
-.cover{
-    border-radius:20px;
-    height:500px;
-    width: 500px;
-    opacity:1;
-    transition: opacity .3s ease-out; 
+.cover {
+  border-radius: 20px;
+  height: 500px;
+  width: 500px;
+  opacity: 1;
+  transition: opacity 0.3s ease-out;
 }
 
-.cover:hover{
-    opacity:0.8;
-    transition: opacity .3s ease-out;
+.cover:hover {
+  opacity: 0.8;
+  transition: opacity 0.3s ease-out;
 }
 
 a i {
-    cursor:pointer;
+  cursor: pointer;
+}
+
+.cancion {
+  height: calc(100vh - 140px - 104px);
+
 }

@@ -38,7 +38,7 @@ public class Cancion {
     @JoinColumn(name = "estilo_id", nullable = false)
     private Estilo estilo;
 
-    @OneToMany(mappedBy = "cancion")
+    @OneToMany(mappedBy = "cancion", cascade = CascadeType.ALL)
     private Set<CancionUsuario> cancionesUsuarios;
 
     public Long getId() {
@@ -110,7 +110,8 @@ public class Cancion {
     }
 
     public void setReproduccion(Long reproduccion) {
-        this.reproduccion = reproduccion == null ? 0 : reproduccion;
+        this.reproduccion = reproduccion == null ? 0L : reproduccion;
+
     }
 
     @Override
