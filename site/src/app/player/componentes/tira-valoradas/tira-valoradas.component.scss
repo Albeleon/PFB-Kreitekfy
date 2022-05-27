@@ -1,0 +1,12 @@
+.cover{
+    border-radius:20px;
+    height:200px;
+    width: 200px;
+    opacity:1;
+    transition: opacity .3s ease-out; 
+}
+
+.cover:hover{
+    opacity:0.8;
+    transition: opacity .3s ease-out;
+}

@@ -1,5 +1,6 @@
 package com.kreitek.PFBKreitekfy.Infrasctructure.Repository.Impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.kreitek.PFBKreitekfy.Domain.Entity.Cancion;
@@ -26,6 +27,12 @@ public class CancionPersistenceImpl implements CancionPersistence {
     {
         this.cancionRepository = cancionRepository;
         this.cancionUsuarioRepository = cancionUsuarioRepository;
+    }
+
+    @Override
+    public List<Cancion> findAll(String filter) {
+        CancionSpecification specification = new CancionSpecification(SearchCriteriaHelper.fromFilterString(filter));
+        return this.cancionRepository.findAll(specification);
     }
 
     @Override

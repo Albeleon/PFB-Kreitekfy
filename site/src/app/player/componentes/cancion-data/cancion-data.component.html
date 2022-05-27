@@ -15,10 +15,10 @@
             <p>Estilo: {{ cancion.estiloNombre }}</p>
             <p>¡Valora la canción!</p>
             <div>
-                <i #estrella1 class="pi pi-star"></i>
-                <i #estrella2 class="pi pi-star"></i>
-                <i #estrella3 class="pi pi-star"></i>
-                <i #estrella4 class="pi pi-star"></i>
+                <a (click)="enviarValoracion(1)"><i #estrella1 class="pi pi-star"></i></a>
+                <a (click)="enviarValoracion(2)"><i #estrella2 class="pi pi-star"></i></a>
+                <a (click)="enviarValoracion(3)"><i #estrella3 class="pi pi-star"></i></a>
+                <a (click)="enviarValoracion(4)"><i #estrella4 class="pi pi-star"></i></a>
             </div>
         </div>
     </div>

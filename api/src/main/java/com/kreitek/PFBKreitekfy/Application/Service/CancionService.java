@@ -1,5 +1,6 @@
 package com.kreitek.PFBKreitekfy.Application.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.kreitek.PFBKreitekfy.Application.Dto.CancionDTO;
@@ -17,9 +18,15 @@ public interface CancionService {
 
     Optional<CancionDTO> getCancionById(Long idCancion);
 
-<<<<<<< HEAD
+
     void updateReproduccionCancion(Long idCancion);
-=======
+
     Optional<CancionUsuarioDTO> getCancionUsuarioById(Long idCancion, Long idUsuario);
->>>>>>> 1cc905e024aa26c25ff3d769fa74ee43b3fd5b6d
+
+    List<CancionSimpleDTO> getCancionesMasValoradas(String filter);
+
+    List<CancionSimpleDTO> getCancionesNovedades(String filter);
+
+    List<CancionSimpleDTO> getCancionesMasReproducidas(String filter);
+
 }
