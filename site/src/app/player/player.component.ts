@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Cancion_Simple } from '../models/cancion-simple.interface';
+import { Estilo } from '../models/estilo.interface';
 import { CancionService } from '../services/cancion.service';
 
 @Component({
@@ -9,27 +10,13 @@ import { CancionService } from '../services/cancion.service';
   styleUrls: ['./player.component.scss']
 })
 export class PlayerComponent implements OnInit {
-  novedades: Cancion_Simple[] = [];
-  base64Prefix: string = environment.base64Prefix;
-  estilo: string = "";
+  estilo?: Estilo;
 
-  constructor(private cancionService: CancionService) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    this.actualizarTiras();
-  }
+  ngOnInit(): void {}
 
-  actualizarTiras(): void {
-    this.cancionService.getCancionesNovedades(this.estilo).subscribe({
-      next: (data: any) => {
-        this.novedades = data.content;
-      }
-    }
-    )
-  }
-
-  actualizarEstilo(value: string) {
+  actualizarEstilo(value: Estilo) {
     this.estilo = value;
-    this.actualizarTiras();
   }
 }

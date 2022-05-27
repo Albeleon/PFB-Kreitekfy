@@ -3,8 +3,6 @@ package com.kreitek.PFBKreitekfy.Application.Mapper;
 
 import com.kreitek.PFBKreitekfy.Application.Dto.CancionDTO;
 import com.kreitek.PFBKreitekfy.Domain.Entity.Cancion;
-import com.kreitek.PFBKreitekfy.Domain.Entity.CancionUsuario;
-import com.kreitek.PFBKreitekfy.Domain.Key.CancionUsuarioKey;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

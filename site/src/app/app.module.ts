@@ -7,6 +7,7 @@ import { ListaUsuariosComponent } from './componentes/lista-usuarios/lista-usuar
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [AppComponent, ListaUsuariosComponent],
@@ -17,7 +18,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    TableModule
   ],
   providers: [],
   bootstrap: [AppComponent],

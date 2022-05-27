@@ -1,7 +1,6 @@
 package com.kreitek.PFBKreitekfy.Application.Mapper;
 
 import com.kreitek.PFBKreitekfy.Application.Dto.AlbumDTO;
-import com.kreitek.PFBKreitekfy.Application.Dto.EstiloDTO;
 import com.kreitek.PFBKreitekfy.Domain.Entity.Album;
 
 import org.mapstruct.Mapper;

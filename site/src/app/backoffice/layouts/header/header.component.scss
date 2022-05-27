@@ -1,0 +1,74 @@
+.brand{
+    font-family: 'Orbitron', sans-serif;
+}
+
+.admin{
+    font-size: 10px;
+    position: relative;
+    top:15px;
+    font-family: 'Orbitron', sans-serif;
+
+}
+
+a{
+    font-family: Montserrat;
+    font-weight: 300;
+}
+
+.logo{
+    margin-right:10px;
+    margin-top:-7px;
+    margin-left:10px;
+    height:26px;
+    width:26px;
+}
+
+.searchForm{
+    border-radius: 19px;
+    border:none;
+    background-color: rgba(87, 87, 87, 0.699);
+    color:white;
+    font-family: Montserrat;
+    font-weight: 300;
+}
+
+.searchForm::placeholder{
+    color:white;
+}
+
+.form-control:focus {
+    box-shadow: none;
+  }
+
+.logoB{
+    margin-right:10px;
+    margin-top:6px;
+    margin-left:10px;
+    height:26px;
+    width:26px;
+}
+
+.userName{
+    color:white;
+    font-family: Montserrat;
+    font-weight: 300;
+    position: relative;
+    top:9px;
+    cursor:default;
+}
+
+
+.filtros{
+    position:relative;
+    left:-70px;
+    border-radius: 19px;
+    border:none;
+    background-color: rgb(105, 105, 105);
+    color:white;
+    font-family: Montserrat;
+    font-weight: 300;
+}
+
+.filtros:focus {
+    box-shadow: none;
+  }
