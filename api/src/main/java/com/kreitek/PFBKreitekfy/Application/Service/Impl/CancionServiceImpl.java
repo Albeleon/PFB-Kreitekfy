@@ -1,7 +1,10 @@
 package com.kreitek.PFBKreitekfy.Application.Service.Impl;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
+import com.kreitek.PFBKreitekfy.Application.Comparer.ValoracionComparer;
 import com.kreitek.PFBKreitekfy.Application.Dto.CancionDTO;
 import com.kreitek.PFBKreitekfy.Application.Dto.CancionSimpleDTO;
 import com.kreitek.PFBKreitekfy.Application.Dto.CancionUsuarioDTO;
@@ -13,7 +16,9 @@ import com.kreitek.PFBKreitekfy.Domain.Entity.Cancion;
 import com.kreitek.PFBKreitekfy.Domain.Persistence.CancionPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,11 +31,10 @@ public class CancionServiceImpl implements CancionService {
 
     @Autowired
     public CancionServiceImpl(
-        CancionPersistence persistence, 
-        CancionUsuarioMapper cancionUsuarioMapper,
-        CancionSimpleMapper simpleMapper, 
-        CancionMapper mapper)
-    {
+            CancionPersistence persistence,
+            CancionUsuarioMapper cancionUsuarioMapper,
+            CancionSimpleMapper simpleMapper,
+            CancionMapper mapper) {
         this.persistence = persistence;
         this.cancionUsuarioMapper = cancionUsuarioMapper;
         this.simpleMapper = simpleMapper;
@@ -58,17 +62,38 @@ public class CancionServiceImpl implements CancionService {
     }
 
     @Override
-<<<<<<< HEAD
     @Transactional
     public void updateReproduccionCancion(Long idCancion) {
         CancionDTO cancionDTO = this.getCancionById(idCancion).orElseThrow(() -> new RuntimeException("No existe este Usuario"));
         Cancion cancion = mapper.toEntity(cancionDTO);
         cancion.setReproduccion(cancion.getReproduccion() + 1);
         persistence.saveItem(cancion);
-=======
+    }
+
+
+    @Override
     @Transactional(readOnly = true)
-    public Optional<CancionUsuarioDTO> getCancionUsuarioById(Long idCancion, Long idUsuario) {
-        return this.persistence.getCancionUsuarioById(idCancion, idUsuario).map(cancionUsuarioMapper::toDto);
->>>>>>> 1cc905e024aa26c25ff3d769fa74ee43b3fd5b6d
+    public List<CancionSimpleDTO> getCancionesNovedades(String filter) {
+        Pageable pageable = PageRequest.of(0, 5, Sort.by("fecha").descending());
+        List<Cancion> canciones = this.persistence.findAll(pageable, filter).getContent();
+        return simpleMapper.toListDto(canciones);
+    }
+
+    @Override
+    public List<CancionSimpleDTO> getCancionesMasReproducidas(String filter) {
+        Pageable pageable = PageRequest.of(0, 5, Sort.by("reproduccion").descending());
+        List<Cancion> canciones = this.persistence.findAll(pageable, filter).getContent();
+        return simpleMapper.toListDto(canciones);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<CancionSimpleDTO> getCancionesMasValoradas(String filter) {
+        List<Cancion> canciones = this.persistence.findAll(filter);
+        Collections.sort(canciones, new ValoracionComparer());
+        while (canciones.size() > 5) {
+            canciones.remove(canciones.size() - 1);
+        }
+        return simpleMapper.toListDto(canciones);
     }
 }

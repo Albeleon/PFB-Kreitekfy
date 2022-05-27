@@ -1,5 +1,6 @@
 package com.kreitek.PFBKreitekfy.Infrasctructure.Repository.Impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.kreitek.PFBKreitekfy.Domain.Entity.Cancion;
@@ -29,6 +30,12 @@ public class CancionPersistenceImpl implements CancionPersistence {
     }
 
     @Override
+    public List<Cancion> findAll(String filter) {
+        CancionSpecification specification = new CancionSpecification(SearchCriteriaHelper.fromFilterString(filter));
+        return this.cancionRepository.findAll(specification);
+    }
+
+    @Override
     public Page<Cancion> findAll(Pageable pageable, String filter) {
         CancionSpecification specification = new CancionSpecification(SearchCriteriaHelper.fromFilterString(filter));
         return this.cancionRepository.findAll(specification, pageable);
@@ -42,10 +49,5 @@ public class CancionPersistenceImpl implements CancionPersistence {
     @Override
     public Optional<Cancion> getCancionById(Long idCancion) {
         return this.cancionRepository.findById(idCancion);
-    }
-
-    @Override
-    public Optional<CancionUsuario> getCancionUsuarioById(Long idCancion, Long idUsuario) {
-        return this.cancionUsuarioRepository.findByCancion_idAndUsuario_Id(idCancion, idUsuario);
     }
 }

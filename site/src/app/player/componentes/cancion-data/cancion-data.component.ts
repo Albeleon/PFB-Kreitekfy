@@ -96,6 +96,34 @@ export class CancionDataComponent implements OnInit {
     this.estrella4!.nativeElement.classList.remove(classRemove);
   }
 
+  enviarValoracion(numero: number): void {
+    this.valoracion = numero;
+
+    this.cancionUsuario!.cancionId = this.cancion!.id!;
+    this.cancionUsuario!.usuarioId = +this.usuarioId!;
+    this.cancionUsuario!.valoracion = this.valoracion;
+
+    this.cancionService.updateValoracion(this.cancionUsuario!).subscribe({
+      next: (data: Cancion_Usuario) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Valoración',
+          detail: 'Valorado con éxito',
+        });
+
+        this.actualizarEstrellas(this.valoracion!);
+      },
+      error: (err) => {
+        console.log(err);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Valoración',
+          detail: 'Se ha producido un error',
+        });
+      },
+    })
+  }
+
   updateReproduccion() {
     this.cancionUsuario!.cancionId = this.cancion!.id!;
     this.cancionUsuario!.usuarioId = +this.usuarioId!;

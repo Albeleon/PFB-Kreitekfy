@@ -5,11 +5,11 @@ import { CancionService } from 'src/app/services/cancion.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-tira-novedades',
-  templateUrl: './tira-novedades.component.html',
-  styleUrls: ['./tira-novedades.component.scss']
+  selector: 'app-tira-valoradas',
+  templateUrl: './tira-valoradas.component.html',
+  styleUrls: ['./tira-valoradas.component.scss']
 })
-export class TiraNovedadesComponent implements OnInit {
+export class TiraValoradasComponent implements OnInit {
   canciones: Cancion_Simple[] = [];
   base64Prefix: string = environment.base64Prefix;
   @Input() estilo?: Estilo;
@@ -25,11 +25,12 @@ export class TiraNovedadesComponent implements OnInit {
   }
 
   actualizarTiras(): void {
-    this.cancionService.getCancionesNovedades(this.estilo).subscribe({
+    this.cancionService.getCancionesMasValoradas(this.estilo).subscribe({
       next: (data: any) => {
         this.canciones = data;
       }
     }
     )
   }
+
 }
