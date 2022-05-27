@@ -2,7 +2,7 @@ import { Component, Input, OnInit , OnChanges, SimpleChanges } from '@angular/co
 import { ViewChild } from '@angular/core';
 import { Album } from 'src/app/models/album.interface';
 import { Artista } from 'src/app/models/artista.interface';
-import { Cancion } from 'src/app/models/cancion.model';
+import { Cancion } from 'src/app/models/cancion.interface';
 import { Estilo } from 'src/app/models/estilo.interface';
 import { AlbumService } from 'src/app/services/album.service';
 import { ArtistaService } from 'src/app/services/artista.service';
@@ -101,25 +101,25 @@ export class TablaCancionesComponent implements OnInit , OnChanges{
  
 
   public getCancionesFiltradas():void{
-    const filtro = localStorage.getItem('filtroAdmin');
-    if(this.clickpage == true){
-      this.clickpage = false;
-    }else{
-      this.page = 0;
+    if (this.busqueda == "" || this.busqueda.match("^[^.:,&=%;]+$")) {
+      const filtro = localStorage.getItem('filtroAdmin');
+      if(this.clickpage == true){
+        this.clickpage = false;
+      }else{
+        this.page = 0;
+      }
+      this.cancionService.getCancionesAdministrador(this.busqueda, filtro! , this.page).subscribe({
+            next: (data: any) => {this.Canciones = data.content
+              this.totalPages = data.totalPages;
+              this.first = data.first;
+              this.last = data.last;
+              console.log(data);
+            },
+            error: (err) => {this.handleError(err);}
+          })
     }
-    this.cancionService.getCancionesAdministrador(this.busqueda, filtro! , this.page).subscribe({
-          next: (data: any) => {this.Canciones = data.content
-            this.totalPages = data.totalPages;
-            this.first = data.first;
-            this.last = data.last;
-            console.log(data);
-          },
-          error: (err) => {this.handleError(err);}
-        })
-    }
-  
-
-
+  }
+    
   private handleError(err:any):void{
     // implementar gestión de errores;
   }
@@ -130,11 +130,11 @@ export class TablaCancionesComponent implements OnInit , OnChanges{
 
     initInsertarCancion() {
       this.operacion = "new";
-      this.cancion = new Cancion();
+      this.cancion = { nombre: "", duracion: 1, fecha: new Date()};
     }
   
     initEditarCancion(id: string) {
-      this.cancion = new Cancion();
+      this.cancion = { nombre: "", duracion: 1, fecha: new Date()};
       this.operacion = "edit";
       this.cancionService.getCancionById(id).subscribe({
         next: (data: Cancion) => {

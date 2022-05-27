@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Album } from 'src/app/models/album.interface';
 import { Artista } from 'src/app/models/artista.interface';
-import { Cancion } from 'src/app/models/cancion.model';
+import { Cancion } from 'src/app/models/cancion.interface';
 import { Estilo } from 'src/app/models/estilo.interface';
 import { AlbumService } from 'src/app/services/album.service';
 import { ArtistaService } from 'src/app/services/artista.service';
@@ -49,11 +49,11 @@ export class CancionFormComponent implements OnInit {
 
   initInsertarCancion() {
     this.operacion = "new";
-    this.cancion = new Cancion();
+    this.cancion = { nombre: "", duracion: 1, fecha: new Date()};
   }
 
   initEditarCancion(id: string) {
-    this.cancion = new Cancion();
+    this.cancion = { nombre: "", duracion: 1, fecha: new Date()};
     this.operacion = "edit";
     this.cancionService.getCancionById(id).subscribe({
       next: (data: Cancion) => {

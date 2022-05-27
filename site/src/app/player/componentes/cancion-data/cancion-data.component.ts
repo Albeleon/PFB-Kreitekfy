@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Cancion_Usuario } from 'src/app/models/cancion-usuario.interface';
-import { Cancion } from 'src/app/models/cancion.model';
+import { Cancion } from 'src/app/models/cancion.interface';
 import { CancionService } from 'src/app/services/cancion.service';
 import { environment } from 'src/environments/environment';
 

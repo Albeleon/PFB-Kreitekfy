@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cancion_Simple } from '../models/cancion-simple.interface';
 import { Cancion_Usuario } from '../models/cancion-usuario.interface';
-import { Cancion } from '../models/cancion.model';
+import { Cancion } from '../models/cancion.interface';
 import { Estilo } from '../models/estilo.interface';
 
 @Injectable({
