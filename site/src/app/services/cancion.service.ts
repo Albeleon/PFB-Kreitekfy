@@ -34,12 +34,22 @@ export class CancionService {
     return this.http.get<Cancion_Simple[]>(urlEndpoint);
   }
 
-  getCancionesMasValoradas(estilo: Estilo | undefined) {
+  getCancionesMasValoradas(
+    estilo: Estilo | undefined
+  ): Observable<Cancion_Simple[]> {
     let urlEndpoint: string =
       'http://localhost:8080/kreitekfy/canciones/masValoradas';
     if (estilo) {
       urlEndpoint = urlEndpoint + '&filter=estilo.id:EQUAL:' + estilo.id;
     }
+    return this.http.get<Cancion_Simple[]>(urlEndpoint);
+  }
+
+  getCancionesRecomendadas(
+    usuarioId: string | null
+  ): Observable<Cancion_Simple[]> {
+    let urlEndpoint: string =
+      'http://localhost:8080/kreitekfy/canciones/recomendadas/' + usuarioId;
     return this.http.get<Cancion_Simple[]>(urlEndpoint);
   }
 

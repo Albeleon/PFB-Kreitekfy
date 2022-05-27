@@ -6,6 +6,8 @@ import java.util.List;
 import com.kreitek.PFBKreitekfy.Application.Dto.CancionDTO;
 import com.kreitek.PFBKreitekfy.Application.Dto.CancionSimpleDTO;
 import com.kreitek.PFBKreitekfy.Application.Service.CancionService;
+import com.kreitek.PFBKreitekfy.Application.Service.EstiloService;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -16,9 +18,11 @@ import org.springframework.web.bind.annotation.*;
 public class CancionRestController {
 
     private final CancionService cancionService;
+    private final EstiloService estiloService;
 
-    public CancionRestController(CancionService cancionService) {
+    public CancionRestController(CancionService cancionService, EstiloService estiloService) {
         this.cancionService = cancionService;
+        this.estiloService = estiloService;
     }
 
     @CrossOrigin
@@ -46,6 +50,13 @@ public class CancionRestController {
     @GetMapping(value = "/canciones/masValoradas", produces = "application/json")
     ResponseEntity<List<CancionSimpleDTO>> getCancionesMasValoradas(@RequestParam(value = "filter", required = false) String filter) {
         List<CancionSimpleDTO> canciones = this.cancionService.getCancionesMasValoradas(filter);
+        return new ResponseEntity<>(canciones, HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @GetMapping(value = "/canciones/recomendadas/{usuarioId}", produces = "application/json")
+    ResponseEntity<List<CancionSimpleDTO>> getCancionesRecomendadas(@PathVariable Long usuarioId) {
+        List<CancionSimpleDTO> canciones = this.estiloService.getCancionesRecomendadas(usuarioId);
         return new ResponseEntity<>(canciones, HttpStatus.OK);
     }
 
