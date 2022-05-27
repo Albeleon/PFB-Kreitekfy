@@ -8,8 +8,11 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import {TableModule} from 'primeng/table';
 import { TablaCancionesComponent } from './componentes/tabla-canciones/tabla-canciones.component';
 import { TablaArtistasComponent } from './componentes/tabla-artistas/tabla-artistas.component';
-import { FormsModule } from '@angular/forms';
 
+import { FormsModule } from '@angular/forms';
+import {DialogModule} from 'primeng/dialog';
+import {ButtonModule} from 'primeng/button';
+import {ToastModule} from 'primeng/toast';
 import { CancionFormComponent } from './componentes/cancion-form/cancion-form.component';
 import { CalendarModule } from 'primeng/calendar';
 import { AutoCompleteModule} from 'primeng/autocomplete';
@@ -29,7 +32,13 @@ import { AutoCompleteModule} from 'primeng/autocomplete';
     TableModule,
     CalendarModule,
     AutoCompleteModule,
-    FormsModule
+    FormsModule,
+    DialogModule,
+    ButtonModule,
+    ToastModule
+  ],exports: [
+    HeaderComponent,
+    FooterComponent
   ]
 })
 export class BackofficeModule { }

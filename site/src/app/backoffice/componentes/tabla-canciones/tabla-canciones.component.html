@@ -1,5 +1,5 @@
 <div class = "container-fluid mt-4 mb-4">
-    <h4>Lista de Canciones ♪</h4>
+    <h4>Añadir canción<button class = "añadir" type="button"  type="button" (click)="showDialog()"><img class = "logo mx-2" src = "../../../../assets/img/add.png"></button></h4>
     <div class ="row text-center justify-content-center mx-auto pt-4 row-cols-xl-5 row-cols-lg-5 " >
         <div class = " col text-center" *ngFor = "let item of Canciones" >
 
@@ -8,9 +8,70 @@
             <p class = "artist">({{item.artistaNombre}})</p>
         </div>
     </div>
-    <div class="botoneraPaginacion text-center">
-        <button [disabled]="first" class ="btn btn-secondary btnAtras" (click)="previousPage()">Anterior</button>
-        <span class = "mx-4">Pagina {{(page+1)}} de {{totalPages}}</span>
-        <button [disabled]="last" class ="btn btn-secondary btnSiguiente" (click)="nextPage()">Siguiente</button> 
+    <div class = "row">
+        <div class="botoneraPaginacion text-center col">
+            <button [disabled]="first" class ="btn btn-secondary btnAtras" (click)="previousPage()">Anterior</button>
+            <span class = "mx-3">Pagina {{(page+1)}} de {{totalPages}}</span>
+            <button [disabled]="last" class ="btn btn-secondary btnSiguiente" (click)="nextPage()">Siguiente</button> 
+        </div>
     </div>
+
+
+    <p-dialog [(visible)]="display" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '600px',height: '510px'}" [modal] = "true">
+        <ng-template pTemplate="header">
+            <h4>Añadir una canción</h4>
+        </ng-template>
+        <form *ngIf="cancion">
+            <div class = "row text-center justify-content-center">
+                    <div class="form-group col-xl-5 mt-3">
+                        <label for="nombre">Nombre</label>
+                        <input class = "form-control" id="nombre" [(ngModel)]="cancion.nombre" name="nombre" type="text">
+                    </div>
+                    <div class="form-group col-xl-5 mt-3">
+                        <label for="duracion">Duración (segundos)</label>
+                        <input class = "form-control" id="duracion" [(ngModel)]="cancion.duracion" name="duracion" type="number">
+                    </div>
+            </div>
+            <div class = "row text-center justify-content-center ">
+                <div class="form-group col-xl-5 mt-3">
+                    <div class="field">
+                        <label for="fecha">Fecha</label>
+                        <p-calendar name="fecha" [disabled]="true" [defaultDate] = "fechaHoy" [(ngModel)]="cancion.fecha" [showIcon]="true" inputId="fecha"  [style]="{width: '100%',height: '40px'}" ></p-calendar>
+                    </div>
+                </div>
+                <div class="form-group col-xl-5 mt-3">
+                    <label for="estilo">Album</label>
+                    <p-autoComplete name="album" [(ngModel)]="albumFiltro" [suggestions]="albumes" (completeMethod)="filtrarAlbumes($event)" field="nombre" [dropdown]="true"  scrollHeight = "200px" [style]="{width: '100%', height: '40px'}">
+                        <ng-template let-album pTemplate="album">
+                            <div>{{album.nombre}}</div>
+                        </ng-template>
+                    </p-autoComplete>
+                </div>
+            </div>
+        
+            <div class = "row text-center justify-content-center ">
+                <div class="form-group col-xl-5 mt-3">
+                    <label for="estilo">Artista</label>
+                    <p-autoComplete name="artista" [(ngModel)]="artistaFiltro" [suggestions]="artistas" (completeMethod)="filtrarArtistas($event)" field="nombre" [dropdown]="true" scrollHeight = "150px" [style]="{width: '100%',height: '40px'}">
+                        <ng-template let-artista pTemplate="artista">
+                            <div>{{artista.nombre}}</div>
+                        </ng-template>
+                    </p-autoComplete>
+                </div>
+            
+                <div class="form-group col-xl-5 mt-3">
+                    <label for="estilo">Estilo</label>
+                    <p-autoComplete name="estilo" [(ngModel)]="estiloFiltro" [suggestions]="estilos" (completeMethod)="filtrarEstilos($event)" field="nombre" [dropdown]="true" scrollHeight = "150px" [style]="{width: '100%',height: '40px'}">
+                        <ng-template let-estilo pTemplate="estilo">
+                            <div>{{estilo.nombre}}</div>
+                        </ng-template>
+                    </p-autoComplete>
+                </div>
+            </div>
+          </form>
+        <ng-template pTemplate="footer">
+            <button pButton pRipple type="button" label="Crear" class="p-button-rounded p-button-success mt-4" (click)="insertarCancion()"></button>
+        </ng-template>
+    </p-dialog>
+    <p-toast position="top-right"></p-toast>
 </div>
