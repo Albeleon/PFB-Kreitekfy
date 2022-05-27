@@ -1,6 +1,6 @@
 export interface Cancion_Usuario {
-    idCancion: number;
-    idUsuario: number;
-    reproducciones: number;
-    valoracion: number;
+    cancionId: number;
+    usuarioId: number;
+    reproduccion?: number;
+    valoracion?: number;
 }

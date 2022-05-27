@@ -7,60 +7,90 @@ import { Cancion } from '../models/cancion.model';
 import { Estilo } from '../models/estilo.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CancionService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  public getCancionesNovedades(estilo: Estilo | undefined): Observable<Cancion_Simple[]> {
-    let urlEndpoint: string = "http://localhost:8080/kreitekfy/canciones?size=5&sort=fecha,DESC";
+  public getCancionesNovedades(
+    estilo: Estilo | undefined
+  ): Observable<Cancion_Simple[]> {
+    let urlEndpoint: string =
+      'http://localhost:8080/kreitekfy/canciones?size=5&sort=fecha,DESC';
     if (estilo) {
-      urlEndpoint = urlEndpoint + "&filter=estilo.id:EQUAL:" + estilo.id;
+      urlEndpoint = urlEndpoint + '&filter=estilo.id:EQUAL:' + estilo.id;
     }
     return this.http.get<Cancion_Simple[]>(urlEndpoint);
   }
 
+  public getCancionesAdministrador(
+    busqueda: string,
+    filtro: string,
+    page: number
+  ): Observable<Cancion[]> {
+    let url: string = 'http://localhost:8080/kreitekfy/canciones';
 
-  public getCancionesAdministrador(busqueda:string, filtro:string , page:number): Observable<Cancion[]> {
-    let url: string = "http://localhost:8080/kreitekfy/canciones";
-
-    if(busqueda != "" && filtro != "cancion" && filtro != "" || busqueda != "" && filtro != "cancion" && filtro != "" && page != 1 ) {
-
-      url =  url + "?sort=nombre,ASC&size=25&page="+ page +"&filter="+filtro+".nombre:MATCH:" + busqueda;
-
-    }else if(busqueda != "" && page != 1 && filtro == "" || filtro == "cancion"){
-
-      url =  url + "?sort=nombre,ASC&size=25&page="+ page +"&filter=nombre:MATCH:" + busqueda;
-
-    }else{
-      url =  url + "?sort=nombre,ASC&size=25&page="+ page;
+    if (
+      (busqueda != '' && filtro != 'cancion' && filtro != '') ||
+      (busqueda != '' && filtro != 'cancion' && filtro != '' && page != 1)
+    ) {
+      url =
+        url +
+        '?sort=nombre,ASC&size=25&page=' +
+        page +
+        '&filter=' +
+        filtro +
+        '.nombre:MATCH:' +
+        busqueda;
+    } else if (
+      (busqueda != '' && page != 1 && filtro == '') ||
+      filtro == 'cancion'
+    ) {
+      url =
+        url +
+        '?sort=nombre,ASC&size=25&page=' +
+        page +
+        '&filter=nombre:MATCH:' +
+        busqueda;
+    } else {
+      url = url + '?sort=nombre,ASC&size=25&page=' + page;
     }
 
     return this.http.get<Cancion[]>(url);
   }
 
-
-
-  
   getCancionById(id: string): Observable<Cancion> {
-    let urlEndpoint: string = "http://localhost:8080/kreitekfy/canciones/" + id;
+    const urlEndpoint: string =
+      'http://localhost:8080/kreitekfy/canciones/' + id;
     return this.http.get<Cancion>(urlEndpoint);
   }
 
-  getValoracionCancionById(idCancion: string, idUsuario: string): Observable<Cancion_Usuario> {
-    let urlEndpoint: string = "http://localhost:8080/kreitekfy/canciones/" + idCancion + "/usuarios/" + idUsuario;
+  getValoracionCancionById(
+    idCancion: string,
+    idUsuario: string
+  ): Observable<Cancion_Usuario> {
+    const urlEndpoint: string =
+      'http://localhost:8080/kreitekfy/canciones/' +
+      idCancion +
+      '/usuarios/' +
+      idUsuario;
     return this.http.get<Cancion_Usuario>(urlEndpoint);
   }
 
   insertarCancion(cancion: Cancion) {
-    let urlEndpoint: string = "http://localhost:8080/kreitekfy/canciones";
+    const urlEndpoint: string = 'http://localhost:8080/kreitekfy/canciones';
     return this.http.post<Cancion[]>(urlEndpoint, cancion);
   }
 
   editarCancion(cancion: Cancion) {
-    let urlEndpoint: string = "http://localhost:8080/kreitekfy/canciones";
+    const urlEndpoint: string = 'http://localhost:8080/kreitekfy/canciones';
     return this.http.put<Cancion>(urlEndpoint, cancion);
   }
 
+  updateReproduccion(
+    cancionUsuario: Cancion_Usuario
+  ): Observable<Cancion_Usuario> {
+    const urlEndpoint = `http://localhost:8080/kreitekfy/canciones/${cancionUsuario.cancionId}/usuarios/${cancionUsuario.usuarioId}/reproduccion`;
+    return this.http.put<Cancion_Usuario>(urlEndpoint, cancionUsuario);
+  }
 }

@@ -11,6 +11,7 @@ import { TimeDurationPipe } from '../pipes/time-duration.pipe';
 import { PaginaPrincipalComponent } from './componentes/pagina-principal/pagina-principal.component';
 import { TiraNovedadesComponent } from './componentes/tira-novedades/tira-novedades.component';
 import { AutoCompleteModule} from 'primeng/autocomplete';
+import {ToastModule} from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AutoCompleteModule} from 'primeng/autocomplete';
     CommonModule,
     PlayerRoutingModule,
     FormsModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    ToastModule
   ],
   providers: [
   ]
