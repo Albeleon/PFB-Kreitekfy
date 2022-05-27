@@ -16,7 +16,25 @@ export class CancionService {
     estilo: Estilo | undefined
   ): Observable<Cancion_Simple[]> {
     let urlEndpoint: string =
-      'http://localhost:8080/kreitekfy/canciones?size=5&sort=fecha,DESC';
+      'http://localhost:8080/kreitekfy/canciones/novedades';
+    if (estilo) {
+      urlEndpoint = urlEndpoint + '&filter=estilo.id:EQUAL:' + estilo.id;
+    }
+    return this.http.get<Cancion_Simple[]>(urlEndpoint);
+  }
+  
+  getCancionesMasReproducidas(estilo: Estilo | undefined): Observable<Cancion_Simple[]> {
+    let urlEndpoint: string =
+      'http://localhost:8080/kreitekfy/canciones/masReproducidas';
+    if (estilo) {
+      urlEndpoint = urlEndpoint + '&filter=estilo.id:EQUAL:' + estilo.id;
+    }
+    return this.http.get<Cancion_Simple[]>(urlEndpoint);
+  }
+  
+  getCancionesMasValoradas(estilo: Estilo | undefined) {
+    let urlEndpoint: string =
+      'http://localhost:8080/kreitekfy/canciones/masValoradas';
     if (estilo) {
       urlEndpoint = urlEndpoint + '&filter=estilo.id:EQUAL:' + estilo.id;
     }
@@ -63,6 +81,11 @@ export class CancionService {
     const urlEndpoint: string =
       'http://localhost:8080/kreitekfy/canciones/' + id;
     return this.http.get<Cancion>(urlEndpoint);
+  }
+
+  updateValoracion(cancionUsuario: Cancion_Usuario): Observable<Cancion_Usuario> {
+    const urlEndpoint = `http://localhost:8080/kreitekfy/canciones/${cancionUsuario.cancionId}/usuarios/${cancionUsuario.usuarioId}/valoracion`;
+    return this.http.patch<Cancion_Usuario>(urlEndpoint, cancionUsuario);
   }
 
   getValoracionCancionById(

@@ -4,7 +4,6 @@ import com.kreitek.PFBKreitekfy.Application.Dto.CancionUsuarioDTO;
 import com.kreitek.PFBKreitekfy.Application.Mapper.CancionUsuarioMapper;
 import com.kreitek.PFBKreitekfy.Application.Service.CancionService;
 import com.kreitek.PFBKreitekfy.Application.Service.CancionUsuarioService;
-import com.kreitek.PFBKreitekfy.Domain.Entity.Cancion;
 import com.kreitek.PFBKreitekfy.Domain.Entity.CancionUsuario;
 import com.kreitek.PFBKreitekfy.Domain.Persistence.CancionUsuarioPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
