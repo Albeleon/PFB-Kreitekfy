@@ -9,7 +9,6 @@ import com.kreitek.PFBKreitekfy.Application.Dto.CancionDTO;
 import com.kreitek.PFBKreitekfy.Application.Dto.CancionSimpleDTO;
 import com.kreitek.PFBKreitekfy.Application.Mapper.CancionMapper;
 import com.kreitek.PFBKreitekfy.Application.Mapper.CancionSimpleMapper;
-import com.kreitek.PFBKreitekfy.Application.Mapper.CancionUsuarioMapper;
 import com.kreitek.PFBKreitekfy.Application.Service.CancionService;
 import com.kreitek.PFBKreitekfy.Domain.Entity.Cancion;
 import com.kreitek.PFBKreitekfy.Domain.Persistence.CancionPersistence;
@@ -76,6 +75,7 @@ public class CancionServiceImpl implements CancionService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<CancionSimpleDTO> getCancionesMasReproducidas(String filter) {
         Pageable pageable = PageRequest.of(0, 5, Sort.by("reproduccion").descending());
         List<Cancion> canciones = this.persistence.findAll(pageable, filter).getContent();

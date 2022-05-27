@@ -110,7 +110,7 @@ public class Cancion {
     }
 
     public void setReproduccion(Long reproduccion) {
-        this.reproduccion = reproduccion;
+        this.reproduccion = reproduccion == null ? 0 : reproduccion;
     }
 
     @Override

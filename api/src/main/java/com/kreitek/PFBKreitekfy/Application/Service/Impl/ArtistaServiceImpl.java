@@ -33,6 +33,7 @@ public class ArtistaServiceImpl implements ArtistaService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<ArtistaDTO> getArtistaById(Long idArtista) {
         return this.persistence.getArtistaById(idArtista).map(mapper::toDto);
     }
