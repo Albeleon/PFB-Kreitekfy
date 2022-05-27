@@ -5,6 +5,8 @@ import com.kreitek.PFBKreitekfy.Domain.Persistence.CancionUsuarioPersistence;
 import com.kreitek.PFBKreitekfy.Infrasctructure.Repository.CancionUsuarioRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public class CancionUsuarioPersistenceImpl implements CancionUsuarioPersistence {
 
@@ -15,8 +17,12 @@ public class CancionUsuarioPersistenceImpl implements CancionUsuarioPersistence 
     }
 
     @Override
+    public Optional<CancionUsuario> findCancionUsuarioByCancionIdAndUsuarioId(Long cancionId, Long usuarioId) {
+        return cancionUsuarioRepository.findByCancion_idAndUsuario_Id(cancionId, usuarioId);
+    }
+
+    @Override
     public CancionUsuario updateReproduccion(CancionUsuario cancionUsuario) {
-        cancionUsuario.setReproducciones(cancionUsuario.getReproducciones() + 1);
         return cancionUsuarioRepository.save(cancionUsuario);
     }
 }

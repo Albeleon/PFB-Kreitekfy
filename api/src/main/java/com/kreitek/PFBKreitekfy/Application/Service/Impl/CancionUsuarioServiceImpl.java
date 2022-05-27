@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 public class CancionUsuarioServiceImpl implements CancionUsuarioService {
 
@@ -29,12 +31,28 @@ public class CancionUsuarioServiceImpl implements CancionUsuarioService {
     @Transactional
     public CancionUsuarioDTO updateReproduccion(CancionUsuarioDTO cancionUsuarioDTO) {
         cancionService.updateReproduccionCancion(cancionUsuarioDTO.getCancionId());
-        CancionUsuario cancionUsuario = cancionUsuarioPersistence.updateReproduccion(cancionUsuarioMapper.toEntity(cancionUsuarioDTO));
-        return cancionUsuarioMapper.toDto(cancionUsuario);
+        Optional<CancionUsuario> cancionUsuario = cancionUsuarioPersistence.findCancionUsuarioByCancionIdAndUsuarioId(cancionUsuarioDTO.getCancionId(), cancionUsuarioDTO.getUsuarioId());
+        if (cancionUsuario.isPresent()) {
+            cancionUsuario.get().setReproduccion(cancionUsuario.get().getReproduccion() + 1);
+            cancionUsuarioPersistence.updateReproduccion(cancionUsuario.get());
+            return cancionUsuarioMapper.toDto(cancionUsuario.get());
+        } else {
+            CancionUsuario cancionUsuarioUpdated = cancionUsuarioMapper.toEntity(cancionUsuarioDTO);
+            cancionUsuarioUpdated.setReproduccion(1L);
+            cancionUsuarioPersistence.updateReproduccion(cancionUsuarioUpdated);
+            return cancionUsuarioMapper.toDto(cancionUsuarioUpdated);
+        }
     }
 
     @Override
+    @Transactional
     public CancionUsuarioDTO updateValoracion(CancionUsuarioDTO cancionUsuarioDTO) {
         return cancionUsuarioDTO;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<CancionUsuarioDTO> getCancionUsuarioById(Long idCancion, Long idUsuario) {
+        return cancionUsuarioPersistence.findCancionUsuarioByCancionIdAndUsuarioId(idCancion, idUsuario).map(cancionUsuarioMapper::toDto);
     }
 }

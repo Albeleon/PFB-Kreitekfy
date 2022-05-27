@@ -16,6 +16,7 @@ public class CancionDTO implements Serializable {
     private byte[] albumImagen;
     private Long estiloId;
     private String estiloNombre;
+    private Long reproduccion;
 
 
     public CancionDTO() {
@@ -110,5 +111,11 @@ public class CancionDTO implements Serializable {
         this.estiloNombre = estiloNombre;
     }
 
+    public Long getReproduccion() {
+        return reproduccion;
+    }
 
+    public void setReproduccion(Long reproduccion) {
+        this.reproduccion = reproduccion;
+    }
 }

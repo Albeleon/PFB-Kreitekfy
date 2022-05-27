@@ -17,9 +17,7 @@ public interface CancionService {
 
     Optional<CancionDTO> getCancionById(Long idCancion);
 
-<<<<<<< HEAD
+
     void updateReproduccionCancion(Long idCancion);
-=======
-    Optional<CancionUsuarioDTO> getCancionUsuarioById(Long idCancion, Long idUsuario);
->>>>>>> 1cc905e024aa26c25ff3d769fa74ee43b3fd5b6d
+
 }

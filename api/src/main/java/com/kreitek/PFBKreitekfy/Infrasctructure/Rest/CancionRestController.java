@@ -47,23 +47,7 @@ public class CancionRestController {
     }
 
     @CrossOrigin
-<<<<<<< HEAD
-    @PostMapping(value = "/canciones", produces = "application/json", consumes = "application/json")
-=======
-    @GetMapping(value = "/canciones/{idCancion}/usuarios/{idUsuario}", produces="application/json")
-    ResponseEntity<CancionUsuarioDTO> getCancionUsuario(@PathVariable Long idCancion, @PathVariable Long idUsuario) {
-        Optional<CancionUsuarioDTO> cancion = this.cancionService.getCancionUsuarioById(idCancion, idUsuario);
-
-        if (cancion.isPresent()) {
-            return new ResponseEntity<>(cancion.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @CrossOrigin
     @PostMapping(value = "/canciones", produces="application/json", consumes="application/json")
->>>>>>> 1cc905e024aa26c25ff3d769fa74ee43b3fd5b6d
     ResponseEntity<CancionDTO> createCancion(@RequestBody CancionDTO cancionDTO) {
         return new ResponseEntity<>(cancionService.saveItem(cancionDTO), HttpStatus.CREATED);
     }

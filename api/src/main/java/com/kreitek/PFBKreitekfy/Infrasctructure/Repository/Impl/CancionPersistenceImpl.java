@@ -43,9 +43,4 @@ public class CancionPersistenceImpl implements CancionPersistence {
     public Optional<Cancion> getCancionById(Long idCancion) {
         return this.cancionRepository.findById(idCancion);
     }
-
-    @Override
-    public Optional<CancionUsuario> getCancionUsuarioById(Long idCancion, Long idUsuario) {
-        return this.cancionUsuarioRepository.findByCancion_idAndUsuario_Id(idCancion, idUsuario);
-    }
 }

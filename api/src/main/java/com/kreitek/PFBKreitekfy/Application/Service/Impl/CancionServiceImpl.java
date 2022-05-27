@@ -26,11 +26,10 @@ public class CancionServiceImpl implements CancionService {
 
     @Autowired
     public CancionServiceImpl(
-        CancionPersistence persistence, 
-        CancionUsuarioMapper cancionUsuarioMapper,
-        CancionSimpleMapper simpleMapper, 
-        CancionMapper mapper)
-    {
+            CancionPersistence persistence,
+            CancionUsuarioMapper cancionUsuarioMapper,
+            CancionSimpleMapper simpleMapper,
+            CancionMapper mapper) {
         this.persistence = persistence;
         this.cancionUsuarioMapper = cancionUsuarioMapper;
         this.simpleMapper = simpleMapper;
@@ -58,17 +57,11 @@ public class CancionServiceImpl implements CancionService {
     }
 
     @Override
-<<<<<<< HEAD
     @Transactional
     public void updateReproduccionCancion(Long idCancion) {
         CancionDTO cancionDTO = this.getCancionById(idCancion).orElseThrow(() -> new RuntimeException("No existe este Usuario"));
         Cancion cancion = mapper.toEntity(cancionDTO);
         cancion.setReproduccion(cancion.getReproduccion() + 1);
         persistence.saveItem(cancion);
-=======
-    @Transactional(readOnly = true)
-    public Optional<CancionUsuarioDTO> getCancionUsuarioById(Long idCancion, Long idUsuario) {
-        return this.persistence.getCancionUsuarioById(idCancion, idUsuario).map(cancionUsuarioMapper::toDto);
->>>>>>> 1cc905e024aa26c25ff3d769fa74ee43b3fd5b6d
     }
 }

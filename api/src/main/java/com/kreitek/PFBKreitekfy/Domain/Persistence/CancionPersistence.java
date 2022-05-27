@@ -16,5 +16,4 @@ public interface CancionPersistence {
 
     Optional<Cancion> getCancionById(Long idCancion);
 
-    Optional<CancionUsuario> getCancionUsuarioById(Long idCancion, Long idUsuario);
 }
