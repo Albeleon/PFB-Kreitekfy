@@ -25,12 +25,14 @@ export class TiraValoradasComponent implements OnInit {
   }
 
   actualizarTiras(): void {
-    this.cancionService.getCancionesMasValoradas(this.estilo).subscribe({
-      next: (data: any) => {
-        this.canciones = data;
+    if (!this.estilo || this.estilo.id) {
+      this.cancionService.getCancionesMasValoradas(this.estilo).subscribe({
+        next: (data: any) => {
+          this.canciones = data;
+        }
       }
+      );
     }
-    )
   }
 
 }

@@ -77,15 +77,20 @@ label {
   margin-top: 90px;
 }
 
+.imagen {
+  position:relative;
+  width: 200px;
+}
+
 .icon-delete {
-  position: relative;
+  position: absolute;
+  top: 0;
+  right: 25px;
 }
 
 .icon-delete i {
   color: red;
   width: 10px;
-  position: absolute;
-  right: 25px;
   padding: 10px 5px;
 }
 

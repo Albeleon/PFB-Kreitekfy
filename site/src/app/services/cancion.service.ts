@@ -18,7 +18,7 @@ export class CancionService {
     let urlEndpoint: string =
       'http://localhost:8080/kreitekfy/canciones/novedades';
     if (estilo) {
-      urlEndpoint = urlEndpoint + '&filter=estilo.id:EQUAL:' + estilo.id;
+      urlEndpoint = urlEndpoint + '?filter=estilo.id:EQUAL:' + estilo.id;
     }
     return this.http.get<Cancion_Simple[]>(urlEndpoint);
   }
@@ -29,7 +29,7 @@ export class CancionService {
     let urlEndpoint: string =
       'http://localhost:8080/kreitekfy/canciones/masReproducidas';
     if (estilo) {
-      urlEndpoint = urlEndpoint + '&filter=estilo.id:EQUAL:' + estilo.id;
+      urlEndpoint = urlEndpoint + '?filter=estilo.id:EQUAL:' + estilo.id;
     }
     return this.http.get<Cancion_Simple[]>(urlEndpoint);
   }
@@ -40,7 +40,7 @@ export class CancionService {
     let urlEndpoint: string =
       'http://localhost:8080/kreitekfy/canciones/masValoradas';
     if (estilo) {
-      urlEndpoint = urlEndpoint + '&filter=estilo.id:EQUAL:' + estilo.id;
+      urlEndpoint = urlEndpoint + '?filter=estilo.id:EQUAL:' + estilo.id;
     }
     return this.http.get<Cancion_Simple[]>(urlEndpoint);
   }

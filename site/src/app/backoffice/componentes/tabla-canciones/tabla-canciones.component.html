@@ -6,9 +6,11 @@
 
             <p class="mt-2">{{item.nombre}}</p>
             <p class="artist">({{item.artistaNombre}})</p>
-            <a (click)="showDialogEdit(item.id!)"><img class="cover"
+            <figure class="imagen">
+                <a (click)="showDialogEdit(item.id!)"><img class="cover"
                     src="https://microsofters.com/wp-content/uploads/2021/06/img19-scaled.jpg"></a>
-            <span class="icon-delete"><i (click)="showDialogDelete(item.id!)" class="pi pi-times-circle"></i></span>
+                <span class="icon-delete"><i (click)="showDialogDelete(item.id!)" class="pi pi-times-circle"></i></span> 
+            </figure>
         </div>
     </div>
     <div class="row mt-3">

@@ -31,12 +31,14 @@ export class TiraReproduccionesComponent implements OnInit {
   }
 
   actualizarTiras(): void {
-    this.cancionService.getCancionesMasReproducidas(this.estilo).subscribe({
-      next: (data: any) => {
-        this.canciones = data;
+    if (!this.estilo || this.estilo.id) {
+      this.cancionService.getCancionesMasReproducidas(this.estilo).subscribe({
+        next: (data: any) => {
+          this.canciones = data;
+        }
       }
+      )
     }
-    )
   }
   
 }

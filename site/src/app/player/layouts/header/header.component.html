@@ -1,46 +1,34 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" [routerLink]="['']" routerLinkActive="router-link-active" >Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-          </li>
-        </ul>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" (click)="logOut()" href="/"><span class="brand">Kreitekfy</span><span
+        class="admin">Admin</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-2">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" [routerLink]="'/player'"><img class="logo"
+              src="../../../../assets/img/home.png">Home</a>
+        </li>
+      </ul>
+      <div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 col-md-12">
         <form class="d-flex">
-          
           <div class="form-group">
-            <label for="estilo">Estilo</label>
-            <p-autoComplete name="estilo" [(ngModel)]="estiloFiltro" [suggestions]="estilos" (completeMethod)="filtrarEstilos($event)" (ngModelChange)="enviarEstilo()" field="nombre" [dropdown]="true">
+            <p-autoComplete class="form-control searchForm me-2" name="estilo" [(ngModel)]="estiloFiltro"
+              [suggestions]="estilos" (completeMethod)="filtrarEstilos($event)"
+              (ngModelChange)="enviarEstilo()" field="nombre" [dropdown]="true" placeholder="Buscar por estilo">
                 <ng-template let-estilo pTemplate="estilo">
                     <div>{{estilo.nombre}}</div>
                 </ng-template>
             </p-autoComplete>
           </div>
-          <div class = "col-xl-1 mx-2">
-            <p class = "userName"><i class="fa-solid fa-user mx-2"></i>{{usuarioNombre}}</p>
-          </div>
         </form>
       </div>
+      <div class = "col-xl-1 mx-2">
+        <p class = "userName"><i class="fa-solid fa-user mx-2"></i>{{usuarioNombre}}</p>
+      </div>
     </div>
-  </nav>
+  </div>
+</nav>

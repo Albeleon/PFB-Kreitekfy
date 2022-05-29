@@ -22,6 +22,13 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  logOut():void{
+    localStorage.removeItem('usuarioId');
+    localStorage.removeItem('rol');
+    localStorage.removeItem('filtroAdmin');
+    localStorage.removeItem('userName');
+  }
+
   enviarEstilo(): void {
     this.eventEmitter.emit(this.estiloFiltro);
   }

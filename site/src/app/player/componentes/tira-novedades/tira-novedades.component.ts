@@ -25,11 +25,13 @@ export class TiraNovedadesComponent implements OnInit {
   }
 
   actualizarTiras(): void {
-    this.cancionService.getCancionesNovedades(this.estilo).subscribe({
-      next: (data: any) => {
-        this.canciones = data;
+    if (!this.estilo || this.estilo.id) {
+      this.cancionService.getCancionesNovedades(this.estilo).subscribe({
+        next: (data: any) => {
+          this.canciones = data;
+        }
       }
+      );
     }
-    )
   }
 }

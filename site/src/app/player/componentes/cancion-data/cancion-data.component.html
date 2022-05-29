@@ -1,15 +1,15 @@
 
 <app-header></app-header>
 
-<div class="cancion" *ngIf="cancion">
+<div class="container-fluid cancion mt-3" *ngIf="cancion">
     <div class="row">
-        <figure class="col-md-6">
-            <img *ngIf="cancion.albumImagen" [src]="base64Prefix + cancion.albumImagen" alt="">
+        <figure class="col-md-8 text-center">
+            <img class="cover" *ngIf="cancion.albumImagen" [src]="base64Prefix + cancion.albumImagen" alt="">
             <img class="cover" *ngIf="!cancion.albumImagen"
                 src="https://microsofters.com/wp-content/uploads/2021/06/img19-scaled.jpg" alt="">
         </figure>
 
-        <div class="col-md-6">
+        <div class="col-md-4 text-md-start text-center">
             <h2>{{ cancion.nombre }}</h2>
             <button (click)="updateReproduccion()" class="btn btn-primary">Reproducir</button>
             <p>Duración: {{ cancion.duracion | timeDuration: 's':'mmss' }}</p>
