@@ -14,4 +14,8 @@ public interface EstiloPersistence {
     Optional<Estilo> getEstiloById(Long idEstilo);
 
     List<Estilo> findAll();
+
+    Estilo saveEstilo(Estilo estilo);
+
+    void deleteEstiloById(Long estiloId);
 }

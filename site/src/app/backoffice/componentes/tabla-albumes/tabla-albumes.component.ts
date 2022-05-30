@@ -26,7 +26,8 @@ export class TablaAlbumesComponent implements OnInit {
   totalPages: number = 0;
   totalElements: number = 0;
   display: boolean = false;
-
+  
+  localizacion: any ;
   busqueda: string = '';
 
   // Variables modal inserción de canciones//
@@ -49,10 +50,14 @@ export class TablaAlbumesComponent implements OnInit {
   // Lógica lista y búsqueda de canciones//
 
   showDialogCreate() {
-    console.log('Create');
     this.toogleCreate = true;
     this.display = true;
     this.initInsertarAlbum();
+  }
+
+
+  setLocation(){
+    this.localizacion = localStorage.setItem('localizacion' , 'albumes');
   }
 
   showDialogEdit(idAlbum: number) {
@@ -64,7 +69,9 @@ export class TablaAlbumesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAlbumesFiltrados();
-    this.sharedService.getEmittedValue().subscribe((data: any) => { this.busqueda = data; this.getAlbumesFiltrados(); })
+    this.sharedService.getEmittedValue().subscribe((data: any) => { this.busqueda = data; this.getAlbumesFiltrados(); });
+    this.setLocation();
+
   }
 
   public nextPage(): void {
@@ -92,7 +99,6 @@ export class TablaAlbumesComponent implements OnInit {
               this.totalPages = data.totalPages;
               this.first = data.first;
               this.last = data.last;
-              console.log(data);
             },
             error: (err) => {this.handleError(err);}
           })

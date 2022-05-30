@@ -18,6 +18,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TablaAlbumesComponent } from './componentes/tabla-albumes/tabla-albumes.component';
+import { TablaEstilosComponent } from './componentes/tabla-estilos/tabla-estilos.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { TablaAlbumesComponent } from './componentes/tabla-albumes/tabla-albumes
     TablaCancionesComponent,
     TablaArtistasComponent,
     CancionFormComponent,
-    TablaAlbumesComponent
+    TablaAlbumesComponent,
+    TablaEstilosComponent
   ],
   imports: [
     CommonModule,

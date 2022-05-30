@@ -30,12 +30,19 @@
           <img class="logoB" src="../../../../assets/img/search.png"><input class="form-control searchForm me-2"
             [pattern]="pattern" type="search" #inputFiltros="ngModel" name="inputFiltros" [(ngModel)]="textoBuscado"
             (ngModelChange)="enviarTextoBuscado()" placeholder="Buscar" aria-label="Search">
-          <select class="filtros" #selectValue (change)=filterParametro()>
-            <option selected value="cancion">Canciones</option>
-            <option value="estilo">Estilos</option>
-            <option value="artista">Artistas</option>
-            <option value="album">Albumes</option>
-          </select>
+          
+            <select class="filtros" #selectValue (change)=filterParametro() *ngIf = "getLocalizacion == 'canciones' ">
+              <option selected value="cancion">Canciones</option>
+              <option value="estilo">Estilos</option>
+              <option value="artista">Artistas</option>
+              <option value="album">Albumes</option>
+            </select>
+            
+            <select class="filtros" *ngIf = "getLocalizacion == 'albumes' ">
+              <option selected value="cancion">Albumes</option>
+            </select>
+
+
           <div class="text-error" *ngIf="(inputFiltros.dirty && inputFiltros.errors)">
             <small class="form-text" *ngIf="inputFiltros.errors['pattern']">
               {{ textPattern }}

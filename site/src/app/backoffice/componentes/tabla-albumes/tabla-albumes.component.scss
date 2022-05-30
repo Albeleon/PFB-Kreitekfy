@@ -6,10 +6,11 @@
     transition: opacity 0.3s ease-out;
   }
   
-  .cover:hover {
-    opacity: 0.8;
-    transition: opacity 0.3s ease-out;
+  .cover:hover{
+    transition: box-shadow 0.2s ease-in-out;
+    box-shadow: rgba(3, 121, 255, 0.897) 0px 0px 0px 3px;
   }
+  
   
   .artist {
     margin-top: -20px;

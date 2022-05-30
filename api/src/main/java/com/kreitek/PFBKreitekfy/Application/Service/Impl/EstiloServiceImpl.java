@@ -54,6 +54,19 @@ public class EstiloServiceImpl implements EstiloService {
     }
 
     @Override
+    @Transactional
+    public EstiloDTO saveEstilo(EstiloDTO estiloDTO) {
+        Estilo estilo = this.persistence.saveEstilo(mapper.toEntity(estiloDTO));
+        return this.mapper.toDto(estilo);
+    }
+
+    @Override
+    @Transactional
+    public void deleteEstiloById(Long estiloId) {
+        this.persistence.deleteEstiloById(estiloId);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public List<CancionSimpleDTO> getCancionesRecomendadas(Long usuarioId) {
         List<Estilo> estilos = getEstilosOrdenReproducccionesUsuario(usuarioId);

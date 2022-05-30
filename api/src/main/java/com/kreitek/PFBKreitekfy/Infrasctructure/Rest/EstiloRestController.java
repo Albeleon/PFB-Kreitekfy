@@ -7,11 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class EstiloRestController {
@@ -39,4 +35,22 @@ public class EstiloRestController {
 
     }
 
+    @CrossOrigin
+    @PostMapping(value = "/estilos", produces = "application/json", consumes = "application/json")
+    public ResponseEntity<EstiloDTO> insertEstilo(@RequestBody EstiloDTO estiloDTO) {
+        return new ResponseEntity<>(this.estiloService.saveEstilo(estiloDTO) , HttpStatus.CREATED);
+    }
+
+    @CrossOrigin
+    @PutMapping(value = "/estilos", produces = "application/json", consumes = "application/json")
+    public ResponseEntity<EstiloDTO> editEstilo(@RequestBody EstiloDTO estiloDTO){
+        return new ResponseEntity<>(this.estiloService.saveEstilo(estiloDTO) , HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @DeleteMapping(value = "/estilos/{estiloId}", produces = "application/json")
+    public ResponseEntity<Void> deleteEstiloById(@PathVariable Long estiloId) {
+        this.estiloService.deleteEstiloById(estiloId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

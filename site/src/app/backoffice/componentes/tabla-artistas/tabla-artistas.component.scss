@@ -8,6 +8,12 @@
   outline: inherit;
 }
 
+.logo {
+  height: 15px;
+  width: 15px;
+}
+
+
 .imagen {
   position: relative;
   width: 200px;
@@ -39,4 +45,32 @@
 .cover:hover {
   transition: box-shadow 0.2s ease-in-out;
   box-shadow: rgba(3, 121, 255, 0.897) 0px 0px 0px 3px;
+}
+
+.btnAtras {
+  border-radius: 19px;
+  background-color: #000000b4;
+  color: white;
+  border: 2px solid white;
+  font-weight: bold;
+}
+
+.btnSiguiente {
+  border-radius: 19px;
+  background-color: #000000b4;
+  color: white;
+  border: 2px solid white;
+  font-weight: bold;
+}
+
+.btnAtras:hover {
+  color: black;
+  background-color: rgb(104, 151, 240);
+  border: 2px solid #2f71e8ff;
+}
+
+.btnSiguiente:hover {
+  color: black;
+  background-color: rgb(104, 151, 240);
+  border: 2px solid #2f71e8ff;
 }

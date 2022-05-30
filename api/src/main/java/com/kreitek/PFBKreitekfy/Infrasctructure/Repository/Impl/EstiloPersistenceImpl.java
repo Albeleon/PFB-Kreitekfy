@@ -37,4 +37,14 @@ public class EstiloPersistenceImpl implements EstiloPersistence {
     public List<Estilo> findAll() {
         return this.estiloRepository.findAll();
     }
+
+    @Override
+    public Estilo saveEstilo(Estilo estilo) {
+        return this.estiloRepository.save(estilo);
+    }
+
+    @Override
+    public void deleteEstiloById(Long estiloId) {
+        this.estiloRepository.deleteById(estiloId);
+    }
 }

@@ -43,6 +43,8 @@ export class TablaCancionesComponent implements OnInit {
 
   busqueda: string = '';
 
+  localizacion: any ;
+  getLocalizacion: any = localStorage.getItem('localizacion');
   // Variables modal inserción de canciones//
 
   exito: Boolean = false;
@@ -79,6 +81,11 @@ export class TablaCancionesComponent implements OnInit {
     this.initInsertarCancion();
   }
 
+  setLocation(){
+    this.localizacion = localStorage.setItem('localizacion' , 'canciones');
+  }
+
+
   showDialogEdit(idCancion: number) {
     this.toogleCreate = false;
     this.display = true;
@@ -91,7 +98,10 @@ export class TablaCancionesComponent implements OnInit {
       this.busqueda = data;
       this.getCancionesFiltradas();
     });
+    this.setLocation();
   }
+
+
 
   public nextPage(): void {
     this.clickpage = true;

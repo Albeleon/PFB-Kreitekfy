@@ -13,10 +13,17 @@ export class HeaderComponent implements OnInit {
   nombre: any = localStorage.getItem('userName');
   filtrosModel: string = "";
   textoBuscado: string = "";
+  getLocalizacion: any;
   @ViewChild('selectValue') selectedvalue!: ElementRef<HTMLSelectElement>;
   constructor(private sharedService: SharedService) { }
 
+  getLocation(){
+    this.getLocalizacion = localStorage.getItem('localizacion');
+  }
+
   ngOnInit(): void {
+    this.getLocation();
+    
   }
 
   filterParametro():void{

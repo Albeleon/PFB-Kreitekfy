@@ -15,5 +15,9 @@ public interface EstiloService {
 
 	Optional<EstiloDTO> getEstiloById(Long idEstilo);
 
+    EstiloDTO saveEstilo(EstiloDTO estiloDTO);
+
+    void deleteEstiloById(Long estiloId);
+
     List<CancionSimpleDTO> getCancionesRecomendadas(Long usuarioId);
 }
