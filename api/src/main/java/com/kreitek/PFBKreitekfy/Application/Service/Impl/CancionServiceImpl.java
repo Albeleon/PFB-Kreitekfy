@@ -1,10 +1,8 @@
 package com.kreitek.PFBKreitekfy.Application.Service.Impl;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import com.kreitek.PFBKreitekfy.Application.Comparer.ValoracionComparer;
 import com.kreitek.PFBKreitekfy.Application.Dto.CancionDTO;
 import com.kreitek.PFBKreitekfy.Application.Dto.CancionSimpleDTO;
 import com.kreitek.PFBKreitekfy.Application.Mapper.CancionMapper;
@@ -83,7 +81,6 @@ public class CancionServiceImpl implements CancionService {
     }
 
     @Override
-    @Transactional()
     public void deleteCancionById(Long cancionId) {
         this.persistence.deleteCancionById(cancionId);
     }
@@ -91,11 +88,14 @@ public class CancionServiceImpl implements CancionService {
     @Override
     @Transactional(readOnly = true)
     public List<CancionSimpleDTO> getCancionesMasValoradas(String filter) {
-        List<Cancion> canciones = this.persistence.findAll(filter);
-        Collections.sort(canciones, new ValoracionComparer());
-        while (canciones.size() > 5) {
-            canciones.remove(canciones.size() - 1);
-        }
+        Pageable pageable = PageRequest.of(0, 5);
+        List<Cancion> canciones = this.persistence.find5CancionesMasValoradas(pageable);
+        return simpleMapper.toListDto(canciones);
+    }
+
+    @Override
+    public List<CancionSimpleDTO> getCancionesRecomendadas(Long usuarioId) {
+        List<Cancion> canciones = this.persistence.find5CancionesRecomendadas(usuarioId);
         return simpleMapper.toListDto(canciones);
     }
 }

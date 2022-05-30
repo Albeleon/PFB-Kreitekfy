@@ -55,8 +55,8 @@ public class AlbumRestController {
 
     @CrossOrigin
     @DeleteMapping(value = "/albumes/{albumId}", produces = "application/json")
-    ResponseEntity<Void> deleteCancionFromId(@PathVariable Long albumId) {
-        albumService.deleteCancionById(albumId);
+    ResponseEntity<Void> deleteAlbumFromId(@PathVariable Long albumId) {
+        albumService.deleteAlbumById(albumId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

@@ -6,7 +6,6 @@ import java.util.List;
 import com.kreitek.PFBKreitekfy.Application.Dto.CancionDTO;
 import com.kreitek.PFBKreitekfy.Application.Dto.CancionSimpleDTO;
 import com.kreitek.PFBKreitekfy.Application.Service.CancionService;
-import com.kreitek.PFBKreitekfy.Application.Service.EstiloService;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,11 +17,9 @@ import org.springframework.web.bind.annotation.*;
 public class CancionRestController {
 
     private final CancionService cancionService;
-    private final EstiloService estiloService;
 
-    public CancionRestController(CancionService cancionService, EstiloService estiloService) {
+    public CancionRestController(CancionService cancionService) {
         this.cancionService = cancionService;
-        this.estiloService = estiloService;
     }
 
     @CrossOrigin
@@ -56,7 +53,7 @@ public class CancionRestController {
     @CrossOrigin
     @GetMapping(value = "/canciones/recomendadas/{usuarioId}", produces = "application/json")
     ResponseEntity<List<CancionSimpleDTO>> getCancionesRecomendadas(@PathVariable Long usuarioId) {
-        List<CancionSimpleDTO> canciones = this.estiloService.getCancionesRecomendadas(usuarioId);
+        List<CancionSimpleDTO> canciones = this.cancionService.getCancionesRecomendadas(usuarioId);
         return new ResponseEntity<>(canciones, HttpStatus.OK);
     }
 

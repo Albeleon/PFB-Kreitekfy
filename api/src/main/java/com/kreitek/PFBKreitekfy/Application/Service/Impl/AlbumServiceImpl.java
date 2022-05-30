@@ -39,7 +39,7 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public void deleteCancionById(Long albumId) {
+    public void deleteAlbumById(Long albumId) {
         this.persistence.deleteAlbumById(albumId);
         
     }
