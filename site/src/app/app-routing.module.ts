@@ -9,12 +9,6 @@ const routes: Routes = [
   { path: '', component: ListaUsuariosComponent },
   {
     path: 'player',
-    component: PlayerComponent,
-    pathMatch: 'full',
-    canActivate: [UserGuard],
-  },
-  {
-    path: 'player',
     loadChildren: () =>
       import('./player/player.module').then((m) => m.PlayerModule),
     canActivate: [UserGuard],

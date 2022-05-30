@@ -7,8 +7,7 @@ import { Estilo } from 'src/app/models/estilo.interface';
   styleUrls: ['./pagina-principal.component.scss']
 })
 export class PaginaPrincipalComponent implements OnInit {
-  @Input() estilo?: Estilo;
-  
+
   constructor() { }
 
   ngOnInit(): void {

@@ -1,4 +1,6 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { SharedService } from 'src/app/services/shared.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -6,12 +8,13 @@ import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-nombre: any = localStorage.getItem('userName');
-filtrosModel: string = "";
-textoBuscado: string = "";
-@Output() eventEmitter = new EventEmitter<string>();
-@ViewChild('selectValue') selectedvalue!: ElementRef<HTMLSelectElement>;
-  constructor() { }
+  pattern: string = environment.pattern;
+  textPattern: string = environment.textPattern;
+  nombre: any = localStorage.getItem('userName');
+  filtrosModel: string = "";
+  textoBuscado: string = "";
+  @ViewChild('selectValue') selectedvalue!: ElementRef<HTMLSelectElement>;
+  constructor(private sharedService: SharedService) { }
 
   ngOnInit(): void {
   }
@@ -29,7 +32,7 @@ textoBuscado: string = "";
   }
 
   enviarTextoBuscado(): void {
-    this.eventEmitter.emit(this.textoBuscado);
+    this.sharedService.change(this.textoBuscado);
   }
 
 

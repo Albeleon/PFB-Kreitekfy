@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Output, EventEmitter } from '@angular/core';
 import { Estilo } from 'src/app/models/estilo.interface';
 import { EstiloService } from 'src/app/services/estilo.service';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-header',
@@ -15,9 +16,7 @@ export class HeaderComponent implements OnInit {
   estiloFiltro?: Estilo;
   estilos: Estilo[] = [];
 
-  @Output() eventEmitter = new EventEmitter<Estilo>();
-
-  constructor(private estiloService: EstiloService) { }
+  constructor(private estiloService: EstiloService, private sharedService: SharedService) { }
 
   ngOnInit(): void {
   }
@@ -30,7 +29,7 @@ export class HeaderComponent implements OnInit {
   }
 
   enviarEstilo(): void {
-    this.eventEmitter.emit(this.estiloFiltro);
+    this.sharedService.change(this.estiloFiltro);
   }
 
   filtrarEstilos(event?: any): void {

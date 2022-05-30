@@ -1,7 +1,5 @@
-
-<app-header></app-header>
-
 <div class="container-fluid cancion mt-3" *ngIf="cancion">
+    <h2>{{ cancion.nombre }}</h2>
     <div class="row">
         <figure class="col-md-8 text-center">
             <img class="cover" *ngIf="cancion.albumImagen" [src]="base64Prefix + cancion.albumImagen" alt="">
@@ -10,7 +8,6 @@
         </figure>
 
         <div class="col-md-4 text-md-start text-center">
-            <h2>{{ cancion.nombre }}</h2>
             <button (click)="updateReproduccion()" class="btn btn-primary">Reproducir</button>
             <p>Duración: {{ cancion.duracion | timeDuration: 's':'mmss' }}</p>
             <p>Album: {{ cancion.albumNombre }}</p>
@@ -28,5 +25,3 @@
 
 </div>
 <p-toast></p-toast>
-
-<app-footer></app-footer>

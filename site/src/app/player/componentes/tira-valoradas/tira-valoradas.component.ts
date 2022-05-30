@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Cancion_Simple } from 'src/app/models/cancion-simple.interface';
 import { Estilo } from 'src/app/models/estilo.interface';
 import { CancionService } from 'src/app/services/cancion.service';
+import { SharedService } from 'src/app/services/shared.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -12,16 +13,13 @@ import { environment } from 'src/environments/environment';
 export class TiraValoradasComponent implements OnInit {
   canciones: Cancion_Simple[] = [];
   base64Prefix: string = environment.base64Prefix;
-  @Input() estilo?: Estilo;
+  estilo?: Estilo;
 
-  constructor(private cancionService: CancionService) { }
+  constructor(private cancionService: CancionService, private sharedService: SharedService) { }
 
   ngOnInit(): void {
     this.actualizarTiras();
-  }
-
-  ngOnChanges(changes: any): void {
-    this.actualizarTiras();
+    this.sharedService.getEmittedValue().subscribe(item => { this.estilo = item; this.actualizarTiras()});
   }
 
   actualizarTiras(): void {

@@ -25,7 +25,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     FooterComponent,
     TablaCancionesComponent,
     TablaArtistasComponent,
-    CancionFormComponent,
+    CancionFormComponent
   ],
   imports: [
     CommonModule,

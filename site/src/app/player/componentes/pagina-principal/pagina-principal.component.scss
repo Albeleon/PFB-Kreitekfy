@@ -1,5 +1,4 @@
-.noImage {
-    width: 100%;
-    height: 200px;
-    background-color: red;
+.tira + .tira {
+    padding-top: 20px;
+    border-top: 3px solid darkslategray;
 }

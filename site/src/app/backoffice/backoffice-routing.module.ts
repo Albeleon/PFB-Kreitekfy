@@ -6,9 +6,9 @@ import { TablaArtistasComponent } from './componentes/tabla-artistas/tabla-artis
 import { CancionFormComponent } from './componentes/cancion-form/cancion-form.component';
 
 const routes: Routes = [
-  { path: '', component: BackofficeComponent },
-  { path: 'ingresarCancion', component: CancionFormComponent },
-  { path: 'editarCancion/:cancionId', component: CancionFormComponent }
+  { path: '', component: BackofficeComponent, children: [
+    { path: '', component: TablaCancionesComponent }
+  ] },
 ];
 
 @NgModule({

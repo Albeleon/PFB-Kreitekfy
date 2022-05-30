@@ -9,30 +9,26 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-2">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/backoffice"><img class="logo"
-              src="../../../../assets/img/home.png">Home</a>
+          <a class="nav-link active" aria-current="page" [routerLinkActive]="['current']" [routerLink]="'/backoffice'"><img class="logo"
+              src="../../../../assets/img/canciones.png">Canciones</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href=""><img class="logo"
+          <a class="nav-link active" aria-current="page" [routerLinkActive]="['current']" [routerLink]="'/backoffice/estilos'"><img class="logo"
               src="../../../../assets/img/estilos.png">Estilos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/backoffice"><img class="logo"
+          <a class="nav-link active" aria-current="page" [routerLinkActive]="['current']" [routerLink]="'/backoffice/albumes'"><img class="logo"
               src="../../../../assets/img/home.png">Albumes</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href=""><img class="logo"
+          <a class="nav-link active" aria-current="page" [routerLinkActive]="['current']" [routerLink]="'/backoffice/artistas'"><img class="logo"
               src="../../../../assets/img/artistas.png">Artistas</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active current" aria-current="page"><img class="logo"
-              src="../../../../assets/img/canciones.png">Canciones</a>
         </li>
       </ul>
       <div class=" col-xl-4 col-lg-4 col-sm-3 col-xs-3 col-md-6">
         <form #searchForm="ngForm" id="searchForm" class="d-flex">
           <img class="logoB" src="../../../../assets/img/search.png"><input class="form-control searchForm me-2"
-            pattern="^[^.:,&=%;]+$" type="search" #inputFiltros="ngModel" name="inputFiltros" [(ngModel)]="textoBuscado"
+            [pattern]="pattern" type="search" #inputFiltros="ngModel" name="inputFiltros" [(ngModel)]="textoBuscado"
             (ngModelChange)="enviarTextoBuscado()" placeholder="Buscar" aria-label="Search">
           <select class="filtros" #selectValue (change)=filterParametro()>
             <option selected value="">Filtrado por:</option>
@@ -43,7 +39,7 @@
           </select>
           <div class="text-error" *ngIf="(inputFiltros.dirty && inputFiltros.errors)">
             <small class="form-text" *ngIf="inputFiltros.errors['pattern']">
-              Prohibido caracteres especiales (.:,&=%;).
+              {{ textPattern }}
             </small>
           </div>
         </form>

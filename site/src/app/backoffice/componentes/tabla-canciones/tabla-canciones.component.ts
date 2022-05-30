@@ -17,6 +17,8 @@ import { EstiloService } from 'src/app/services/estilo.service';
 import { ActivatedRoute } from '@angular/router';
 import { Calendar } from 'primeng/calendar';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { SharedService } from 'src/app/services/shared.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-tabla-canciones',
@@ -25,6 +27,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
   providers: [MessageService, ConfirmationService],
 })
 export class TablaCancionesComponent implements OnInit, OnChanges {
+  pattern: string = environment.pattern;
   // Variables lista y búsqueda de canciones//
   Canciones: Cancion[] = [];
   page: number = 0;
@@ -34,7 +37,8 @@ export class TablaCancionesComponent implements OnInit, OnChanges {
   totalPages: number = 0;
   totalElements: number = 0;
   display: boolean = false;
-  @Input() busqueda: string = '';
+
+  busqueda: string = '';
 
   // Variables modal inserción de canciones//
 
@@ -61,7 +65,8 @@ export class TablaCancionesComponent implements OnInit, OnChanges {
     private estiloService: EstiloService,
     private route: ActivatedRoute,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private sharedService: SharedService
   ) {}
 
   // Lógica lista y búsqueda de canciones//
@@ -86,6 +91,7 @@ export class TablaCancionesComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.getCancionesFiltradas();
+    this.sharedService.getEmittedValue().subscribe(data => { this.busqueda = data; this.getCancionesFiltradas(); })
     // const entryParam: string =
     //   this.route.snapshot.paramMap.get('cancionId') ?? 'new';
     // if (entryParam !== 'new') {
@@ -108,7 +114,7 @@ export class TablaCancionesComponent implements OnInit, OnChanges {
   }
 
   public getCancionesFiltradas():void{
-    if (this.busqueda == "" || this.busqueda.match("^[^.:,&=%;]+$")) {
+    if (this.busqueda == "" || this.busqueda.match(this.pattern)) {
       const filtro = localStorage.getItem('filtroAdmin');
       if(this.clickpage == true){
         this.clickpage = false;
