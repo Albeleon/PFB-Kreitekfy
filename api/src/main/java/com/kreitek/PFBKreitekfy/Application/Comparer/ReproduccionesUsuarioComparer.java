@@ -41,7 +41,7 @@ public class ReproduccionesUsuarioComparer implements Comparator<Estilo> {
         while (cancionesUsuario.hasNext()) {
             CancionUsuario cancionUsuario = cancionesUsuario.next();
             if (cancionUsuario.getUsuario().getId().equals(usuarioId)) {
-                return cancionUsuario.getReproduccion();
+                return cancionUsuario.getReproducciones();
             }
         }
         

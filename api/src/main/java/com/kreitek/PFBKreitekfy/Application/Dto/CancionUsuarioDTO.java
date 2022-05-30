@@ -27,11 +27,11 @@ public class CancionUsuarioDTO implements Serializable {
         this.usuarioId = usuarioId;
     }
 
-    public Long getReproduccion() {
+    public Long getReproducciones() {
         return reproduccion;
     }
 
-    public void setReproduccion(Long reproduccion) {
+    public void setReproducciones(Long reproduccion) {
         this.reproduccion = reproduccion;
     }
 

@@ -32,12 +32,12 @@ public class CancionUsuarioServiceImpl implements CancionUsuarioService {
         cancionService.updateReproduccionCancion(cancionUsuarioDTO.getCancionId());
         Optional<CancionUsuario> cancionUsuario = cancionUsuarioPersistence.findCancionUsuarioByCancionIdAndUsuarioId(cancionUsuarioDTO.getCancionId(), cancionUsuarioDTO.getUsuarioId());
         if (cancionUsuario.isPresent()) {
-            cancionUsuario.get().setReproduccion(cancionUsuario.get().getReproduccion() + 1);
+            cancionUsuario.get().setReproducciones(cancionUsuario.get().getReproducciones() + 1);
             cancionUsuarioPersistence.saveItem(cancionUsuario.get());
             return cancionUsuarioMapper.toDto(cancionUsuario.get());
         } else {
             CancionUsuario cancionUsuarioUpdated = cancionUsuarioMapper.toEntity(cancionUsuarioDTO);
-            cancionUsuarioUpdated.setReproduccion(1L);
+            cancionUsuarioUpdated.setReproducciones(1L);
             cancionUsuarioPersistence.saveItem(cancionUsuarioUpdated);
             return cancionUsuarioMapper.toDto(cancionUsuarioUpdated);
         }

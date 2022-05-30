@@ -1,13 +1,17 @@
-<h4>Novedades</h4>
-<div class="row text-center justify-content-center mx-auto pt-4 row-cols-xl-5 row-cols-lg-5">
-    <div class="itemCancion col text-center" *ngFor="let cancion of canciones">
-        <p class="mt-2">{{ cancion.nombre }}</p>
-        <p class="artist">({{ cancion.artistaNombre }})</p>
-        <a aria-current="page" [routerLink]="['fichaCancion/', cancion.id]">
-            <figure>
-                <img class="cover" *ngIf="cancion.albumImagen" [src]="base64Prefix + cancion.albumImagen" alt="">
-                <img class="cover" *ngIf="!cancion.albumImagen" src="https://microsofters.com/wp-content/uploads/2021/06/img19-scaled.jpg" alt="">
-            </figure>
-        </a>
+<div class="container-fluid novedades"> 
+    <div class = "d-flex flex-row">
+        <h4>Novedades</h4>
     </div>
-</div>
+    <div class="row text-center justify-content-center mx-auto pt-4 row-cols-xl-5 row-cols-lg-5">
+        <div class="itemCancion col text-center mb-4 mt-4" *ngFor="let cancion of canciones">
+            <a aria-current="page" [routerLink]="['fichaCancion/', cancion.id]">
+                <figure>
+                    <img class="cover" *ngIf="cancion.albumImagen" [src]="base64Prefix + cancion.albumImagen" alt="">
+                    <img class="cover" *ngIf="!cancion.albumImagen" src="https://microsofters.com/wp-content/uploads/2021/06/img19-scaled.jpg" alt="">
+                </figure>
+            </a>
+            <p class="mt-2">{{ cancion.nombre }}</p>
+            <p class="artist">({{ cancion.artistaNombre }})</p>
+        </div>
+    </div>
+</div> 
