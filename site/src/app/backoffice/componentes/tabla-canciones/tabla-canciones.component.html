@@ -2,14 +2,13 @@
     <h4>Añadir canción<button class="añadir" type="button" type="button" (click)="showDialogCreate()"><img
                 class="logo mx-2" src="../../../../assets/img/add.png"></button></h4>
     <div class="row text-center justify-content-center mx-auto pt-4 row-cols-xl-5 row-cols-lg-5 ">
-        <div class="itemCancion col text-center" *ngFor="let item of Canciones">
-
-            <p class="mt-2">{{item.nombre}}</p>
-            <p class="artist">({{item.artistaNombre}})</p>
+        <div class="itemCancion col d-flex justify-content-center" *ngFor="let item of Canciones">
             <figure class="imagen">
                 <a (click)="showDialogEdit(item.id!)"><img class="cover"
                     src="https://microsofters.com/wp-content/uploads/2021/06/img19-scaled.jpg"></a>
                 <span class="icon-delete"><i (click)="showDialogDelete(item.id!)" class="pi pi-times-circle"></i></span> 
+                <p class="mt-2">{{item.nombre}}</p>
+                <p class="artist">({{item.artistaNombre}})</p>
             </figure>
         </div>
     </div>
@@ -99,7 +98,7 @@
         </form>
     </p-dialog>
     <p-toast position="top-right"></p-toast>
-    <p-confirmDialog [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+    <p-confirmDialog acceptLabel = "Sí" rejectLabel = "No" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
         Content
     </p-confirmDialog>
 </div>
