@@ -7,11 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class ArtistaRestController {
@@ -37,6 +33,25 @@ public class ArtistaRestController {
                 .map(artistaDTO -> new ResponseEntity<>(artistaDTO, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
+    }
+
+    @CrossOrigin
+    @PostMapping(value = "/artistas", produces = "application/json", consumes = "application/json")
+    public ResponseEntity<ArtistaDTO> insertArtista(@RequestBody ArtistaDTO artistaDTO) {
+        return new ResponseEntity<>(this.artistaService.saveArtista(artistaDTO), HttpStatus.CREATED);
+    }
+
+    @CrossOrigin
+    @PutMapping(value = "/artistas", produces = "application/json", consumes = "application/json")
+    public ResponseEntity<ArtistaDTO> editArtista(@RequestBody ArtistaDTO artistaDTO) {
+        return new ResponseEntity<>(artistaService.saveArtista(artistaDTO), HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @DeleteMapping(value = "/artistas/{artistaId}", produces = "application/json")
+    public ResponseEntity<Void> deleteArtistaById(@PathVariable Long artistaId) {
+        this.artistaService.deleteArtistaById(artistaId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

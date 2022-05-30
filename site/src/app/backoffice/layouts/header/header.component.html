@@ -6,7 +6,7 @@
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="navbar-collapse collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-2">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" [routerLinkActive]="['current']" [routerLink]="'/backoffice/canciones'"><img class="logo"
@@ -31,11 +31,10 @@
             [pattern]="pattern" type="search" #inputFiltros="ngModel" name="inputFiltros" [(ngModel)]="textoBuscado"
             (ngModelChange)="enviarTextoBuscado()" placeholder="Buscar" aria-label="Search">
           <select class="filtros" #selectValue (change)=filterParametro()>
-            <option selected value="">Filtrado por:</option>
+            <option selected value="cancion">Canciones</option>
             <option value="estilo">Estilos</option>
             <option value="artista">Artistas</option>
             <option value="album">Albumes</option>
-            <option value="cancion">Canciones</option>
           </select>
           <div class="text-error" *ngIf="(inputFiltros.dirty && inputFiltros.errors)">
             <small class="form-text" *ngIf="inputFiltros.errors['pattern']">
@@ -44,8 +43,8 @@
           </div>
         </form>
       </div>
-      <div class="col-xl-1 mx-2">
-        <p class="userName"><i class="fa-solid fa-user userLogo"></i>{{nombre}}</p>
+      <div class="col-xl-1 mx-4">
+        <p class="userName "><i class="fa-solid fa-user userLogo"></i>{{nombre}}</p>
       </div>
     </div>
   </div>

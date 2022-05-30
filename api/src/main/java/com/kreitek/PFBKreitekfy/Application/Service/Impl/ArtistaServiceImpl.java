@@ -37,4 +37,17 @@ public class ArtistaServiceImpl implements ArtistaService {
     public Optional<ArtistaDTO> getArtistaById(Long idArtista) {
         return this.persistence.getArtistaById(idArtista).map(mapper::toDto);
     }
+
+    @Override
+    @Transactional
+    public ArtistaDTO saveArtista(ArtistaDTO artistaDTO) {
+        Artista artista = this.persistence.saveArtista(mapper.toEntity(artistaDTO));
+        return this.mapper.toDto(artista);
+    }
+
+    @Override
+    @Transactional
+    public void deleteArtistaById(Long artistaId) {
+        this.persistence.deleteArtistaById(artistaId);
+    }
 }

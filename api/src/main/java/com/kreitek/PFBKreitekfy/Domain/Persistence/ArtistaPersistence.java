@@ -11,4 +11,8 @@ public interface ArtistaPersistence {
     Page<Artista> findAll(Pageable pageable, String filter);
 
     Optional<Artista> getArtistaById(Long idArtista);
+
+    Artista saveArtista(Artista artista);
+
+    void deleteArtistaById(Long artistaId);
 }

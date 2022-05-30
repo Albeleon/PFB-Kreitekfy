@@ -31,4 +31,14 @@ public class ArtistaPersistenceImpl implements ArtistaPersistence {
     public Optional<Artista> getArtistaById(Long idArtista) {
         return this.artistaRepository.findById(idArtista);
     }
+
+    @Override
+    public Artista saveArtista(Artista artista) {
+        return this.artistaRepository.save(artista);
+    }
+
+    @Override
+    public void deleteArtistaById(Long artistaId) {
+        this.artistaRepository.deleteById(artistaId);
+    }
 }
