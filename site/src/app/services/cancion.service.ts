@@ -69,7 +69,7 @@ export class CancionService {
     ) {
       url =
         url +
-        '?sort=nombre,ASC&size=25&page=' +
+        '?sort=nombre,ASC&size=' + environment.sizePage + '&page=' +
         page +
         '&filter=' +
         filtro +
@@ -81,12 +81,12 @@ export class CancionService {
     ) {
       url =
         url +
-        '?sort=nombre,ASC&size=25&page=' +
+        '?sort=nombre,ASC&size=' + environment.sizePage + '&page=' +
         page +
         '&filter=nombre:MATCH:' +
         busqueda;
     } else {
-      url = url + '?sort=nombre,ASC&size=25&page=' + page;
+      url = url + '?sort=nombre,ASC&size=' + environment.sizePage + '&page=' + page;
     }
 
     return this.http.get<Cancion[]>(url);
@@ -117,12 +117,12 @@ export class CancionService {
     return this.http.get<Cancion_Usuario>(urlEndpoint);
   }
 
-  insertarCancion(cancion: Cancion) {
+  insertarCancion(cancion: Cancion): Observable<Cancion> {
     const urlEndpoint: string = this.urlBackend + 'canciones';
-    return this.http.post<Cancion[]>(urlEndpoint, cancion);
+    return this.http.post<Cancion>(urlEndpoint, cancion);
   }
 
-  editarCancion(cancion: Cancion) {
+  editarCancion(cancion: Cancion): Observable<Cancion> {
     const urlEndpoint: string = this.urlBackend + 'canciones';
     return this.http.put<Cancion>(urlEndpoint, cancion);
   }

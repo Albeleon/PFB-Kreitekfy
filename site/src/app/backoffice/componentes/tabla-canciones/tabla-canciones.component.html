@@ -4,12 +4,14 @@
     <div class="row text-center justify-content-center mx-auto pt-4 row-cols-xl-5 row-cols-lg-5 ">
         <div class="itemCancion col text-center" *ngFor="let item of Canciones">
 
-            <p class="mt-2">{{item.nombre}}</p>
-            <p class="artist">({{item.artistaNombre}})</p>
             <figure class="imagen">
-                <a (click)="showDialogEdit(item.id!)"><img class="cover"
-                    src="https://microsofters.com/wp-content/uploads/2021/06/img19-scaled.jpg"></a>
+                <a (click)="showDialogEdit(item.id!)">
+                    <img *ngIf="item.albumImagen" class="cover" [src]="base64Prefix + item.albumImagen">
+                    <img *ngIf="!item.albumImagen" class="cover" [src]="defaultImage">
+                </a>
                 <span class="icon-delete"><i (click)="showDialogDelete(item.id!)" class="pi pi-times-circle"></i></span> 
+                <p class="mt-2">{{item.nombre}}</p>
+                <p class="artist">({{item.artistaNombre}})</p>
             </figure>
         </div>
     </div>

@@ -12,4 +12,8 @@ public interface AlbumService {
     Page<AlbumDTO> getAlbumsByCriteriaString(Pageable pageable, String filter);
 
     Optional<AlbumDTO> getAlbumById(Long idAlbum);
+
+    void deleteCancionById(Long albumId);
+
+    AlbumDTO saveItem(AlbumDTO cancionDTO);
 }

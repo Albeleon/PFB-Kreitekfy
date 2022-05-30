@@ -37,4 +37,17 @@ public class AlbumServiceImpl implements AlbumService {
     public Optional<AlbumDTO> getAlbumById(Long idAlbum) {
         return this.persistence.getAlbumById(idAlbum).map(mapper::toDto);
     }
+
+    @Override
+    public void deleteCancionById(Long albumId) {
+        this.persistence.deleteAlbumById(albumId);
+        
+    }
+
+    @Override
+    @Transactional()
+    public AlbumDTO saveItem(AlbumDTO albumDTO) {
+        Album albumSaved = this.persistence.saveItem(this.mapper.toEntity(albumDTO));
+        return this.mapper.toDto(albumSaved);
+    }
 }

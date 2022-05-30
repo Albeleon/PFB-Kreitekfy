@@ -17,6 +17,7 @@ import { CancionFormComponent } from './componentes/cancion-form/cancion-form.co
 import { CalendarModule } from 'primeng/calendar';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { TablaAlbumesComponent } from './componentes/tabla-albumes/tabla-albumes.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     FooterComponent,
     TablaCancionesComponent,
     TablaArtistasComponent,
-    CancionFormComponent
+    CancionFormComponent,
+    TablaAlbumesComponent
   ],
   imports: [
     CommonModule,

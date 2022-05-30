@@ -1,0 +1,57 @@
+<div class="container-fluid mt-4 mb-4">
+    <h4>Añadir album<button class="añadir" type="button" type="button" (click)="showDialogCreate()"><img
+                class="logo mx-2" src="../../../../assets/img/add.png"></button></h4>
+    <div class="row text-center justify-content-center mx-auto pt-4 row-cols-xl-5 row-cols-lg-5 ">
+        <div class="itemCancion col text-center" *ngFor="let item of albumes">
+            <figure class="imagen">
+                <a (click)="showDialogEdit(item.id!)">
+                    <img *ngIf="item.imagen" class="cover" [src]="base64Prefix + item.imagen">
+                    <img *ngIf="!item.imagen" class="cover" [src]="defaultImage">
+                </a>
+                <span class="icon-delete"><i (click)="showDialogDelete(item.id!)" class="pi pi-times-circle"></i></span> 
+                <p class="mt-2">{{item.nombre}}</p>
+            </figure>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="botoneraPaginacion text-center col">
+            <button [disabled]="first" class="btn btn-secondary btnAtras" (click)="previousPage()">Anterior</button>
+            <span class="mx-3">Pagina {{(page+1)}} de {{totalPages}}</span>
+            <button [disabled]="last" class="btn btn-secondary btnSiguiente" (click)="nextPage()">Siguiente</button>
+        </div>
+    </div>
+
+
+    <p-dialog [(visible)]="display" [breakpoints]="{'960px': '75vw', '640px': '100vw'}"
+        [style]="{width: '600px',height: '510px'}" [modal]="true">
+        <ng-template pTemplate="header">
+            <h4>{{titleMode}} un album</h4>
+        </ng-template>
+        <form #cancionForm="ngForm" *ngIf="album">
+            <div class="row text-center justify-content-center">
+                <div class="form-group col-xl-5 mt-3">
+                    <label for="nombre">Nombre</label>
+                    <input class="form-control" id="nombre" [(ngModel)]="album.nombre" name="nombre" #nombre="ngModel"
+                        required type="text">
+                    <small class="p-error" *ngIf="nombre.dirty && !album.nombre">Este campo es requerido.</small>
+                </div>
+                <div class="form-group col-xl-5 mt-3">
+                    <label for="imagen">Imagen</label>
+                    <input type="file" id="image" class="form-control" id="imagen" (change)="includeImageInItem($event);">
+                    <figure class="imagen" *ngIf="album.imagen">
+                        <img class="cover" [src]="base64Prefix + album.imagen">
+                        <span class="icon-delete"><i (click)="deleteImagen()" class="pi pi-times-circle"></i></span>
+                    </figure>
+                </div>
+            </div>
+            <div class="buttons-actions d-flex justify-content-end">
+                <button (click)="saveAlbum()" [disabled]="cancionForm.invalid" pButton pRipple label="Guardar"
+                    icon="pi pi-check" class="p-button-text"></button>
+            </div>
+        </form>
+    </p-dialog>
+    <p-toast position="top-right"></p-toast>
+    <p-confirmDialog [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+        Content
+    </p-confirmDialog>
+</div>

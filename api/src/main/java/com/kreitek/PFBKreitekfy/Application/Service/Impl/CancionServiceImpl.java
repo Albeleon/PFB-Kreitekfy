@@ -83,6 +83,7 @@ public class CancionServiceImpl implements CancionService {
     }
 
     @Override
+    @Transactional()
     public void deleteCancionById(Long cancionId) {
         this.persistence.deleteCancionById(cancionId);
     }

@@ -4,10 +4,13 @@ import { BackofficeComponent } from './backoffice.component';
 import { TablaCancionesComponent } from './componentes/tabla-canciones/tabla-canciones.component';
 import { TablaArtistasComponent } from './componentes/tabla-artistas/tabla-artistas.component';
 import { CancionFormComponent } from './componentes/cancion-form/cancion-form.component';
+import { TablaAlbumesComponent } from './componentes/tabla-albumes/tabla-albumes.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'canciones', pathMatch: 'full' },
   { path: '', component: BackofficeComponent, children: [
-    { path: '', component: TablaCancionesComponent }
+    { path: 'canciones', component: TablaCancionesComponent },
+    { path: 'albumes', component: TablaAlbumesComponent }
   ] },
 ];
 
