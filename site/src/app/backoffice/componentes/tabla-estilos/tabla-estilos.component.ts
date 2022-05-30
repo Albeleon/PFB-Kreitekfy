@@ -33,6 +33,7 @@ export class TablaEstilosComponent implements OnInit {
     id: 0,
   };
   defaultImage: string = environment.defaultImage;
+  localizacion: any ;
 
   constructor(private messageService: MessageService,
     private confirmationService: ConfirmationService,
@@ -45,6 +46,11 @@ export class TablaEstilosComponent implements OnInit {
       this.busqueda = data;
       this.getEstilosFiltrados();
     });
+    this.setLocation();
+  }
+
+  setLocation(){
+    this.localizacion = localStorage.setItem('localizacion' , 'estilos');
   }
 
   showDialogCreate() {

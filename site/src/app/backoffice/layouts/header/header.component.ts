@@ -23,7 +23,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.getLocation();
-    
   }
 
   filterParametro():void{

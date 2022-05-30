@@ -8,19 +8,19 @@
     </button>
     <div class="navbar-collapse collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-2">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" [routerLinkActive]="['current']" [routerLink]="'/backoffice/canciones'"><img class="logo"
+        <li class="nav-item" (click) = "getLocation()">
+          <a class="nav-link active" aria-current="page" [routerLinkActive]="['current']" [routerLink]="'/backoffice/canciones'" ><img class="logo"
               src="../../../../assets/img/canciones.png">Canciones</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" (click) = "getLocation()">
           <a class="nav-link active" aria-current="page" [routerLinkActive]="['current']" [routerLink]="'/backoffice/estilos'"><img class="logo"
               src="../../../../assets/img/estilos.png">Estilos</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" [routerLinkActive]="['current']" [routerLink]="'/backoffice/albumes'"><img class="logo"
+        <li class="nav-item" (click) = "getLocation()">
+          <a class="nav-link active" aria-current="page" [routerLinkActive]="['current']" [routerLink]="'/backoffice/albumes'" ><img class="logo"
               src="../../../../assets/img/home.png">Albumes</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" (click) = "getLocation()">
           <a class="nav-link active" aria-current="page" [routerLinkActive]="['current']" [routerLink]="'/backoffice/artistas'"><img class="logo"
               src="../../../../assets/img/artistas.png">Artistas</a>
         </li>
@@ -40,6 +40,12 @@
             
             <select class="filtros" *ngIf = "getLocalizacion == 'albumes' ">
               <option selected value="cancion">Albumes</option>
+            </select>
+            <select class="filtros" *ngIf = "getLocalizacion == 'artistas' ">
+              <option selected value="cancion">Artistas</option>
+            </select>
+            <select class="filtros" *ngIf = "getLocalizacion == 'estilos' ">
+              <option selected value="cancion">Estilos</option>
             </select>
 
 
