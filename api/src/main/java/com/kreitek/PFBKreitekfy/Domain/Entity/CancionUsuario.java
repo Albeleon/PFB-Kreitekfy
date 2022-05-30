@@ -51,14 +51,14 @@ public class CancionUsuario {
         this.usuario = usuario;
     }
 
-    public Long getReproduccion() {
+    public Long getReproducciones() {
         if (this.reproduccion == null) {
             this.reproduccion = 0L;
         }
         return reproduccion;
     }
 
-    public void setReproduccion(Long reproduccion) {
+    public void setReproducciones(Long reproduccion) {
         this.reproduccion = reproduccion;
     }
 
