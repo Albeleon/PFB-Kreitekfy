@@ -15,6 +15,7 @@ export class TablaAlbumesComponent implements OnInit {
   pattern: string = environment.pattern;
   base64Prefix: string = environment.base64Prefix;
   defaultImage: string = environment.defaultImage;
+  
 
   // Variables lista y búsqueda de canciones//
   albumes: Album[] = [];

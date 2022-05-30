@@ -54,6 +54,7 @@ a {
   position: relative;
   top: 9px;
   cursor: default;
+  left:-20px;
 }
 
 .filtros {
@@ -87,4 +88,15 @@ a {
 
 #searchForm {
   position: relative;
+}
+
+
+.userLogo{
+  position: relative;
+  top:0px;
+  left: -10px;
+}
+
+.customNavbar{
+  height:70px;
 }
