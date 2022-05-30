@@ -6,13 +6,19 @@ import { TablaArtistasComponent } from './componentes/tabla-artistas/tabla-artis
 import { CancionFormComponent } from './componentes/cancion-form/cancion-form.component';
 
 const routes: Routes = [
-  { path: '', component: BackofficeComponent, children: [
-    { path: '', component: TablaCancionesComponent }
-  ] },
+  { path: '', redirectTo: 'canciones', pathMatch: 'full' },
+  {
+    path: '',
+    component: BackofficeComponent,
+    children: [
+      { path: 'canciones', component: TablaCancionesComponent },
+      { path: 'artistas', component: TablaArtistasComponent },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class BackofficeRoutingModule { }
+export class BackofficeRoutingModule {}

@@ -12,4 +12,8 @@ public interface ArtistaService {
     Page<ArtistaDTO> getArtistasByCriteriaString(Pageable pageable, String filter);
 
     Optional<ArtistaDTO> getArtistaById(Long idArtista);
+
+    ArtistaDTO saveArtista(ArtistaDTO artistaDTO);
+
+    void deleteArtistaById(Long artistaId);
 }

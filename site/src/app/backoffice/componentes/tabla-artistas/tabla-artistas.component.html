@@ -1,1 +1,104 @@
-<p>tabla-artistas works!</p>
+<div class="container-fluid mt-4 mb-4">
+  <h4>
+    Añadir Artista<button
+      class="añadir"
+      type="button"
+      type="button"
+      (click)="showDialogCreate()"
+    >
+      <img class="logo mx-2" src="../../../../assets/img/add.png" />
+    </button>
+  </h4>
+  <div
+    class="row text-center justify-content-center mx-auto pt-4 row-cols-xl-5 row-cols-lg-5"
+  >
+    <div class="itemCancion col text-center" *ngFor="let artista of artistas">
+      <figure>
+        <img src="../../../../assets/img/user-logo.png" width="150" alt="" />
+      </figure>
+      <p class="mt-2">{{ artista.nombre }}</p>
+      <button
+        pButton
+        pRipple
+        icon="pi pi-pencil"
+        class="p-button-rounded p-button-success me-2"
+        (click)="showDialogEdit(artista)"
+      ></button>
+      <button
+        pButton
+        pRipple
+        icon="pi pi-trash"
+        class="p-button-rounded p-button-warning"
+        (click)="showDialogDelete(artista.id!)"
+      ></button>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="botoneraPaginacion text-center col">
+      <button
+        [disabled]="first"
+        class="btn btn-secondary btnAtras"
+        (click)="previousPage()"
+      >
+        Anterior
+      </button>
+      <span class="mx-3">Pagina {{ page + 1 }} de {{ totalPages }}</span>
+      <button
+        [disabled]="last"
+        class="btn btn-secondary btnSiguiente"
+        (click)="nextPage()"
+      >
+        Siguiente
+      </button>
+    </div>
+  </div>
+
+  <p-dialog
+    [(visible)]="display"
+    [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
+    [style]="{ width: '600px', height: '250px' }"
+    [modal]="true"
+  >
+    <ng-template pTemplate="header">
+      <h4>{{ titleMode }} un artista</h4>
+    </ng-template>
+    <form #artistaForm="ngForm" *ngIf="artistaActive">
+      <div class="row text-center justify-content-center">
+        <div class="form-group col-xl-5 mt-3">
+          <label for="nombre">Nombre</label>
+          <input
+            class="form-control"
+            id="nombre"
+            [(ngModel)]="artistaActive.nombre"
+            name="nombre"
+            #nombre="ngModel"
+            required
+            type="text"
+          />
+          <small class="p-error" *ngIf="nombre.dirty && !artistaActive.nombre"
+            >Este campo es requerido.</small
+          >
+        </div>
+      </div>
+
+      <div class="buttons-actions d-flex justify-content-end">
+        <button
+          (click)="saveArtista()"
+          [disabled]="artistaForm.invalid"
+          pButton
+          pRipple
+          label="Guardar"
+          icon="pi pi-check"
+          class="p-button-text"
+        ></button>
+      </div>
+    </form>
+  </p-dialog>
+  <p-toast position="top-right"></p-toast>
+  <p-confirmDialog
+    [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
+    [style]="{ width: '50vw' }"
+  >
+    Content
+  </p-confirmDialog>
+</div>

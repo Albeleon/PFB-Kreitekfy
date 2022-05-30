@@ -91,7 +91,10 @@ export class TablaCancionesComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.getCancionesFiltradas();
-    this.sharedService.getEmittedValue().subscribe(data => { this.busqueda = data; this.getCancionesFiltradas(); })
+    this.sharedService.getEmittedValue().subscribe((data) => {
+      this.busqueda = data;
+      this.getCancionesFiltradas();
+    });
     // const entryParam: string =
     //   this.route.snapshot.paramMap.get('cancionId') ?? 'new';
     // if (entryParam !== 'new') {
@@ -113,26 +116,31 @@ export class TablaCancionesComponent implements OnInit, OnChanges {
     this.getCancionesFiltradas();
   }
 
-  public getCancionesFiltradas():void{
-    if (this.busqueda == "" || this.busqueda.match(this.pattern)) {
+  public getCancionesFiltradas(): void {
+    if (this.busqueda == '' || this.busqueda.match(this.pattern)) {
       const filtro = localStorage.getItem('filtroAdmin');
-      if(this.clickpage == true){
+      if (this.clickpage == true) {
         this.clickpage = false;
-      }else{
+      } else {
         this.page = 0;
       }
-      this.cancionService.getCancionesAdministrador(this.busqueda, filtro! , this.page).subscribe({
-            next: (data: any) => {this.Canciones = data.content
-              this.totalPages = data.totalPages;
-              this.first = data.first;
-              this.last = data.last;
-              console.log(data);
-            },
-            error: (err) => {this.handleError(err);}
-          })
+      this.cancionService
+        .getCancionesAdministrador(this.busqueda, filtro!, this.page)
+        .subscribe({
+          next: (data: any) => {
+            this.Canciones = data.content;
+            this.totalPages = data.totalPages;
+            this.first = data.first;
+            this.last = data.last;
+            console.log(data);
+          },
+          error: (err) => {
+            this.handleError(err);
+          },
+        });
     }
   }
-  
+
   private handleError(err: any): void {
     // implementar gestión de errores;
   }
@@ -151,7 +159,7 @@ export class TablaCancionesComponent implements OnInit, OnChanges {
   }
 
   initEditarCancion(id: string) {
-    this.cancion = { nombre: "", duracion: 1, fecha: new Date()};
+    this.cancion = { nombre: '', duracion: 1, fecha: new Date() };
     this.operacion = 'edit';
     this.cancionService.getCancionById(id).subscribe({
       next: (data: Cancion) => {
@@ -195,9 +203,9 @@ export class TablaCancionesComponent implements OnInit, OnChanges {
       },
     });
   }
-    
+
   filtrarEstilos(event?: any): void {
-    let estiloBusqueda: string = "";
+    let estiloBusqueda: string = '';
     if (event?.query) {
       estiloBusqueda = event.query;
     }
@@ -205,9 +213,8 @@ export class TablaCancionesComponent implements OnInit, OnChanges {
     this.estiloService.getEstilos(estiloBusqueda).subscribe({
       next: (data: any) => {
         this.estilos = data.content;
-      }
-    }
-    )
+      },
+    });
   }
 
   filtrarArtistas(event?: any): void {
