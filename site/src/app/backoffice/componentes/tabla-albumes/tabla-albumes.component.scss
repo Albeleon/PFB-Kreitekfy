@@ -1,0 +1,100 @@
+.cover {
+    border-radius: 20px;
+    height: 200px;
+    width: 200px;
+    opacity: 1;
+    transition: opacity 0.3s ease-out;
+  }
+  
+  .cover:hover {
+    opacity: 0.8;
+    transition: opacity 0.3s ease-out;
+  }
+  
+  .artist {
+    margin-top: -20px;
+    font-weight: 300;
+  }
+  
+  .columna {
+    border: 1px solid black;
+  }
+  
+  .btnAtras {
+    border-radius: 19px;
+    background-color: #000000b4;
+    color: white;
+    border: 2px solid white;
+    font-weight: bold;
+  }
+  
+  .btnSiguiente {
+    border-radius: 19px;
+    background-color: #000000b4;
+    color: white;
+    border: 2px solid white;
+    font-weight: bold;
+  }
+  
+  .btnAtras:hover {
+    color: black;
+    background-color: rgb(104, 151, 240);
+    border: 2px solid #2f71e8ff;
+  }
+  
+  .btnSiguiente:hover {
+    color: black;
+    background-color: rgb(104, 151, 240);
+    border: 2px solid #2f71e8ff;
+  }
+  
+  .logo {
+    height: 15px;
+    width: 15px;
+  }
+  
+  .añadir {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+  }
+  
+  label {
+    margin-bottom: 5px;
+    width: 100%;
+  }
+  
+  .itemCancion {
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .buttons-actions {
+    margin-top: 40px;
+  }
+  
+  .imagen {
+    position:relative;
+    width: 200px;
+  }
+  
+  .icon-delete {
+    position: absolute;
+    top: 0;
+    right: 25px;
+  }
+  
+  .icon-delete i {
+    color: red;
+    width: 10px;
+    padding: 10px 5px;
+  }
+  
+  .icon-delete i:hover {
+    opacity: 1;
+  }
+  

@@ -29,6 +29,7 @@ export class TablaArtistasComponent implements OnInit {
     nombre: '',
     id: 0,
   };
+  defaultImage: string = environment.defaultImage;
 
   constructor(
     private messageService: MessageService,

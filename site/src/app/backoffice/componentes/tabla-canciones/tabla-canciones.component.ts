@@ -26,8 +26,11 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./tabla-canciones.component.scss'],
   providers: [MessageService, ConfirmationService],
 })
-export class TablaCancionesComponent implements OnInit, OnChanges {
+export class TablaCancionesComponent implements OnInit {
   pattern: string = environment.pattern;
+  base64Prefix: string = environment.base64Prefix;
+  defaultImage: string = environment.defaultImage;
+
   // Variables lista y búsqueda de canciones//
   Canciones: Cancion[] = [];
   page: number = 0;
@@ -63,7 +66,6 @@ export class TablaCancionesComponent implements OnInit, OnChanges {
     private albumService: AlbumService,
     private artistaService: ArtistaService,
     private estiloService: EstiloService,
-    private route: ActivatedRoute,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private sharedService: SharedService
@@ -72,21 +74,15 @@ export class TablaCancionesComponent implements OnInit, OnChanges {
   // Lógica lista y búsqueda de canciones//
 
   showDialogCreate() {
-    console.log('Create');
     this.toogleCreate = true;
     this.display = true;
     this.initInsertarCancion();
   }
 
   showDialogEdit(idCancion: number) {
-    this.titleMode = 'Editar';
     this.toogleCreate = false;
     this.display = true;
     this.initEditarCancion(idCancion!.toString());
-  }
-
-  ngOnChanges(busqueda: SimpleChanges): void {
-    this.getCancionesFiltradas();
   }
 
   ngOnInit(): void {
@@ -95,13 +91,6 @@ export class TablaCancionesComponent implements OnInit, OnChanges {
       this.busqueda = data;
       this.getCancionesFiltradas();
     });
-    // const entryParam: string =
-    //   this.route.snapshot.paramMap.get('cancionId') ?? 'new';
-    // if (entryParam !== 'new') {
-    //   this.initEditarCancion(entryParam);
-    // } else {
-    //   this.initInsertarCancion();
-    // }
   }
 
   public nextPage(): void {
@@ -231,8 +220,6 @@ export class TablaCancionesComponent implements OnInit, OnChanges {
   }
 
   showDialogDelete(cancionId: number) {
-    console.log(cancionId);
-
     this.confirmationService.confirm({
       message: '¿Desea eliminar esta cancion?',
       header: 'Confirmacion de eliminacion',
@@ -247,7 +234,7 @@ export class TablaCancionesComponent implements OnInit, OnChanges {
             });
             this.ngOnInit();
           },
-          error: (err) => {
+          error: (err: any) => {
             console.log(err);
             this.messageService.add({
               severity: 'error',
@@ -279,7 +266,6 @@ export class TablaCancionesComponent implements OnInit, OnChanges {
       this.cancion.estiloId = this.estiloFiltro.id;
       this.cancionService.insertarCancion(this.cancion).subscribe({
         next: (data: any) => {
-          // this.exito = true;
           this.messageService.add({
             severity: 'success',
             summary: 'Inserción Correcta',
@@ -316,7 +302,7 @@ export class TablaCancionesComponent implements OnInit, OnChanges {
           this.display = false;
           this.ngOnInit();
         },
-        error: (err) => {
+        error: (err: any) => {
           console.log(err);
           // this.exito = true;
           this.messageService.add({

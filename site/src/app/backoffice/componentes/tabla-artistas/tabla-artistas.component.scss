@@ -7,3 +7,36 @@
   cursor: pointer;
   outline: inherit;
 }
+
+.imagen {
+  position: relative;
+  width: 200px;
+  cursor: pointer;
+}
+
+.icon-delete {
+  position: absolute;
+  top: 0;
+  right: 25px;
+}
+
+.icon-delete i {
+  color: red;
+  width: 10px;
+  padding: 10px 5px;
+}
+
+.icon-delete i:hover {
+  opacity: 1;
+}
+
+.cover {
+  border-radius: 20px;
+  height: 200px;
+  width: 200px;
+}
+
+.cover:hover {
+  transition: box-shadow 0.2s ease-in-out;
+  box-shadow: rgba(3, 121, 255, 0.897) 0px 0px 0px 3px;
+}

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark customNavbar">
   <div class="container-fluid">
     <a class="navbar-brand" (click)="logOut()" href="/"><span class="brand">Kreitekfy</span><span
         class="admin">Admin</span></a>
@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-2">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" [routerLinkActive]="['current']" [routerLink]="'/backoffice'"><img class="logo"
+          <a class="nav-link active" aria-current="page" [routerLinkActive]="['current']" [routerLink]="'/backoffice/canciones'"><img class="logo"
               src="../../../../assets/img/canciones.png">Canciones</a>
         </li>
         <li class="nav-item">
@@ -45,7 +45,7 @@
         </form>
       </div>
       <div class="col-xl-1 mx-2">
-        <p class="userName"><i class="fa-solid fa-user mx-2"></i>{{nombre}}</p>
+        <p class="userName"><i class="fa-solid fa-user userLogo"></i>{{nombre}}</p>
       </div>
     </div>
   </div>

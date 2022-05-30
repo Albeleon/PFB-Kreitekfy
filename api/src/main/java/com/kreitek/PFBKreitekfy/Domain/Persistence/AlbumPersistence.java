@@ -11,4 +11,8 @@ public interface AlbumPersistence {
     Page<Album> findAll(Pageable pageable, String filter);
 
     Optional<Album> getAlbumById(Long idAlbum);
+
+    void deleteAlbumById(Long albumId);
+
+    Album saveItem(Album entity);
 }

@@ -31,4 +31,14 @@ public class AlbumPersistenceImpl implements AlbumPersistence {
     public Optional<Album> getAlbumById(Long idAlbum) {
         return this.albumRepository.findById(idAlbum);
     }
+
+    @Override
+    public void deleteAlbumById(Long albumId) {
+        this.albumRepository.deleteById(albumId);
+    }
+
+    @Override
+    public Album saveItem(Album entity) {
+        return this.albumRepository.save(entity);
+    }
 }

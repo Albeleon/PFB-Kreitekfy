@@ -2,13 +2,14 @@
   border-radius: 20px;
   height: 200px;
   width: 200px;
-  opacity: 1;
-  transition: opacity 0.3s ease-out;
+ 
 }
 
-.cover:hover {
-  opacity: 0.8;
-  transition: opacity 0.3s ease-out;
+
+.cover:hover{
+  transition: box-shadow 0.2s ease-in-out;
+  box-shadow: rgba(3, 121, 255, 0.897) 0px 0px 0px 3px;
+  
 }
 
 .artist {
@@ -69,7 +70,6 @@ label {
 }
 
 .itemCancion {
-  cursor: pointer;
   position: relative;
 }
 
@@ -80,6 +80,8 @@ label {
 .imagen {
   position:relative;
   width: 200px;
+  cursor:pointer;
+  
 }
 
 .icon-delete {

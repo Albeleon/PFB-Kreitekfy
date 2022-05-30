@@ -8,7 +8,9 @@ export const environment = {
   pattern: '^[^.:,&=%;]+$',
   textPattern: 'Prohibido caracteres especiales ( .:,&=%; )',
   urlBackend: 'http://localhost:8080/kreitekfy/',
-  sizePage: 25,
+  defaultImage:
+    'https://microsofters.com/wp-content/uploads/2021/06/img19-scaled.jpg',
+  sizePage: '25',
 };
 
 /*
