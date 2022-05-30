@@ -51,8 +51,8 @@ public class CancionPersistenceImpl implements CancionPersistence {
     }
 
     @Override
-    public List<Cancion> find5CancionesMasValoradas(Pageable pageable) {
-        return this.cancionRepository.find5CancionesMasValoradas(pageable);
+    public List<Cancion> find5CancionesMasValoradas(String estiloId) {
+        return this.cancionRepository.find5CancionesMasValoradas(estiloId);
     }
 
     @Override

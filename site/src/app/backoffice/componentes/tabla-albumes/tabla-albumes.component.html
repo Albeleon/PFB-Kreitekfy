@@ -27,7 +27,7 @@
         <ng-template pTemplate="header">
             <h4>{{titleMode}} un album</h4>
         </ng-template>
-        <form #cancionForm="ngForm" *ngIf="album">
+        <form #albumForm="ngForm" *ngIf="album">
             <div class="row text-center justify-content-center">
                 <div class="form-group col-xl-5 mt-3">
                     <label for="nombre">Nombre</label>
@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="buttons-actions d-flex justify-content-end">
-                <button (click)="saveAlbum()" [disabled]="cancionForm.invalid" pButton pRipple label="Guardar"
+                <button (click)="saveAlbum()" [disabled]="albumForm.invalid" pButton pRipple label="Guardar"
                     icon="pi pi-check" class="p-button-text"></button>
             </div>
         </form>

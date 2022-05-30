@@ -20,7 +20,7 @@ public interface CancionPersistence {
 
     void deleteCancionById(Long cancionId);
 
-    List<Cancion> find5CancionesMasValoradas(Pageable pageable);
+    List<Cancion> find5CancionesMasValoradas(String filter);
 
     List<Cancion> find5CancionesRecomendadas(Long usuarioId);
 

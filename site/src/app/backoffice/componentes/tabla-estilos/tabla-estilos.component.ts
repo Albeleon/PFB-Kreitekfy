@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Estilo } from 'src/app/models/estilo.interface';
 import { EstiloService } from 'src/app/services/estilo.service';
@@ -12,6 +13,7 @@ import { environment } from 'src/environments/environment';
   providers: [MessageService, ConfirmationService],
 })
 export class TablaEstilosComponent implements OnInit {
+  @ViewChild('estiloForm') form?: NgForm;
 
   pattern: string = environment.pattern;
   page: number = 0;
@@ -47,6 +49,7 @@ export class TablaEstilosComponent implements OnInit {
 
   showDialogCreate() {
     this.titleMode = 'Añadir';
+    this.form!.control.markAsPristine();
     this.toogleCreate = true;
     this.display = true;
     this.estiloActive = {} as Estilo;
@@ -54,6 +57,7 @@ export class TablaEstilosComponent implements OnInit {
 
   showDialogEdit(estiloData: Estilo) {
     this.titleMode = 'Editar';
+    this.form!.control.markAsPristine();
     this.toogleCreate = false;
     this.display = true;
     this.estiloActive = { ...estiloData };

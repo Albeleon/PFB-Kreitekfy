@@ -43,7 +43,7 @@ export class CancionService {
     let urlEndpoint: string =
       this.urlBackend + 'canciones/masValoradas';
     if (estilo) {
-      urlEndpoint = urlEndpoint + '?filter=estilo.id:EQUAL:' + estilo.id;
+      urlEndpoint = urlEndpoint + '?filter='+ estilo.id;
     }
     return this.http.get<Cancion_Simple[]>(urlEndpoint);
   }

@@ -19,6 +19,7 @@ import { Calendar } from 'primeng/calendar';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { SharedService } from 'src/app/services/shared.service';
 import { environment } from 'src/environments/environment';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-tabla-canciones',
@@ -27,6 +28,8 @@ import { environment } from 'src/environments/environment';
   providers: [MessageService, ConfirmationService],
 })
 export class TablaCancionesComponent implements OnInit {
+  @ViewChild('cancionForm') form?: NgForm;
+
   pattern: string = environment.pattern;
   base64Prefix: string = environment.base64Prefix;
   defaultImage: string = environment.defaultImage;
@@ -50,7 +53,10 @@ export class TablaCancionesComponent implements OnInit {
   exito: Boolean = false;
   operacion: string = '';
 
-  cancion?: Cancion;
+  cancion: Cancion = {
+    nombre: '',
+    id: 0
+  };
   albumFiltro?: Album;
   albumes: Album[] = [];
   artistaFiltro?: Artista;
@@ -76,6 +82,7 @@ export class TablaCancionesComponent implements OnInit {
   // Lógica lista y búsqueda de canciones//
 
   showDialogCreate() {
+    this.form!.control.markAsPristine();
     this.toogleCreate = true;
     this.display = true;
     this.initInsertarCancion();
@@ -87,6 +94,7 @@ export class TablaCancionesComponent implements OnInit {
 
 
   showDialogEdit(idCancion: number) {
+    this.form!.control.markAsPristine();
     this.toogleCreate = false;
     this.display = true;
     this.initEditarCancion(idCancion!.toString());
@@ -269,6 +277,7 @@ export class TablaCancionesComponent implements OnInit {
       this.cancion &&
       this.cancion.nombre != '' &&
       this.cancion.duracion! > 0 &&
+      this.cancion.duracion! <= 1000000 &&
       this.cancion.fecha
     ) {
       this.cancion.albumId = this.albumFiltro.id;

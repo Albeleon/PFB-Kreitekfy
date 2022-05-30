@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Album } from 'src/app/models/album.interface';
 import { AlbumService } from 'src/app/services/album.service';
@@ -12,6 +13,8 @@ import { environment } from 'src/environments/environment';
   providers: [MessageService, ConfirmationService]
 })
 export class TablaAlbumesComponent implements OnInit {
+  @ViewChild('albumForm') form?: NgForm;
+
   pattern: string = environment.pattern;
   base64Prefix: string = environment.base64Prefix;
   defaultImage: string = environment.defaultImage;
@@ -35,7 +38,11 @@ export class TablaAlbumesComponent implements OnInit {
   exito: Boolean = false;
   operacion: string = '';
 
-  album?: Album;
+  album: Album = {
+    nombre: '',
+    id: 0,
+    imagen: undefined
+  };
   toogleCreate: boolean = false;
   titleMode: string = '';
   flagErrorSearch: boolean = false;
@@ -50,6 +57,7 @@ export class TablaAlbumesComponent implements OnInit {
   // Lógica lista y búsqueda de canciones//
 
   showDialogCreate() {
+    this.form!.control.markAsPristine();
     this.toogleCreate = true;
     this.display = true;
     this.initInsertarAlbum();

@@ -88,8 +88,7 @@ public class CancionServiceImpl implements CancionService {
     @Override
     @Transactional(readOnly = true)
     public List<CancionSimpleDTO> getCancionesMasValoradas(String filter) {
-        Pageable pageable = PageRequest.of(0, 5);
-        List<Cancion> canciones = this.persistence.find5CancionesMasValoradas(pageable);
+        List<Cancion> canciones = this.persistence.find5CancionesMasValoradas(filter);
         return simpleMapper.toListDto(canciones);
     }
 

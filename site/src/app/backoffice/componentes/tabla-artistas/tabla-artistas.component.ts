@@ -4,6 +4,9 @@ import { Artista } from 'src/app/models/artista.interface';
 import { ArtistaService } from 'src/app/services/artista.service';
 import { SharedService } from 'src/app/services/shared.service';
 import { environment } from 'src/environments/environment';
+import { ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+
 
 @Component({
   selector: 'app-tabla-artistas',
@@ -12,6 +15,8 @@ import { environment } from 'src/environments/environment';
   providers: [MessageService, ConfirmationService],
 })
 export class TablaArtistasComponent implements OnInit {
+  @ViewChild('artistaForm') form?: NgForm;
+
   pattern: string = environment.pattern;
   page: number = 0;
   first: boolean = false;
@@ -48,6 +53,7 @@ export class TablaArtistasComponent implements OnInit {
 
   showDialogCreate() {
     this.titleMode = 'Añadir';
+    this.form!.control.markAsPristine();
     this.toogleCreate = true;
     this.display = true;
     this.artistaActive = {} as Artista;
@@ -55,6 +61,7 @@ export class TablaArtistasComponent implements OnInit {
 
   showDialogEdit(artistaData: Artista) {
     this.titleMode = 'Editar';
+    this.form!.control.markAsPristine();
     this.toogleCreate = false;
     this.display = true;
     this.artistaActive = { ...artistaData };

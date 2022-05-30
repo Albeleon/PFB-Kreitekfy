@@ -47,6 +47,7 @@
           <input class="form-control" id="duracion" [(ngModel)]="cancion.duracion" #duracion="ngModel" name="duracion"
             required type="number" />
           <small class="p-error" *ngIf="duracion.dirty && !cancion.duracion">Este campo es requerido.</small>
+          <small class="p-error" *ngIf="duracion.dirty && cancion.duracion && (cancion.duracion <= 0 || cancion.duracion > 1000000)">Tiene que ser un número entre 0 y 1.000.000</small>
         </div>
       </div>
       <div class="row text-center justify-content-center">
