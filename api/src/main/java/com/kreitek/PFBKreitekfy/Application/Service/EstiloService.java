@@ -1,9 +1,7 @@
 package com.kreitek.PFBKreitekfy.Application.Service;
 
-import java.util.List;
 import java.util.Optional;
 
-import com.kreitek.PFBKreitekfy.Application.Dto.CancionSimpleDTO;
 import com.kreitek.PFBKreitekfy.Application.Dto.EstiloDTO;
 
 import org.springframework.data.domain.Page;
@@ -18,6 +16,4 @@ public interface EstiloService {
     EstiloDTO saveEstilo(EstiloDTO estiloDTO);
 
     void deleteEstiloById(Long estiloId);
-
-    List<CancionSimpleDTO> getCancionesRecomendadas(Long usuarioId);
 }

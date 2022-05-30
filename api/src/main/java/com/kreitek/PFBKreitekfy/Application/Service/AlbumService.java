@@ -13,7 +13,7 @@ public interface AlbumService {
 
     Optional<AlbumDTO> getAlbumById(Long idAlbum);
 
-    void deleteCancionById(Long albumId);
+    void deleteAlbumById(Long albumId);
 
     AlbumDTO saveItem(AlbumDTO cancionDTO);
 }

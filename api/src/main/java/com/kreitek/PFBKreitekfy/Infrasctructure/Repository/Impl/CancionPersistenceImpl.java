@@ -49,4 +49,14 @@ public class CancionPersistenceImpl implements CancionPersistence {
     public void deleteCancionById(Long cancionId) {
         this.cancionRepository.deleteById(cancionId);
     }
+
+    @Override
+    public List<Cancion> find5CancionesMasValoradas(Pageable pageable) {
+        return this.cancionRepository.find5CancionesMasValoradas(pageable);
+    }
+
+    @Override
+    public List<Cancion> find5CancionesRecomendadas(Long usuarioId) {
+        return this.cancionRepository.find5CancionesRecomendadas(usuarioId);
+    }
 }
