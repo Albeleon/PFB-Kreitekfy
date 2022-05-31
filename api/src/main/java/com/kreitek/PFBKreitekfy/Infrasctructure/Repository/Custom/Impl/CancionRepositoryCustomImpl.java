@@ -30,14 +30,10 @@ public class CancionRepositoryCustomImpl implements CancionRepositoryCustom {
     @Override
     public List<Cancion> find5CancionesRecomendadas(Long usuarioId) {
         Query query = entityManager.createQuery("SELECT e FROM Estilo AS e INNER JOIN Cancion AS c ON e.id = c.estilo.id INNER JOIN CancionUsuario AS cu ON c.id = cu.id.cancionId WHERE cu.id.usuarioId = " + usuarioId + " GROUP BY e.id ORDER BY sum(cu.reproduccion) DESC");
-        List<Estilo> estilos = query.getResultList();
-        
-        for (int index = 0; index < estilos.size(); index++) {
-            System.out.println(">>>>>> " + estilos.get(index).getNombre());
-        }
+        List<Estilo> estilos = query.setMaxResults(2).getResultList();
         
         String whereEstilo = "";
-        for (int index = 0; index < 2 && index < estilos.size(); index++) {
+        for (int index = 0; index < estilos.size(); index++) {
             whereEstilo += (index > 0 ? " OR " : "") + "c.estilo.id = " + estilos.get(index).getId();
         }
 
