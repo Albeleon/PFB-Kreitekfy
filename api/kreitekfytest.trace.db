@@ -1,0 +1,8 @@
+2022-05-31 17:13:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]IF NOT EXISTS (SELECT * FROM albumes WHERE id = 99991) INSERT INTO albumes (id, nombre, imagen) VALUES (99991, '_-_album_-_', null)"
+Syntax error in SQL statement "[*]IF NOT EXISTS (SELECT * FROM albumes WHERE id = 99991) INSERT INTO albumes (id, nombre, imagen) VALUES (99991, '_-_album_-_', null)"; SQL statement:
+IF NOT EXISTS (SELECT * FROM albumes WHERE id = 99991) INSERT INTO albumes (id, nombre, imagen) VALUES (99991, '_-_album_-_', null) [42000-212]
+2022-05-31 17:15:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "BEGIN [*]IF NOT EXISTS (SELECT * FROM albumes WHERE id = 99991) BEGIN INSERT INTO albumes (id, nombre, imagen) VALUES (99991, '_-_album_-_', null) END END"
+Syntax error in SQL statement "BEGIN [*]IF NOT EXISTS (SELECT * FROM albumes WHERE id = 99991) BEGIN INSERT INTO albumes (id, nombre, imagen) VALUES (99991, '_-_album_-_', null) END END"; SQL statement:
+BEGIN IF NOT EXISTS (SELECT * FROM albumes WHERE id = 99991) BEGIN INSERT INTO albumes (id, nombre, imagen) VALUES (99991, '_-_album_-_', null) END END [42000-212]
