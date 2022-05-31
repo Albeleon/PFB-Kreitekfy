@@ -13,7 +13,6 @@ import { FormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
-import { CancionFormComponent } from './componentes/cancion-form/cancion-form.component';
 import { CalendarModule } from 'primeng/calendar';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -27,7 +26,6 @@ import { TablaEstilosComponent } from './componentes/tabla-estilos/tabla-estilos
     FooterComponent,
     TablaCancionesComponent,
     TablaArtistasComponent,
-    CancionFormComponent,
     TablaAlbumesComponent,
     TablaEstilosComponent
   ],
