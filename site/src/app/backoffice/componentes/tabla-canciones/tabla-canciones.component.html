@@ -22,17 +22,27 @@
         </figure>
       </div>
     </div>
-    <div class="row mt-3">
-      <div class="botoneraPaginacion text-center col">
+    <div class="row d-flex justify-content-center mt-3 ">
+      <div class="botoneraPaginacion text-center col-xl-6 col-sm-6 col-xs-12 d-block d-sm-block d-xs-block d-md-none">
         <button [disabled]="first" class="btn btn-secondary btnAtras" (click)="previousPage()">
           Anterior
         </button>
-        <span class="mx-3">Pagina {{ page + 1 }} de {{ totalPages }}</span>
+        <span class="mx-2">{{ page + 1 }} de {{ totalPages }}</span>
+        <button [disabled]="last" class="btn btn-secondary btnSiguiente" (click)="nextPage()">
+          Siguiente
+        </button>
+      </div>
+      <div class="botoneraPaginacion text-center col-xl-6 col-sm-6 col-xs-12 d-none d-md-block ">
+        <button [disabled]="first" class="btn btn-secondary btnAtras" (click)="previousPage()">
+          Anterior
+        </button>
+        <span class="mx-2">Página {{ page + 1 }} de {{ totalPages }}</span>
         <button [disabled]="last" class="btn btn-secondary btnSiguiente" (click)="nextPage()">
           Siguiente
         </button>
       </div>
     </div>
+    
 
     <p-dialog [(visible)]="display" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
       [style]="{ width: '600px', height: '510px' }" [modal]="true">
