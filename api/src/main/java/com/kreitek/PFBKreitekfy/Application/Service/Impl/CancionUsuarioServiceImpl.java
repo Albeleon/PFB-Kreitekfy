@@ -38,7 +38,7 @@ public class CancionUsuarioServiceImpl implements CancionUsuarioService {
         } else {
             CancionUsuario cancionUsuarioUpdated = cancionUsuarioMapper.toEntity(cancionUsuarioDTO);
             cancionUsuarioUpdated.setReproducciones(1L);
-            cancionUsuarioPersistence.saveItem(cancionUsuarioUpdated);
+            cancionUsuarioUpdated = cancionUsuarioPersistence.saveItem(cancionUsuarioUpdated);
             return cancionUsuarioMapper.toDto(cancionUsuarioUpdated);
         }
     }
