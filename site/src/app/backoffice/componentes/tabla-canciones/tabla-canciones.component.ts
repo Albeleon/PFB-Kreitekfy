@@ -89,7 +89,7 @@ export class TablaCancionesComponent implements OnInit {
   }
 
   setLocation(){
-    this.localizacion = localStorage.setItem('localizacion' , 'canciones');
+    this.sharedService.changeBack("canciones");
   }
 
 

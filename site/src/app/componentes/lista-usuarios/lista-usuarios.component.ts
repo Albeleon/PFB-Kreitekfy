@@ -40,6 +40,7 @@ export class ListaUsuariosComponent implements OnInit {
       this.router.navigate(['/player']);
     }
     if(localStorage.getItem('rol') == 'ADMINISTRADOR'){
+      localStorage.setItem('localizacion' , 'canciones');
       this.router.navigate(['/backoffice']);
     }
   }

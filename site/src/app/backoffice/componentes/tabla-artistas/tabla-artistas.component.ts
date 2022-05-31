@@ -54,7 +54,7 @@ export class TablaArtistasComponent implements OnInit {
   }
 
   setLocation(){
-    this.localizacion = localStorage.setItem('localizacion' , 'artistas');
+    this.sharedService.changeBack("artistas");
   }
 
   showDialogCreate() {

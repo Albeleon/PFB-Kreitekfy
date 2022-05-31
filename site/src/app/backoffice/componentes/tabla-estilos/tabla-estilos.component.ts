@@ -50,7 +50,7 @@ export class TablaEstilosComponent implements OnInit {
   }
 
   setLocation(){
-    this.localizacion = localStorage.setItem('localizacion' , 'estilos');
+    this.sharedService.changeBack("estilos");
   }
 
   showDialogCreate() {

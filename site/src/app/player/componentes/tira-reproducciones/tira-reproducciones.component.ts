@@ -16,6 +16,7 @@ import { environment } from 'src/environments/environment';
 export class TiraReproduccionesComponent implements OnInit {
   canciones: Cancion_Simple[] = [];
   base64Prefix: string = environment.base64Prefix;
+  defaultImagen: string = environment.defaultImage;
   estilo?: Estilo;
 
   constructor(private cancionService: CancionService, private sharedService: SharedService) { }

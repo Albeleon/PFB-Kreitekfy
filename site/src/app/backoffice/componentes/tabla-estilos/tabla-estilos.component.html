@@ -7,7 +7,7 @@
     <div class="row text-center justify-content-center mx-auto pt-4 row-cols-xl-5 row-cols-lg-5">
       <div class="itemCancion col d-flex justify-content-center" *ngFor="let estilo of estilos">
         <figure class="imagen">
-          <a (click)="showDialogEdit(estilo)"><img class="cover" [src]="defaultImage" /></a>
+          <a (click)="showDialogEdit(estilo)"><img class="cover" src="../../../../assets/img/pexels-bob-clark-21148.jpg" /></a>
           <span class="icon-delete"><i (click)="showDialogDelete(estilo.id!)" class="pi pi-times-circle"></i></span>
           <p class="mt-2">{{ estilo.nombre }}</p>
         </figure>

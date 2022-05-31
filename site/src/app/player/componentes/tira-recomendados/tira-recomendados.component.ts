@@ -14,6 +14,7 @@ export class TiraRecomendadosComponent implements OnInit {
 
   canciones: Cancion_Simple[] = [];
   base64Prefix: string = environment.base64Prefix;
+  defaultImagen: string = environment.defaultImage;
 
   constructor(private cancionService: CancionService) { }
 

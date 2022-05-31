@@ -65,7 +65,7 @@ export class TablaAlbumesComponent implements OnInit {
 
 
   setLocation(){
-    this.localizacion = localStorage.setItem('localizacion' , 'albumes');
+    this.sharedService.changeBack("albumes");
   }
 
   showDialogEdit(idAlbum: number) {

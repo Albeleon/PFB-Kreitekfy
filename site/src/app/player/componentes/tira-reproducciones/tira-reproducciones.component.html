@@ -7,7 +7,7 @@
             <a aria-current="page" [routerLink]="['fichaCancion/', cancion.id]">
                 <figure>
                     <img class="cover" *ngIf="cancion.albumImagen" [src]="base64Prefix + cancion.albumImagen" alt="">
-                    <img class="cover" *ngIf="!cancion.albumImagen" src="https://microsofters.com/wp-content/uploads/2021/06/img19-scaled.jpg" alt="">
+                    <img class="cover" *ngIf="!cancion.albumImagen" [src]="defaultImagen" alt="">
                 </figure>
             </a>
             <p class="mt-2">{{ cancion.nombre }}</p>

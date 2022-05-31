@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
   constructor(private sharedService: SharedService) { }
 
   getLocation(){
-    this.getLocalizacion = localStorage.getItem('localizacion');
+    this.sharedService.getEmittedValueBack().subscribe((data: any) => { this.getLocalizacion = data; });
   }
 
   ngOnInit(): void {
@@ -35,6 +35,7 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem('rol');
     localStorage.removeItem('filtroAdmin');
     localStorage.removeItem('userName');
+    localStorage.removeItem('localizacion');
   }
 
   enviarTextoBuscado(): void {
