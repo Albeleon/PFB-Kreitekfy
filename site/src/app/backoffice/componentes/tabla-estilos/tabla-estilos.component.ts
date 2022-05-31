@@ -34,6 +34,7 @@ export class TablaEstilosComponent implements OnInit {
   };
   defaultImage: string = environment.defaultImage;
   localizacion: any ;
+  loader: boolean = true;
 
   constructor(private messageService: MessageService,
     private confirmationService: ConfirmationService,
@@ -96,6 +97,7 @@ export class TablaEstilosComponent implements OnInit {
             this.totalPages = data.totalPages;
             this.first = data.first;
             this.last = data.last;
+            this.loader = false ;
           },
           error: (err) => {
             this.handleError(err);

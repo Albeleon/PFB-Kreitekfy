@@ -68,6 +68,7 @@ export class TablaCancionesComponent implements OnInit {
   toogleCreate: boolean = false;
   titleMode: string = '';
   flagErrorSearch: boolean = false;
+  loader: boolean = true;
 
   constructor(
     private cancionService: CancionService,
@@ -139,7 +140,7 @@ export class TablaCancionesComponent implements OnInit {
             this.totalPages = data.totalPages;
             this.first = data.first;
             this.last = data.last;
-            console.log(data);
+            this.loader = false;
           },
           error: (err) => {
             this.handleError(err);

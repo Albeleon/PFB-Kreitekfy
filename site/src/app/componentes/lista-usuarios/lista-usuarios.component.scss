@@ -62,3 +62,17 @@ h4{
      font-family: "Orbitron", sans-serif;
      font-size:30px;
  }
+
+ .loader{
+    height:50%;
+    width: 50%;
+  }
+  
+  .wrapper{
+    width: 100%;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+  }
+  
