@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class ListaUsuariosComponent implements OnInit {
   Usuarios: Usuario[] = [];
+  loader: boolean = true;
   
   constructor(private usuarioService: UsuarioService , private router: Router) {
 
@@ -22,7 +23,10 @@ export class ListaUsuariosComponent implements OnInit {
 
   private getUsuarios():void{
     this.usuarioService.getAllUsuarios().subscribe({
-      next: (usuariosRequest) => {this.Usuarios = usuariosRequest},
+      next: (usuariosRequest) => {
+        this.Usuarios = usuariosRequest
+        this.loader = false;
+      },
       error: (err) => {this.handleError(err);}
     })
     
