@@ -18,6 +18,7 @@ export class TiraReproduccionesComponent implements OnInit {
   base64Prefix: string = environment.base64Prefix;
   defaultImagen: string = environment.defaultImage;
   estilo?: Estilo;
+  loader: boolean = true;
 
   constructor(private cancionService: CancionService, private sharedService: SharedService) { }
 
@@ -35,6 +36,7 @@ export class TiraReproduccionesComponent implements OnInit {
       this.cancionService.getCancionesMasReproducidas(this.estilo).subscribe({
         next: (data: any) => {
           this.canciones = data;
+          this.loader = false;
         }
       }
       )

@@ -15,6 +15,7 @@ export class TiraRecomendadosComponent implements OnInit {
   canciones: Cancion_Simple[] = [];
   base64Prefix: string = environment.base64Prefix;
   defaultImagen: string = environment.defaultImage;
+  loader: boolean = true;
 
   constructor(private cancionService: CancionService) { }
 
@@ -30,6 +31,7 @@ export class TiraRecomendadosComponent implements OnInit {
     this.cancionService.getCancionesRecomendadas(this.usuarioId).subscribe({
       next: (data: any) => {
         this.canciones = data;
+        this.loader = false;
       }
     }
     )

@@ -1,4 +1,7 @@
-<div class="container-fluid mt-4 mb-4">
+<div class="container-fluid wrapper text-center" *ngIf = "loader == true">
+    <img class = "loader" src = "../../../../assets/img/loader.svg">
+  </div>
+<div class="container-fluid mt-4 mb-4" *ngIf = "loader == false">
     <h4>Añadir album<button class="añadir" type="button" type="button" (click)="showDialogCreate()"><img
                 class="logo mx-2" src="../../../../assets/img/add.png"></button></h4>
     <div class="row text-center justify-content-center mx-auto pt-4 row-cols-xl-5 row-cols-lg-5 ">

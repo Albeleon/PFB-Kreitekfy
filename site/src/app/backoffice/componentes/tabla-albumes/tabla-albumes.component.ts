@@ -46,6 +46,7 @@ export class TablaAlbumesComponent implements OnInit {
   toogleCreate: boolean = false;
   titleMode: string = '';
   flagErrorSearch: boolean = false;
+  loader: boolean = true;
 
   constructor(
     private albumService: AlbumService,
@@ -107,6 +108,7 @@ export class TablaAlbumesComponent implements OnInit {
               this.totalPages = data.totalPages;
               this.first = data.first;
               this.last = data.last;
+              this.loader = false;
             },
             error: (err) => {this.handleError(err);}
           })

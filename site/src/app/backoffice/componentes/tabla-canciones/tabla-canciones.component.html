@@ -1,110 +1,115 @@
-<div class="container-fluid mt-4 mb-4">
-  <h4>
-    Añadir canción<button class="añadir" type="button" type="button" (click)="showDialogCreate()">
-      <img class="logo mx-2" src="../../../../assets/img/add.png" />
-    </button>
-  </h4>
-  <div class="row text-center justify-content-center mx-auto pt-4 row-cols-xl-5 row-cols-lg-5">
-    <div class="itemCancion col text-center d-flex justify-content-center" *ngFor="let item of Canciones">
-      <figure class="imagen">
-        <a (click)="showDialogEdit(item.id!)">
-          <img *ngIf="item.albumImagen" class="cover" [src]="base64Prefix + item.albumImagen" />
-          <img *ngIf="!item.albumImagen" class="cover" [src]="defaultImage" />
-        </a>
-        <span class="icon-delete"><i (click)="showDialogDelete(item.id!)" class="pi pi-times-circle"></i></span>
-        <p class="mt-2">{{ item.nombre }}</p>
-        <p class="artist">({{ item.artistaNombre }})</p>
-      </figure>
-    </div>
-  </div>
-  <div class="row mt-3">
-    <div class="botoneraPaginacion text-center col">
-      <button [disabled]="first" class="btn btn-secondary btnAtras" (click)="previousPage()">
-        Anterior
-      </button>
-      <span class="mx-3">Pagina {{ page + 1 }} de {{ totalPages }}</span>
-      <button [disabled]="last" class="btn btn-secondary btnSiguiente" (click)="nextPage()">
-        Siguiente
-      </button>
-    </div>
-  </div>
+<div class="container-fluid wrapper text-center" *ngIf = "loader == true">
+  <img class = "loader" src = "../../../../assets/img/loader.svg">
+</div>
 
-  <p-dialog [(visible)]="display" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
-    [style]="{ width: '600px', height: '510px' }" [modal]="true">
-    <ng-template pTemplate="header">
-      <h4>{{ titleMode }} una canción</h4>
-    </ng-template>
-    <form #cancionForm="ngForm" *ngIf="cancion">
-      <div class="row text-center justify-content-center">
-        <div class="form-group col-xl-5 mt-3">
-          <label for="nombre">Nombre</label>
-          <input class="form-control" id="nombre" [(ngModel)]="cancion.nombre" name="nombre" #nombre="ngModel" required
-            type="text" />
-          <small class="p-error" *ngIf="nombre.dirty && !cancion.nombre">Este campo es requerido.</small>
-        </div>
-        <div class="form-group col-xl-5 mt-3">
-          <label for="duracion">Duración (segundos)</label>
-          <input class="form-control" id="duracion" [(ngModel)]="cancion.duracion" #duracion="ngModel" name="duracion"
-            required type="number" />
-          <small class="p-error" *ngIf="duracion.dirty && !cancion.duracion">Este campo es requerido.</small>
-          <small class="p-error" *ngIf="duracion.dirty && cancion.duracion && (cancion.duracion <= 0 || cancion.duracion > 1000000)">Tiene que ser un número entre 0 y 1.000.000</small>
-        </div>
+
+  <div class="container-fluid mt-4 mb-4" *ngIf = "loader == false">
+    <h4>
+      Añadir canción<button class="añadir" type="button" type="button" (click)="showDialogCreate()">
+        <img class="logo mx-2" src="../../../../assets/img/add.png" />
+      </button>
+    </h4>
+    <div class="row text-center justify-content-center mx-auto pt-4 row-cols-xl-5 row-cols-lg-5">
+      <div class="itemCancion col text-center d-flex justify-content-center" *ngFor="let item of Canciones">
+        <figure class="imagen">
+          <a (click)="showDialogEdit(item.id!)">
+            <img *ngIf="item.albumImagen" class="cover" [src]="base64Prefix + item.albumImagen" />
+            <img *ngIf="!item.albumImagen" class="cover" [src]="defaultImage" />
+          </a>
+          <span class="icon-delete"><i (click)="showDialogDelete(item.id!)" class="pi pi-times-circle"></i></span>
+          <p class="mt-2">{{ item.nombre }}</p>
+          <p class="artist">({{ item.artistaNombre }})</p>
+        </figure>
       </div>
-      <div class="row text-center justify-content-center">
-        <div class="form-group col-xl-5 mt-3">
-          <div class="field">
-            <label for="fecha">Fecha</label>
-            <p-calendar name="fecha" [disabled]="true" [defaultDate]="fechaHoy" [(ngModel)]="cancion.fecha"
-              [showIcon]="true" inputId="fecha" [style]="{ width: '100%', height: '40px' }"></p-calendar>
+    </div>
+    <div class="row mt-3">
+      <div class="botoneraPaginacion text-center col">
+        <button [disabled]="first" class="btn btn-secondary btnAtras" (click)="previousPage()">
+          Anterior
+        </button>
+        <span class="mx-3">Pagina {{ page + 1 }} de {{ totalPages }}</span>
+        <button [disabled]="last" class="btn btn-secondary btnSiguiente" (click)="nextPage()">
+          Siguiente
+        </button>
+      </div>
+    </div>
+
+    <p-dialog [(visible)]="display" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
+      [style]="{ width: '600px', height: '510px' }" [modal]="true">
+      <ng-template pTemplate="header">
+        <h4>{{ titleMode }} una canción</h4>
+      </ng-template>
+      <form #cancionForm="ngForm" *ngIf="cancion">
+        <div class="row text-center justify-content-center">
+          <div class="form-group col-xl-5 mt-3">
+            <label for="nombre">Nombre</label>
+            <input class="form-control" id="nombre" [(ngModel)]="cancion.nombre" name="nombre" #nombre="ngModel" required
+              type="text" />
+            <small class="p-error" *ngIf="nombre.dirty && !cancion.nombre">Este campo es requerido.</small>
+          </div>
+          <div class="form-group col-xl-5 mt-3">
+            <label for="duracion">Duración (segundos)</label>
+            <input class="form-control" id="duracion" [(ngModel)]="cancion.duracion" #duracion="ngModel" name="duracion"
+              required type="number" />
+            <small class="p-error" *ngIf="duracion.dirty && !cancion.duracion">Este campo es requerido.</small>
+            <small class="p-error" *ngIf="duracion.dirty && cancion.duracion && (cancion.duracion <= 0 || cancion.duracion > 1000000)">Tiene que ser un número entre 0 y 1.000.000</small>
           </div>
         </div>
-        <div class="form-group col-xl-5 mt-3">
-          <label for="estilo">Album</label>
-          <p-autoComplete name="album" #album="ngModel" [required]="true" [(ngModel)]="albumFiltro"
-            [suggestions]="albumes" (completeMethod)="filtrarAlbumes($event)" field="nombre" [dropdown]="true"
-            scrollHeight="200px" [style]="{ width: '100%', height: '40px' }">
-            <ng-template let-album pTemplate="album">
-              <div>{{ album.nombre }}</div>
-            </ng-template>
-          </p-autoComplete>
-          <small class="p-error" *ngIf="album.dirty && !albumFiltro">Este campo es requerido.</small>
-        </div>
-      </div>
-
-      <div class="row text-center justify-content-center">
-        <div class="form-group col-xl-5 mt-3">
-          <label for="estilo">Artista</label>
-          <p-autoComplete name="artista" #artista="ngModel" [required]="true" [(ngModel)]="artistaFiltro"
-            [suggestions]="artistas" (completeMethod)="filtrarArtistas($event)" field="nombre" [dropdown]="true"
-            scrollHeight="150px" [style]="{ width: '100%', height: '40px' }">
-            <ng-template let-artista pTemplate="artista">
-              <div>{{ artista.nombre }}</div>
-            </ng-template>
-          </p-autoComplete>
-          <small class="p-error" *ngIf="artista.dirty && !artistaFiltro">Este campo es requerido.</small>
+        <div class="row text-center justify-content-center">
+          <div class="form-group col-xl-5 mt-3">
+            <div class="field">
+              <label for="fecha">Fecha</label>
+              <p-calendar name="fecha" [disabled]="true" [defaultDate]="fechaHoy" [(ngModel)]="cancion.fecha"
+                [showIcon]="true" inputId="fecha" [style]="{ width: '100%', height: '40px' }"></p-calendar>
+            </div>
+          </div>
+          <div class="form-group col-xl-5 mt-3">
+            <label for="estilo">Album</label>
+            <p-autoComplete name="album" #album="ngModel" [required]="true" [(ngModel)]="albumFiltro"
+              [suggestions]="albumes" (completeMethod)="filtrarAlbumes($event)" field="nombre" [dropdown]="true"
+              scrollHeight="200px" [style]="{ width: '100%', height: '40px' }">
+              <ng-template let-album pTemplate="album">
+                <div>{{ album.nombre }}</div>
+              </ng-template>
+            </p-autoComplete>
+            <small class="p-error" *ngIf="album.dirty && !albumFiltro">Este campo es requerido.</small>
+          </div>
         </div>
 
-        <div class="form-group col-xl-5 mt-3">
-          <label for="estilo">Estilo</label>
-          <p-autoComplete name="estilo" #estilo="ngModel" [required]="true" [(ngModel)]="estiloFiltro"
-            [suggestions]="estilos" (completeMethod)="filtrarEstilos($event)" field="nombre" [dropdown]="true"
-            scrollHeight="150px" [style]="{ width: '100%', height: '40px' }">
-            <ng-template let-estilo pTemplate="estilo">
-              <div>{{ estilo.nombre }}</div>
-            </ng-template>
-          </p-autoComplete>
-          <small class="p-error" *ngIf="estilo.dirty && !estiloFiltro">Este campo es requerido.</small>
+        <div class="row text-center justify-content-center">
+          <div class="form-group col-xl-5 mt-3">
+            <label for="estilo">Artista</label>
+            <p-autoComplete name="artista" #artista="ngModel" [required]="true" [(ngModel)]="artistaFiltro"
+              [suggestions]="artistas" (completeMethod)="filtrarArtistas($event)" field="nombre" [dropdown]="true"
+              scrollHeight="150px" [style]="{ width: '100%', height: '40px' }">
+              <ng-template let-artista pTemplate="artista">
+                <div>{{ artista.nombre }}</div>
+              </ng-template>
+            </p-autoComplete>
+            <small class="p-error" *ngIf="artista.dirty && !artistaFiltro">Este campo es requerido.</small>
+          </div>
+
+          <div class="form-group col-xl-5 mt-3">
+            <label for="estilo">Estilo</label>
+            <p-autoComplete name="estilo" #estilo="ngModel" [required]="true" [(ngModel)]="estiloFiltro"
+              [suggestions]="estilos" (completeMethod)="filtrarEstilos($event)" field="nombre" [dropdown]="true"
+              scrollHeight="150px" [style]="{ width: '100%', height: '40px' }">
+              <ng-template let-estilo pTemplate="estilo">
+                <div>{{ estilo.nombre }}</div>
+              </ng-template>
+            </p-autoComplete>
+            <small class="p-error" *ngIf="estilo.dirty && !estiloFiltro">Este campo es requerido.</small>
+          </div>
         </div>
-      </div>
-      <div class="buttons-actions d-flex justify-content-end">
-        <button (click)="saveCancion()" [disabled]="cancionForm.invalid" pButton pRipple label="Guardar"
-          icon="pi pi-check" class="p-button-text"></button>
-      </div>
-    </form>
-  </p-dialog>
-  <p-toast position="top-right"></p-toast>
-  <p-confirmDialog acceptLabel="Sí" rejectLabel="No" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
-    [style]="{ width: '50vw' }">
-    Content
-  </p-confirmDialog>
-</div>
+        <div class="buttons-actions d-flex justify-content-end">
+          <button (click)="saveCancion()" [disabled]="cancionForm.invalid" pButton pRipple label="Guardar"
+            icon="pi pi-check" class="p-button-text"></button>
+        </div>
+      </form>
+    </p-dialog>
+    <p-toast position="top-right"></p-toast>
+    <p-confirmDialog acceptLabel="Sí" rejectLabel="No" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
+      [style]="{ width: '50vw' }">
+      Content
+    </p-confirmDialog>
+  </div>
