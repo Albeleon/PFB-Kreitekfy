@@ -1,24 +1,20 @@
-
-<div class = "container-fluid fondo">
+<div class = "fondo pb-4">
     <h4 class = "title pt-2 px-2">Kreitekfy</h4>
-    <div class = "container alignment">
-        
         <div class="container usuarios">  
             <div class = "row text-center titulo mt-4 mb-4">
                 <h4 class = "mt-4">¿Quién está escuchando?</h4>
             </div>
             <div class="row text-center d-flex justify-content-center" *ngIf = "loader == true">
-                <div class = "col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12 users">
+                <div class = "col-xl-2 col-lg-3  users">
                         <img class = "loader" src = "../../../../assets/img/loader.svg">
                 </div>
             </div>
-            <div class = "row text-center mb-4 " *ngIf = "loader == false">
-                <div class = "col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12 users" *ngFor = "let item of Usuarios">
+            <div class = "row text-center d-flex justify-content-center " *ngIf = "loader == false">
+                <div class = "col-xl-3 col-lg-3  users" *ngFor = "let item of Usuarios" >
                     <img class = "userImg" (click) = "setUser(item.id, item.rol,item.nombre) ; navigateUser()" src = "https://cdn-icons-png.flaticon.com/512/219/219986.png">
                     <p>{{item.nombre}}</p>
                     <p class= "rol">({{item.rol}})</p>
                 </div>
             </div>
         </div>
-    </div>
 </div>
