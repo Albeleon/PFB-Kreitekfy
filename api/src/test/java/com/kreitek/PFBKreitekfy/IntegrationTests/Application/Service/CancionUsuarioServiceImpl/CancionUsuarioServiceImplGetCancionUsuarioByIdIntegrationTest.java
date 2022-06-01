@@ -5,6 +5,7 @@ import com.kreitek.PFBKreitekfy.Application.Mapper.CancionMapper;
 import com.kreitek.PFBKreitekfy.Application.Mapper.CancionUsuarioMapper;
 import com.kreitek.PFBKreitekfy.Application.Service.CancionService;
 import com.kreitek.PFBKreitekfy.Application.Service.Impl.CancionUsuarioServiceImpl;
+import com.kreitek.PFBKreitekfy.Domain.Persistence.CancionPersistence;
 import com.kreitek.PFBKreitekfy.Infrasctructure.Repository.CancionUsuarioRepository;
 import com.kreitek.PFBKreitekfy.Infrasctructure.Repository.Impl.CancionUsuarioPersistenceImpl;
 import com.kreitek.PFBKreitekfy.PfbKreitekfyApplication;
@@ -32,11 +33,14 @@ public class CancionUsuarioServiceImplGetCancionUsuarioByIdIntegrationTest {
     @Autowired
     private CancionMapper cancionMapper;
 
+    @Autowired
+    private CancionPersistence cancionPersistence;
+
     @Sql({"/test_data.sql"})
     @Sql(scripts = "/test_clean.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
     void ShouldReturnNoCancionUsuarioWhenFindOneCancionUsuarioThatIsNot() {
-        CancionUsuarioServiceImpl cancionUsuarioService = new CancionUsuarioServiceImpl(new CancionUsuarioPersistenceImpl(cancionUsuarioRepository), cancionService, cancionUsuarioMapper, cancionMapper);
+        CancionUsuarioServiceImpl cancionUsuarioService = new CancionUsuarioServiceImpl(new CancionUsuarioPersistenceImpl(cancionUsuarioRepository), cancionService, cancionUsuarioMapper, cancionMapper , cancionPersistence);
         Optional<CancionUsuarioDTO> cancionUsuarioDTO = cancionUsuarioService.getCancionUsuarioById(99990L, 99990L);
 
         assertNotNull(cancionUsuarioDTO);
@@ -47,7 +51,7 @@ public class CancionUsuarioServiceImplGetCancionUsuarioByIdIntegrationTest {
     @Sql(scripts = "/test_clean.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
     void ShouldReturnCancionUsuarioWhenFindOneCancionUsuario() {
-        CancionUsuarioServiceImpl cancionUsuarioService = new CancionUsuarioServiceImpl(new CancionUsuarioPersistenceImpl(cancionUsuarioRepository), cancionService, cancionUsuarioMapper, cancionMapper);
+        CancionUsuarioServiceImpl cancionUsuarioService = new CancionUsuarioServiceImpl(new CancionUsuarioPersistenceImpl(cancionUsuarioRepository), cancionService, cancionUsuarioMapper, cancionMapper,cancionPersistence);
         Optional<CancionUsuarioDTO> cancionUsuarioDTO = cancionUsuarioService.getCancionUsuarioById(99991L, 99991L);
 
         assertNotNull(cancionUsuarioDTO);

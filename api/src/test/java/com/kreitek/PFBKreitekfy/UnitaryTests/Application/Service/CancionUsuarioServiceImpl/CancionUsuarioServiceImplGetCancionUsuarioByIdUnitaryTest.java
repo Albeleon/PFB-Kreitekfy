@@ -7,6 +7,7 @@ import com.kreitek.PFBKreitekfy.Application.Service.CancionService;
 import com.kreitek.PFBKreitekfy.Application.Service.CancionUsuarioService;
 import com.kreitek.PFBKreitekfy.Application.Service.Impl.CancionUsuarioServiceImpl;
 import com.kreitek.PFBKreitekfy.Domain.Entity.CancionUsuario;
+import com.kreitek.PFBKreitekfy.Domain.Persistence.CancionPersistence;
 import com.kreitek.PFBKreitekfy.Domain.Persistence.CancionUsuarioPersistence;
 import org.junit.jupiter.api.Test;
 
@@ -21,11 +22,12 @@ public class CancionUsuarioServiceImplGetCancionUsuarioByIdUnitaryTest {
 
     @Test
     void shouldReturnEmptyDTOCancionUsuarioWhenRepositoryHasNotThatElement() {
+        CancionPersistence cancionPersistence = mock(CancionPersistence.class);
         CancionUsuarioPersistence mockedCancionUsuarioPersistence = mock(CancionUsuarioPersistence.class);
         CancionService mockedCancionService = mock(CancionService.class);
         when(mockedCancionUsuarioPersistence.findCancionUsuarioByCancionIdAndUsuarioId(1L, 1L)).thenReturn(Optional.empty());
 
-        CancionUsuarioService cancionUsuarioService = new CancionUsuarioServiceImpl(mockedCancionUsuarioPersistence, mockedCancionService, new CancionUsuarioMapperImpl(), new CancionMapperImpl());
+        CancionUsuarioService cancionUsuarioService = new CancionUsuarioServiceImpl(mockedCancionUsuarioPersistence, mockedCancionService, new CancionUsuarioMapperImpl(), new CancionMapperImpl(),cancionPersistence);
 
         Optional<CancionUsuarioDTO> cancionUsuarioDTO = cancionUsuarioService.getCancionUsuarioById(1L, 1L);
 
@@ -35,11 +37,12 @@ public class CancionUsuarioServiceImplGetCancionUsuarioByIdUnitaryTest {
 
     @Test
     void shouldReturnDTOCancionUsuarioWhenRepositoryHasThatElement() {
+        CancionPersistence cancionPersistence = mock(CancionPersistence.class);
         CancionUsuarioPersistence mockedCancionUsuarioPersistence = mock(CancionUsuarioPersistence.class);
         CancionService mockedCancionService = mock(CancionService.class);
         when(mockedCancionUsuarioPersistence.findCancionUsuarioByCancionIdAndUsuarioId(1L, 1L)).thenReturn(Optional.of(new CancionUsuario()));
 
-        CancionUsuarioService cancionUsuarioService = new CancionUsuarioServiceImpl(mockedCancionUsuarioPersistence, mockedCancionService, new CancionUsuarioMapperImpl(), new CancionMapperImpl());
+        CancionUsuarioService cancionUsuarioService = new CancionUsuarioServiceImpl(mockedCancionUsuarioPersistence, mockedCancionService, new CancionUsuarioMapperImpl(), new CancionMapperImpl(),cancionPersistence);
 
         Optional<CancionUsuarioDTO> cancionUsuarioDTO = cancionUsuarioService.getCancionUsuarioById(1L, 1L);
 

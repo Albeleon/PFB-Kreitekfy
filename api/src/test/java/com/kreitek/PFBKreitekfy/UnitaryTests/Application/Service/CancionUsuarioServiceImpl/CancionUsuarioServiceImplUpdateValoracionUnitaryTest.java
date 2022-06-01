@@ -7,6 +7,7 @@ import com.kreitek.PFBKreitekfy.Application.Service.CancionService;
 import com.kreitek.PFBKreitekfy.Application.Service.CancionUsuarioService;
 import com.kreitek.PFBKreitekfy.Application.Service.Impl.CancionUsuarioServiceImpl;
 import com.kreitek.PFBKreitekfy.Domain.Entity.CancionUsuario;
+import com.kreitek.PFBKreitekfy.Domain.Persistence.CancionPersistence;
 import com.kreitek.PFBKreitekfy.Domain.Persistence.CancionUsuarioPersistence;
 import org.junit.jupiter.api.Test;
 
@@ -19,6 +20,7 @@ public class CancionUsuarioServiceImplUpdateValoracionUnitaryTest {
 
     @Test
     void shouldReturnDTOCancionUsuarioUpdatedWhenUpdateVarloacion() {
+        CancionPersistence cancionPersistence = mock(CancionPersistence.class);
         CancionUsuarioDTO cancionUsuarioDTO = new CancionUsuarioDTO();
         cancionUsuarioDTO.setValoracion(3L);
 
@@ -39,7 +41,7 @@ public class CancionUsuarioServiceImplUpdateValoracionUnitaryTest {
         CancionService mockedCancionService = mock(CancionService.class);
         when(mockedCancionUsuarioPersistence.saveItem(cancionUsuario)).thenReturn(cancionUsuarioUpdated);
 
-        CancionUsuarioService cancionUsuarioService = new CancionUsuarioServiceImpl(mockedCancionUsuarioPersistence, mockedCancionService, mockedCancionUsuarioMapper, new CancionMapperImpl());
+        CancionUsuarioService cancionUsuarioService = new CancionUsuarioServiceImpl(mockedCancionUsuarioPersistence, mockedCancionService, mockedCancionUsuarioMapper, new CancionMapperImpl(),cancionPersistence);
 
         CancionUsuarioDTO cancionUsuarioUpdatedDTO = cancionUsuarioService.updateReproduccion(cancionUsuarioDTO);
 
