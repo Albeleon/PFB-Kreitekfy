@@ -1,7 +1,7 @@
 
 <div class="container-fluid novedades"> 
     <div class = "d-flex flex-row">
-        <h4>Novedades</h4>
+        <h4>Novedades<span *ngIf="!loader && canciones && canciones.length == 0">: Ninguna actualmente</span></h4>
     </div>
     <div class="container-fluid wrapper text-center" *ngIf = "loader == true">
         <div class = "col itemCancion text-center mb-4 mt-4">
@@ -20,4 +20,5 @@
             <p class="artist">({{ cancion.artistaNombre }})</p>
         </div>
     </div>
+    <p-toast position="top-right"></p-toast>
 </div> 

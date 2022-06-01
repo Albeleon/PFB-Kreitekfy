@@ -2,18 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../../services/usuario.service';
 import { Usuario } from 'src/app/models/usuario.interface';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 
 @Component({
   selector: 'app-lista-usuarios',
   templateUrl: './lista-usuarios.component.html',
-  styleUrls: ['./lista-usuarios.component.scss']
+  styleUrls: ['./lista-usuarios.component.scss'],
+  providers: [MessageService]
 })
 export class ListaUsuariosComponent implements OnInit {
   Usuarios: Usuario[] = [];
   loader: boolean = true;
   
-  constructor(private usuarioService: UsuarioService , private router: Router) {
+  constructor(private usuarioService: UsuarioService , 
+    private messageService: MessageService, private router: Router) {
 
    }
 
@@ -50,7 +53,12 @@ export class ListaUsuariosComponent implements OnInit {
   }
 
   private handleError(err:any):void{
-    // implementar gestión de errores;
+    this.loader = false;
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Se ha producido un error conectando a la base de datos',
+    });
   }
 
 }

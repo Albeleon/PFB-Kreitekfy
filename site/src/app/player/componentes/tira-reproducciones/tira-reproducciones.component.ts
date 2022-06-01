@@ -20,7 +20,7 @@ export class TiraReproduccionesComponent implements OnInit {
   estilo?: Estilo;
   loader: boolean = true;
 
-  constructor(private cancionService: CancionService, private sharedService: SharedService) { }
+  constructor(private cancionService: CancionService, private messageService: MessageService, private sharedService: SharedService) { }
 
     ngOnInit(): void {
       this.actualizarTiras();
@@ -37,6 +37,14 @@ export class TiraReproduccionesComponent implements OnInit {
         next: (data: any) => {
           this.canciones = data;
           this.loader = false;
+        },
+        error: (err: any) => {
+          this.loader = false;
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Se ha producido un error conectando a la base de datos',
+          });
         }
       }
       )

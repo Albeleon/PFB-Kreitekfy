@@ -37,7 +37,7 @@ public class CancionRepositoryCustomImpl implements CancionRepositoryCustom {
             whereEstilo += (index > 0 ? " OR " : "") + "c.estilo.id = " + estilos.get(index).getId();
         }
 
-        List<Cancion> canciones = entityManager.createQuery("SELECT c FROM Cancion AS c INNER JOIN CancionUsuario AS cu ON c.id = cu.id.cancionId WHERE " + whereEstilo + " GROUP BY c.id HAVING avg(cu.valoracion) >= 3 ORDER BY c.reproduccion DESC").setMaxResults(5).getResultList();
+        List<Cancion> canciones = entityManager.createQuery("SELECT c FROM Cancion AS c INNER JOIN CancionUsuario AS cu ON c.id = cu.id.cancionId " + (whereEstilo != "" ? "WHERE " : "") + whereEstilo + " GROUP BY c.id HAVING avg(cu.valoracion) >= 3 ORDER BY c.reproduccion DESC").setMaxResults(5).getResultList();
 
         return canciones;
 
