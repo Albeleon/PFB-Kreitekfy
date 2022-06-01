@@ -2,8 +2,8 @@ package com.kreitek.PFBKreitekfy.Application.Service.Impl;
 
 import java.util.Optional;
 
-import com.kreitek.PFBKreitekfy.Application.Dto.EstiloDTO;
 import com.kreitek.PFBKreitekfy.Application.Mapper.EstiloMapper;
+import com.kreitek.PFBKreitekfy.Application.Dto.EstiloDTO;
 import com.kreitek.PFBKreitekfy.Application.Service.EstiloService;
 import com.kreitek.PFBKreitekfy.Domain.Entity.Estilo;
 import com.kreitek.PFBKreitekfy.Domain.Persistence.EstiloPersistence;
@@ -20,7 +20,9 @@ public class EstiloServiceImpl implements EstiloService {
     private final EstiloMapper mapper;
 
     @Autowired
-    public EstiloServiceImpl(EstiloPersistence persistence, EstiloMapper mapper) {
+    public EstiloServiceImpl(
+        EstiloPersistence persistence,
+        EstiloMapper mapper) {
         this.persistence = persistence;
         this.mapper = mapper;
     }
@@ -33,7 +35,22 @@ public class EstiloServiceImpl implements EstiloService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<EstiloDTO> getEstiloById(Long idEstilo) {
         return this.persistence.getEstiloById(idEstilo).map(mapper::toDto);
     }
+    
+    @Override
+    @Transactional
+    public EstiloDTO saveEstilo(EstiloDTO estiloDTO) {
+        Estilo estilo = this.persistence.saveEstilo(mapper.toEntity(estiloDTO));
+        return this.mapper.toDto(estilo);
+    }
+
+    @Override
+    @Transactional
+    public void deleteEstiloById(Long estiloId) {
+        this.persistence.deleteEstiloById(estiloId);
+    }
+
 }

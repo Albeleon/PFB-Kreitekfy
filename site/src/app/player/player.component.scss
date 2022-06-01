@@ -1,5 +1,5 @@
-.noImage {
-    width: 100%;
-    height: 200px;
-    background-color: red;
+
+.router-outlet-container{
+    min-height: calc(90vh - 60px - 20px);
+    padding:20px;
 }

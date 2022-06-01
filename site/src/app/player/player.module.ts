@@ -12,6 +12,9 @@ import { PaginaPrincipalComponent } from './componentes/pagina-principal/pagina-
 import { TiraNovedadesComponent } from './componentes/tira-novedades/tira-novedades.component';
 import { AutoCompleteModule} from 'primeng/autocomplete';
 import {ToastModule} from 'primeng/toast';
+import { TiraReproduccionesComponent } from './componentes/tira-reproducciones/tira-reproducciones.component';
+import { TiraValoradasComponent } from './componentes/tira-valoradas/tira-valoradas.component';
+import { TiraRecomendadosComponent } from './componentes/tira-recomendados/tira-recomendados.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import {ToastModule} from 'primeng/toast';
     CancionDataComponent,
     TimeDurationPipe,
     PaginaPrincipalComponent,
-    TiraNovedadesComponent
+    TiraNovedadesComponent,
+    TiraReproduccionesComponent,
+    TiraValoradasComponent,
+    TiraRecomendadosComponent
   ],
   imports: [
     CommonModule,

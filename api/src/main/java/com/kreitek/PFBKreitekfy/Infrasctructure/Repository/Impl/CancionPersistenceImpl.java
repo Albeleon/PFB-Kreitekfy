@@ -1,12 +1,11 @@
 package com.kreitek.PFBKreitekfy.Infrasctructure.Repository.Impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.kreitek.PFBKreitekfy.Domain.Entity.Cancion;
-import com.kreitek.PFBKreitekfy.Domain.Entity.CancionUsuario;
 import com.kreitek.PFBKreitekfy.Domain.Persistence.CancionPersistence;
 import com.kreitek.PFBKreitekfy.Infrasctructure.Repository.CancionRepository;
-import com.kreitek.PFBKreitekfy.Infrasctructure.Repository.CancionUsuarioRepository;
 import com.kreitek.PFBKreitekfy.Infrasctructure.Specs.CancionSpecification;
 import com.kreitek.PFBKreitekfy.Infrasctructure.Specs.Shared.SearchCriteriaHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,15 +16,17 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class CancionPersistenceImpl implements CancionPersistence {
     private final CancionRepository cancionRepository;
-    private final CancionUsuarioRepository cancionUsuarioRepository;
 
     @Autowired
     public CancionPersistenceImpl(
-        CancionRepository cancionRepository,
-        CancionUsuarioRepository cancionUsuarioRepository)
-    {
+            CancionRepository cancionRepository) {
         this.cancionRepository = cancionRepository;
-        this.cancionUsuarioRepository = cancionUsuarioRepository;
+    }
+
+    @Override
+    public List<Cancion> findAll(String filter) {
+        CancionSpecification specification = new CancionSpecification(SearchCriteriaHelper.fromFilterString(filter));
+        return this.cancionRepository.findAll(specification);
     }
 
     @Override
@@ -45,7 +46,12 @@ public class CancionPersistenceImpl implements CancionPersistence {
     }
 
     @Override
-    public Optional<CancionUsuario> getCancionUsuarioById(Long idCancion, Long idUsuario) {
-        return this.cancionUsuarioRepository.findByCancion_idAndUsuario_Id(idCancion, idUsuario);
+    public void deleteCancionById(Long cancionId) {
+        this.cancionRepository.deleteById(cancionId);
+    }
+
+    @Override
+    public List<Cancion> find5CancionesRecomendadas(Long usuarioId) {
+        return this.cancionRepository.find5CancionesRecomendadas(usuarioId);
     }
 }

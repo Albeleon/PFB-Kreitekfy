@@ -22,8 +22,8 @@ public class CancionUsuario {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    @Column(nullable = false)
-    private Long reproducciones;
+
+    private Long reproduccion;
 
     private Long valoracion;
 
@@ -52,11 +52,14 @@ public class CancionUsuario {
     }
 
     public Long getReproducciones() {
-        return reproducciones;
+        if (this.reproduccion == null) {
+            this.reproduccion = 0L;
+        }
+        return reproduccion;
     }
 
-    public void setReproducciones(Long reproducciones) {
-        this.reproducciones = reproducciones;
+    public void setReproducciones(Long reproduccion) {
+        this.reproduccion = reproduccion;
     }
 
     public Long getValoracion() {

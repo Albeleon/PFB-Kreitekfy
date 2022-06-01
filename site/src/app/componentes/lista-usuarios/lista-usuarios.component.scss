@@ -1,7 +1,10 @@
-.usuarios{
-    margin-top:250px;
-}
 
+.usuarios{
+    background-color:rgba(253, 253, 253, 0.897);
+    border-radius: 19px;
+    margin-top:15%;
+    min-height: 100%;
+}
 
 .userImg{
     height:50%;
@@ -15,6 +18,45 @@
 }
 
 .rol{
+    font-family: Montserrat;
     font-weight: 300;
     margin-top:-15px;
+    color:black;
 }
+
+.name{
+    font-family: Montserrat;
+    color:black;
+}
+
+
+.fondo{
+    background-image: url("../../../assets/img/pexels-hendrik-b-744318.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    min-height: 100%;
+}
+
+h4{
+    color:black;
+    font-family: Montserrat;
+    font-size:30px;
+}
+
+.brand{
+    color:white;
+    font-family: "Orbitron", sans-serif;
+}
+ .title{
+     color:white;
+     font-family: "Orbitron", sans-serif;
+     font-size:30px;
+ }
+
+ .loader{
+    height:50%;
+    width: 50%;
+  }
+  

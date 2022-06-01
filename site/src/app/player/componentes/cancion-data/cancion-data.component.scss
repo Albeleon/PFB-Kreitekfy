@@ -1,12 +1,35 @@
-.cover{
-    border-radius:20px;
-    height:500px;
-    width: 500px;
-    opacity:1;
-    transition: opacity .3s ease-out; 
+.cover {
+  border-radius: 20px;
+  height: 300px;
+  width: 300px;
+  opacity: 1;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
-.cover:hover{
-    opacity:0.8;
-    transition: opacity .3s ease-out;
+h2 {
+  text-align: center;
+  font-family: Montserrat;
+}
+
+a i {
+  cursor: pointer;
+}
+
+p{
+  font-family: Montserrat;
+}
+
+button{
+  font-family: Montserrat;
+}
+
+
+.reproducir{
+  background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
 }

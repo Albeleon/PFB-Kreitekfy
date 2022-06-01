@@ -1,0 +1,24 @@
+
+<div class="container-fluid paraTi">
+    <div class="row-flex d-flex">
+        <h4>Canciones recomendadas para ti<span *ngIf="!loader && canciones && canciones.length == 0">: Ninguna actualmente</span></h4>
+    </div>
+    <div class="container-fluid wrapper text-center" *ngIf = "loader == true">
+        <div class = "col itemCancion text-center mb-4 mt-4">
+            <img class = "loader" src = "../../../../assets/img/loader.svg">
+        </div>
+    </div>
+    <div class="row text-center justify-content-center mx-auto pt-4 row-cols-xl-5 row-cols-lg-5" *ngIf = "loader == false">
+        <div class="itemCancion col text-center mb-4 mt-4" *ngFor="let cancion of canciones">
+            <a aria-current="page" [routerLink]="['fichaCancion/', cancion.id]">
+                <figure>
+                    <img class="cover" *ngIf="cancion.albumImagen" [src]="base64Prefix + cancion.albumImagen" alt="">
+                    <img class="cover" *ngIf="!cancion.albumImagen" [src]="defaultImagen" alt="">
+                </figure>
+            </a>
+            <p class="mt-2">{{ cancion.nombre }}</p>
+            <p class="artist">({{ cancion.artistaNombre }})</p>
+        </div>
+    </div>
+    <p-toast position="top-right"></p-toast>
+</div>

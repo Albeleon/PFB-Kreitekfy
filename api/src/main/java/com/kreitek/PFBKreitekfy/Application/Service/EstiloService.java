@@ -12,4 +12,8 @@ public interface EstiloService {
     Page<EstiloDTO> getEstilosByCriteriaString(Pageable pageable, String filter);
 
 	Optional<EstiloDTO> getEstiloById(Long idEstilo);
+
+    EstiloDTO saveEstilo(EstiloDTO estiloDTO);
+
+    void deleteEstiloById(Long estiloId);
 }

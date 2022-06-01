@@ -1,0 +1,33 @@
+.cover{
+    border-radius:20px;
+    height:200px;
+    width: 200px;
+    opacity:1;
+    transition: opacity .3s ease-out; 
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.cover:hover{
+    transition: box-shadow 0.2s ease-in-out;
+    box-shadow: rgba(3, 121, 255, 0.897) 0px 0px 0px 3px;
+    
+  }
+
+.artist {
+    margin-top: -20px;
+    font-weight: 300;
+  }
+
+
+  .loader{
+    height:3%;
+    width: 3%;
+  }
+  
+  .wrapper{
+      width: 100%;
+      position: relative;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+  }

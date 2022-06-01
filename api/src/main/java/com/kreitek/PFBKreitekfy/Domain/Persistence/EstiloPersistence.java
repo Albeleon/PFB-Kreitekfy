@@ -1,6 +1,7 @@
 package com.kreitek.PFBKreitekfy.Domain.Persistence;
 
 
+import java.util.List;
 import java.util.Optional;
 
 import com.kreitek.PFBKreitekfy.Domain.Entity.Estilo;
@@ -11,4 +12,10 @@ public interface EstiloPersistence {
     Page<Estilo> findAll(Pageable pageable, String filter);
 
     Optional<Estilo> getEstiloById(Long idEstilo);
+
+    List<Estilo> findAll();
+
+    Estilo saveEstilo(Estilo estilo);
+
+    void deleteEstiloById(Long estiloId);
 }

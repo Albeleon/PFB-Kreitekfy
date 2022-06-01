@@ -1,0 +1,58 @@
+<div class="container-fluid wrapper text-center" *ngIf = "loader == true">
+  <img class = "loader" src = "../../../../assets/img/loader.svg">
+</div>
+
+<div class="container-fluid mt-4 mb-4" *ngIf = "loader == false">
+    <h4>
+      Añadir estilo<button class="añadir" type="button" type="button" (click)="showDialogCreate()">
+        <img class="logo mx-2" src="../../../../assets/img/add.png" />
+      </button>
+    </h4>
+    <div class="row text-center justify-content-center mx-auto pt-4 row-cols-xl-5 row-cols-lg-5">
+      <div class="itemCancion col d-flex justify-content-center" *ngFor="let estilo of estilos">
+        <figure class="imagen">
+          <a (click)="showDialogEdit(estilo)"><img class="cover" src="../../../../assets/img/pexels-bob-clark-21148.jpg" /></a>
+          <span class="icon-delete"><i (click)="showDialogDelete(estilo.id!)" class="pi pi-times-circle"></i></span>
+          <p class="mt-2">{{ estilo.nombre }}</p>
+        </figure>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="botoneraPaginacion text-center col">
+        <button [disabled]="first" class="btn btn-secondary btnAtras" (click)="previousPage()">
+          Anterior
+        </button>
+        <span class="mx-3">Pagina {{ page + 1 }} de {{ totalPages }}</span>
+        <button [disabled]="last" class="btn btn-secondary btnSiguiente" (click)="nextPage()">
+          Siguiente
+        </button>
+      </div>
+    </div>
+  
+    <p-dialog [(visible)]="display" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
+      [style]="{ width: '600px', height: '280px' }" [modal]="true">
+      <ng-template pTemplate="header">
+        <h4>{{ titleMode }} un estilo</h4>
+      </ng-template>
+      <form #estiloForm="ngForm" *ngIf="estiloActive">
+        <div class="row text-center justify-content-center">
+          <div class="form-group col-xl-5 mt-3">
+            <label for="nombre">Nombre</label>
+            <input class="form-control" id="nombre" [(ngModel)]="estiloActive.nombre" name="nombre" #nombre="ngModel"
+              required type="text" />
+            <small class="p-error" *ngIf="nombre.dirty && !estiloActive.nombre">Este campo es requerido.</small>
+          </div>
+        </div>
+  
+        <div class="buttons-actions d-flex justify-content-end">
+          <button (click)="saveEstilo()" [disabled]="estiloForm.invalid" pButton pRipple label="Guardar"
+            icon="pi pi-check" class="p-button-text"></button>
+        </div>
+      </form>
+    </p-dialog>
+    <p-toast position="top-right"></p-toast>
+    <p-confirmDialog [breakpoints]="{ '960px': '75vw', '640px': '100vw' }" [style]="{ width: '50vw' }">
+      Content
+    </p-confirmDialog>
+  
+</div>

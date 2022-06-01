@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Cancion_Usuario } from 'src/app/models/cancion-usuario.interface';
-import { Cancion } from 'src/app/models/cancion.model';
+import { Cancion } from 'src/app/models/cancion.interface';
 import { CancionService } from 'src/app/services/cancion.service';
 import { environment } from 'src/environments/environment';
 
@@ -94,6 +94,34 @@ export class CancionDataComponent implements OnInit {
     classRemove = numero >= 4 ? 'pi-star' : 'pi-star-fill';
     this.estrella4!.nativeElement.classList.add(classAdd);
     this.estrella4!.nativeElement.classList.remove(classRemove);
+  }
+
+  enviarValoracion(numero: number): void {
+    this.valoracion = numero;
+
+    this.cancionUsuario!.cancionId = this.cancion!.id!;
+    this.cancionUsuario!.usuarioId = +this.usuarioId!;
+    this.cancionUsuario!.valoracion = this.valoracion;
+
+    this.cancionService.updateValoracion(this.cancionUsuario!).subscribe({
+      next: (data: Cancion_Usuario) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Valoración',
+          detail: 'Valorado con éxito',
+        });
+
+        this.actualizarEstrellas(this.valoracion!);
+      },
+      error: (err) => {
+        console.log(err);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Valoración',
+          detail: 'Se ha producido un error',
+        });
+      },
+    })
   }
 
   updateReproduccion() {

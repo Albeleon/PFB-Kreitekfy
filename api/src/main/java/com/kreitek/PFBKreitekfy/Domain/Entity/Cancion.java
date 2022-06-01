@@ -26,6 +26,9 @@ public class Cancion {
     @Column(nullable = false)
     private Long reproduccion = 0L;
 
+    @Column(nullable = true)
+    private Float valoracionMedia;
+
     @ManyToOne
     @JoinColumn(name = "artista_id", nullable = false)
     private Artista artista;
@@ -38,7 +41,7 @@ public class Cancion {
     @JoinColumn(name = "estilo_id", nullable = false)
     private Estilo estilo;
 
-    @OneToMany(mappedBy = "cancion")
+    @OneToMany(mappedBy = "cancion", cascade = CascadeType.ALL)
     private Set<CancionUsuario> cancionesUsuarios;
 
     public Long getId() {
@@ -97,6 +100,14 @@ public class Cancion {
         this.estilo = estilo;
     }
 
+    public Float getValoracionMedia() {
+        return valoracionMedia;
+    }
+
+    public void setValoracionMedia(Float valoracionMedia) {
+        this.valoracionMedia = valoracionMedia;
+    }
+
     public Set<CancionUsuario> getCancionesUsuarios() {
         return cancionesUsuarios;
     }
@@ -110,7 +121,8 @@ public class Cancion {
     }
 
     public void setReproduccion(Long reproduccion) {
-        this.reproduccion = reproduccion;
+        this.reproduccion = reproduccion == null ? 0L : reproduccion;
+
     }
 
     @Override

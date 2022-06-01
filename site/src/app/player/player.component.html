@@ -1,3 +1,5 @@
-<app-header (eventEmitter)="actualizarEstilo($event)"></app-header>
-<app-pagina-principal [estilo] = "estilo"></app-pagina-principal>
+<app-header></app-header>
+<div class = "router-outlet-container">
+<router-outlet></router-outlet>
+</div>
 <app-footer></app-footer>
