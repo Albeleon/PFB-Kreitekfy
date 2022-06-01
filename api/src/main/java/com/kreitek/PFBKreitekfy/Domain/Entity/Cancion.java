@@ -26,6 +26,9 @@ public class Cancion {
     @Column(nullable = false)
     private Long reproduccion = 0L;
 
+    @Column(nullable = true)
+    private Float valoracionMedia;
+
     @ManyToOne
     @JoinColumn(name = "artista_id", nullable = false)
     private Artista artista;
@@ -95,6 +98,14 @@ public class Cancion {
 
     public void setEstilo(Estilo estilo) {
         this.estilo = estilo;
+    }
+
+    public Float getValoracionMedia() {
+        return valoracionMedia;
+    }
+
+    public void setValoracionMedia(Float valoracionMedia) {
+        this.valoracionMedia = valoracionMedia;
     }
 
     public Set<CancionUsuario> getCancionesUsuarios() {

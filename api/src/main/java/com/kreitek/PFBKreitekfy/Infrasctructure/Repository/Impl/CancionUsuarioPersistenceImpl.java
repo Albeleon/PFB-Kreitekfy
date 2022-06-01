@@ -1,5 +1,6 @@
 package com.kreitek.PFBKreitekfy.Infrasctructure.Repository.Impl;
 
+import com.kreitek.PFBKreitekfy.Domain.Entity.Cancion;
 import com.kreitek.PFBKreitekfy.Domain.Entity.CancionUsuario;
 import com.kreitek.PFBKreitekfy.Domain.Persistence.CancionUsuarioPersistence;
 import com.kreitek.PFBKreitekfy.Infrasctructure.Repository.CancionUsuarioRepository;
@@ -24,5 +25,10 @@ public class CancionUsuarioPersistenceImpl implements CancionUsuarioPersistence 
     @Override
     public CancionUsuario saveItem(CancionUsuario entity) {
         return cancionUsuarioRepository.save(entity);
+    }
+
+    @Override
+    public Long findNumeroUsuariosValoracion(Long idCancion) {
+        return cancionUsuarioRepository.findNumeroUsuariosValoracion(idCancion);
     }
 }

@@ -18,6 +18,8 @@ public class CancionDTO implements Serializable {
     private String estiloNombre;
     private Long reproduccion;
 
+    private Float valoracionMedia;
+
 
     public CancionDTO() {
     }
@@ -117,5 +119,13 @@ public class CancionDTO implements Serializable {
 
     public void setReproduccion(Long reproduccion) {
         this.reproduccion = reproduccion;
+    }
+
+    public Float getValoracionMedia() {
+        return valoracionMedia;
+    }
+
+    public void setValoracionMedia(Float valoracionMedia) {
+        this.valoracionMedia = valoracionMedia;
     }
 }
