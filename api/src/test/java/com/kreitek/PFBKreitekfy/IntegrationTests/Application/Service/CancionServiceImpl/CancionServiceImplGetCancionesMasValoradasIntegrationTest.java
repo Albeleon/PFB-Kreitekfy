@@ -36,7 +36,7 @@ public class CancionServiceImplGetCancionesMasValoradasIntegrationTest {
         List<CancionSimpleDTO> cancionesDTO = cancionService.getCancionesMasValoradas("");
 
         assertNotNull(cancionesDTO);
-        assertEquals(4, cancionesDTO.size());
+        assertEquals(5, cancionesDTO.size());
         assertEquals(99993, cancionesDTO.get(0).getId());
         assertEquals(99991, cancionesDTO.get(1).getId());
         assertEquals(99995, cancionesDTO.get(2).getId());
