@@ -51,11 +51,6 @@ public class CancionPersistenceImpl implements CancionPersistence {
     }
 
     @Override
-    public List<Cancion> find5CancionesMasValoradas(String estiloId) {
-        return this.cancionRepository.find5CancionesMasValoradas(estiloId);
-    }
-
-    @Override
     public List<Cancion> find5CancionesRecomendadas(Long usuarioId) {
         return this.cancionRepository.find5CancionesRecomendadas(usuarioId);
     }

@@ -18,16 +18,6 @@ public class CancionRepositoryCustomImpl implements CancionRepositoryCustom {
     private EntityManager entityManager;
 
     @Override
-    public List<Cancion> find5CancionesMasValoradas(String estiloId) {
-        String filter = estiloId != null && estiloId != ""? "WHERE c.estilo.id=" + estiloId : "";
-        Query query = entityManager.createQuery("SELECT c FROM Cancion AS c INNER JOIN CancionUsuario AS cu ON c.id = cu.id.cancionId " + filter + " GROUP BY c.id ORDER BY avg(cu.valoracion) DESC");
-        List<Cancion> canciones = query.setMaxResults(5).getResultList();
-
-        return canciones;
-
-    }
-
-    @Override
     public List<Cancion> find5CancionesRecomendadas(Long usuarioId) {
         Query query = entityManager.createQuery("SELECT e FROM Estilo AS e INNER JOIN Cancion AS c ON e.id = c.estilo.id INNER JOIN CancionUsuario AS cu ON c.id = cu.id.cancionId WHERE cu.id.usuarioId = " + usuarioId + " GROUP BY e.id ORDER BY sum(cu.reproduccion) DESC");
         List<Estilo> estilos = query.setMaxResults(2).getResultList();
