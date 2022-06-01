@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { debounceTime } from 'rxjs';
 import { Estilo } from 'src/app/models/estilo.interface';
 import { EstiloService } from 'src/app/services/estilo.service';
 import { SharedService } from 'src/app/services/shared.service';
@@ -33,25 +34,30 @@ export class TablaEstilosComponent implements OnInit {
     id: 0,
   };
   defaultImage: string = environment.defaultImage;
-  localizacion: any ;
+  localizacion: any;
   loader: boolean = true;
 
-  constructor(private messageService: MessageService,
+  constructor(
+    private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private estiloService: EstiloService,
-    private sharedService: SharedService) { }
+    private sharedService: SharedService
+  ) {}
 
   ngOnInit(): void {
     this.getEstilosFiltrados();
-    this.sharedService.getEmittedValue().subscribe((data) => {
-      this.busqueda = data;
-      this.getEstilosFiltrados();
-    });
+    this.sharedService
+      .getEmittedValue()
+      .pipe(debounceTime(250))
+      .subscribe((data) => {
+        this.busqueda = data;
+        this.getEstilosFiltrados();
+      });
     this.setLocation();
   }
 
-  setLocation(){
-    this.sharedService.changeBack("estilos");
+  setLocation() {
+    this.sharedService.changeBack('estilos');
   }
 
   showDialogCreate() {
@@ -97,7 +103,7 @@ export class TablaEstilosComponent implements OnInit {
             this.totalPages = data.totalPages;
             this.first = data.first;
             this.last = data.last;
-            this.loader = false ;
+            this.loader = false;
           },
           error: (err) => {
             this.handleError(err);
@@ -107,7 +113,6 @@ export class TablaEstilosComponent implements OnInit {
   }
 
   showDialogDelete(idEstilo: number) {
-
     this.confirmationService.confirm({
       message: '¿Desea eliminar este Estilo?',
       header: 'Confirmacion de eliminacion',
@@ -188,9 +193,4 @@ export class TablaEstilosComponent implements OnInit {
   private handleError(err: any): void {
     // implementar gestión de errores;
   }
-
-
-
-
-
 }

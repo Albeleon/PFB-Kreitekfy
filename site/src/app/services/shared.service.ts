@@ -1,13 +1,13 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SharedService {
   @Output() fire: EventEmitter<any> = new EventEmitter();
   @Output() fireBack: EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
   change(data: any) {
     this.fire.emit(data);

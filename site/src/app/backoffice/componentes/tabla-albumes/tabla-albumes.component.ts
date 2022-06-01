@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { debounceTime } from 'rxjs';
 import { Album } from 'src/app/models/album.interface';
 import { AlbumService } from 'src/app/services/album.service';
 import { SharedService } from 'src/app/services/shared.service';
@@ -10,7 +11,7 @@ import { environment } from 'src/environments/environment';
   selector: 'app-tabla-albumes',
   templateUrl: './tabla-albumes.component.html',
   styleUrls: ['./tabla-albumes.component.scss'],
-  providers: [MessageService, ConfirmationService]
+  providers: [MessageService, ConfirmationService],
 })
 export class TablaAlbumesComponent implements OnInit {
   @ViewChild('albumForm') form?: NgForm;
@@ -18,7 +19,6 @@ export class TablaAlbumesComponent implements OnInit {
   pattern: string = environment.pattern;
   base64Prefix: string = environment.base64Prefix;
   defaultImage: string = environment.defaultImage;
-  
 
   // Variables lista y búsqueda de canciones//
   albumes: Album[] = [];
@@ -29,8 +29,8 @@ export class TablaAlbumesComponent implements OnInit {
   totalPages: number = 0;
   totalElements: number = 0;
   display: boolean = false;
-  
-  localizacion: any ;
+
+  localizacion: any;
   busqueda: string = '';
 
   // Variables modal inserción de canciones//
@@ -41,7 +41,7 @@ export class TablaAlbumesComponent implements OnInit {
   album: Album = {
     nombre: '',
     id: 0,
-    imagen: undefined
+    imagen: undefined,
   };
   toogleCreate: boolean = false;
   titleMode: string = '';
@@ -64,9 +64,8 @@ export class TablaAlbumesComponent implements OnInit {
     this.initInsertarAlbum();
   }
 
-
-  setLocation(){
-    this.sharedService.changeBack("albumes");
+  setLocation() {
+    this.sharedService.changeBack('albumes');
   }
 
   showDialogEdit(idAlbum: number) {
@@ -78,9 +77,14 @@ export class TablaAlbumesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAlbumesFiltrados();
-    this.sharedService.getEmittedValue().subscribe((data: any) => { this.busqueda = data; this.getAlbumesFiltrados(); });
+    this.sharedService
+      .getEmittedValue()
+      .pipe(debounceTime(250))
+      .subscribe((data: any) => {
+        this.busqueda = data;
+        this.getAlbumesFiltrados();
+      });
     this.setLocation();
-
   }
 
   public nextPage(): void {
@@ -95,26 +99,31 @@ export class TablaAlbumesComponent implements OnInit {
     this.getAlbumesFiltrados();
   }
 
-  public getAlbumesFiltrados():void{
-    if (this.busqueda == "" || this.busqueda.match(this.pattern)) {
+  public getAlbumesFiltrados(): void {
+    if (this.busqueda == '' || this.busqueda.match(this.pattern)) {
       const filtro = localStorage.getItem('filtroAdmin');
-      if(this.clickpage == true){
+      if (this.clickpage == true) {
         this.clickpage = false;
-      }else{
+      } else {
         this.page = 0;
       }
-      this.albumService.getAlbumesPagina(this.busqueda, this.page.toString()).subscribe({
-            next: (data: any) => {this.albumes = data.content
-              this.totalPages = data.totalPages;
-              this.first = data.first;
-              this.last = data.last;
-              this.loader = false;
-            },
-            error: (err) => {this.handleError(err);}
-          })
+      this.albumService
+        .getAlbumesPagina(this.busqueda, this.page.toString())
+        .subscribe({
+          next: (data: any) => {
+            this.albumes = data.content;
+            this.totalPages = data.totalPages;
+            this.first = data.first;
+            this.last = data.last;
+            this.loader = false;
+          },
+          error: (err) => {
+            this.handleError(err);
+          },
+        });
     }
   }
-  
+
   private handleError(err: any): void {
     // implementar gestión de errores;
   }
@@ -127,7 +136,7 @@ export class TablaAlbumesComponent implements OnInit {
   }
 
   initEditarAlbum(id: string) {
-    this.album = { nombre: "", imagen: "" };
+    this.album = { nombre: '', imagen: '' };
     this.operacion = 'edit';
     this.albumService.getAlbumById(id).subscribe({
       next: (data: Album) => {
@@ -169,7 +178,7 @@ export class TablaAlbumesComponent implements OnInit {
   }
 
   insertarAlbum(): void {
-    if ( this.album && this.album.nombre != '') {
+    if (this.album && this.album.nombre != '') {
       this.albumService.insertarAlbum(this.album).subscribe({
         next: (data: any) => {
           this.messageService.add({
@@ -185,7 +194,7 @@ export class TablaAlbumesComponent implements OnInit {
   }
 
   editarAlbum(): void {
-    if ( this.album && this.album.nombre != '') {
+    if (this.album && this.album.nombre != '') {
       this.albumService.editarAlbum(this.album).subscribe({
         next: (data: any) => {
           this.exito = true;
@@ -218,47 +227,44 @@ export class TablaAlbumesComponent implements OnInit {
     const inputFile = event.target as HTMLInputElement;
     const file: File | null = inputFile.files?.item(0) ?? null;
 
-
     this.readFileAsString(file!).then(
       (result) => {
         const imageType: string = this.getImageType(result);
         const imageBase64: string = this.getImageBase64(result);
 
         this.album!.imagen = imageBase64;
-
       },
       (error) => {
-        console.log("No se pudo cargar la imagen")
-      })
-        
+        console.log('No se pudo cargar la imagen');
+      }
+    );
   }
 
   private getImageType(imageString: string): string {
-    const imageStringParts: string[] = imageString.split(",");
+    const imageStringParts: string[] = imageString.split(',');
     if (imageStringParts.length == 2) {
       return imageStringParts[0];
     } else {
-      return "";
+      return '';
     }
   }
 
   private getImageBase64(imageString: string): string {
-    const imageStringParts: string[] = imageString.split(",");
+    const imageStringParts: string[] = imageString.split(',');
     if (imageStringParts.length == 2) {
       return imageStringParts[1];
     } else {
-      return "";
+      return '';
     }
   }
 
   private readFileAsString(file: File) {
-    return new Promise<string>(function(resolve, reject) {
+    return new Promise<string>(function (resolve, reject) {
       let reader: FileReader = new FileReader();
-      reader.readAsDataURL(file)
-      reader.onload = function() {
-        resolve(this.result as string)
-      }
-    })
+      reader.readAsDataURL(file);
+      reader.onload = function () {
+        resolve(this.result as string);
+      };
+    });
   }
-  
 }

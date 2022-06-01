@@ -6,7 +6,7 @@ import { SharedService } from 'src/app/services/shared.service';
 import { environment } from 'src/environments/environment';
 import { ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-
+import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-tabla-artistas',
@@ -47,15 +47,18 @@ export class TablaArtistasComponent implements OnInit {
 
   ngOnInit(): void {
     this.getArtistasFiltrados();
-    this.sharedService.getEmittedValue().subscribe((data) => {
-      this.busqueda = data;
-      this.getArtistasFiltrados();
-    });
+    this.sharedService
+      .getEmittedValue()
+      .pipe(debounceTime(250))
+      .subscribe((data) => {
+        this.busqueda = data;
+        this.getArtistasFiltrados();
+      });
     this.setLocation();
   }
 
-  setLocation(){
-    this.sharedService.changeBack("artistas");
+  setLocation() {
+    this.sharedService.changeBack('artistas');
   }
 
   showDialogCreate() {
@@ -111,7 +114,6 @@ export class TablaArtistasComponent implements OnInit {
   }
 
   showDialogDelete(cancionId: number) {
-
     this.confirmationService.confirm({
       message: '¿Desea eliminar esta cancion?',
       header: 'Confirmacion de eliminacion',

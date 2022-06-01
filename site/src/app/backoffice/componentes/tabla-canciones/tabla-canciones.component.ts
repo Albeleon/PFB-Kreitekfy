@@ -20,6 +20,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { SharedService } from 'src/app/services/shared.service';
 import { environment } from 'src/environments/environment';
 import { NgForm } from '@angular/forms';
+import { debounceTime, pipe } from 'rxjs';
 
 @Component({
   selector: 'app-tabla-canciones',
@@ -46,7 +47,7 @@ export class TablaCancionesComponent implements OnInit {
 
   busqueda: string = '';
 
-  localizacion: any ;
+  localizacion: any;
   getLocalizacion: any = localStorage.getItem('localizacion');
   // Variables modal inserción de canciones//
 
@@ -55,7 +56,7 @@ export class TablaCancionesComponent implements OnInit {
 
   cancion: Cancion = {
     nombre: '',
-    id: 0
+    id: 0,
   };
   albumFiltro?: Album;
   albumes: Album[] = [];
@@ -89,10 +90,9 @@ export class TablaCancionesComponent implements OnInit {
     this.initInsertarCancion();
   }
 
-  setLocation(){
-    this.sharedService.changeBack("canciones");
+  setLocation() {
+    this.sharedService.changeBack('canciones');
   }
-
 
   showDialogEdit(idCancion: number) {
     this.form!.control.markAsPristine();
@@ -103,14 +103,16 @@ export class TablaCancionesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCancionesFiltradas();
-    this.sharedService.getEmittedValue().subscribe((data) => {
-      this.busqueda = data;
-      this.getCancionesFiltradas();
-    });
+    this.sharedService
+      .getEmittedValue()
+      .pipe(debounceTime(250))
+      .subscribe((data) => {
+        this.busqueda = data;
+        this.getCancionesFiltradas();
+      });
     this.setLocation();
+    localStorage.setItem('filtroAdmin', 'cancion');
   }
-
-
 
   public nextPage(): void {
     this.clickpage = true;
